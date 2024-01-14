@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvhgr4pj3mkb6"]
+[gd_scene load_steps=4 format=3 uid="uid://d3bkgwn8htm03"]
 
-[ext_resource type="Script" path="res://hud.gd" id="1_dakux"]
+[ext_resource type="Script" path="res://scenes/hud.gd" id="1_41lc2"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_8ojis"]
 action = &"start_game"
@@ -9,7 +9,7 @@ action = &"start_game"
 events = [SubResource("InputEventAction_8ojis")]
 
 [node name="HUD" type="CanvasLayer"]
-script = ExtResource("1_dakux")
+script = ExtResource("1_41lc2")
 
 [node name="ScoreLabel" type="Label" parent="."]
 anchors_preset = 5
