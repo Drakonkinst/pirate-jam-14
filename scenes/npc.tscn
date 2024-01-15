@@ -1,0 +1,151 @@
+[gd_scene load_steps=17 format=3 uid="uid://dmjjey2624xf5"]
+
+[ext_resource type="Script" path="res://scenes/npc.gd" id="1_dkacp"]
+[ext_resource type="Texture2D" uid="uid://dfiuqw157vysl" path="res://assets/art/city_tileset.png" id="2_ie0wr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_njawe"]
+atlas = ExtResource("2_ie0wr")
+region = Rect2(384, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mn1mw"]
+atlas = ExtResource("2_ie0wr")
+region = Rect2(384, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_65kii"]
+atlas = ExtResource("2_ie0wr")
+region = Rect2(384, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_avcpq"]
+atlas = ExtResource("2_ie0wr")
+region = Rect2(368, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_efx77"]
+atlas = ExtResource("2_ie0wr")
+region = Rect2(368, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bf1f7"]
+atlas = ExtResource("2_ie0wr")
+region = Rect2(368, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4151s"]
+atlas = ExtResource("2_ie0wr")
+region = Rect2(416, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lo4xu"]
+atlas = ExtResource("2_ie0wr")
+region = Rect2(416, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8n73d"]
+atlas = ExtResource("2_ie0wr")
+region = Rect2(416, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tc2rp"]
+atlas = ExtResource("2_ie0wr")
+region = Rect2(400, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5oe6w"]
+atlas = ExtResource("2_ie0wr")
+region = Rect2(400, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r0oe1"]
+atlas = ExtResource("2_ie0wr")
+region = Rect2(400, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p1b4l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_njawe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mn1mw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_65kii")
+}],
+"loop": true,
+"name": &"down",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_avcpq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_efx77")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bf1f7")
+}],
+"loop": true,
+"name": &"left",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4151s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lo4xu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8n73d")
+}],
+"loop": true,
+"name": &"right",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tc2rp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5oe6w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r0oe1")
+}],
+"loop": true,
+"name": &"up",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_17ptb"]
+radius = 25.0
+height = 62.0
+
+[node name="NPC" type="CharacterBody2D" groups=["mobs"]]
+collision_mask = 0
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_dkacp")
+speed = null
+acceleration = null
+max_wander_range = null
+min_wander_range = null
+min_idle_timer = null
+max_idle_timer = null
+metadata/_edit_group_ = true
+
+[node name="NPCModel" type="AnimatedSprite2D" parent="."]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_p1b4l")
+animation = &"down"
+
+[node name="NPCHitbox" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_17ptb")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(1, 3.5)
+scale = Vector2(2.3, 2.85)
+
+[node name="Navigation" type="Node2D" parent="."]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Navigation"]
+avoidance_enabled = true
+
+[node name="Timer" type="Timer" parent="Navigation"]
+autostart = true
+
+[connection signal="timeout" from="Navigation/Timer" to="." method="_on_navigation_timer_timeout"]

@@ -1,19 +1,15 @@
-extends CharacterBody2D
-
-const WALK_RIGHT_ANIMATION = "walk"
-const WALK_UP_ANIMATION = "up"
+extends Character
 
 signal hit
 
 @export var speed: float = 400 # How fast player will move (pixels/sec)
-var screen_size: Vector2 # Size of the game window
 
 # EVENT METHODS (called by other things)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	screen_size = get_viewport_rect().size
 	# hide()
+	pass
 
 func _on_body_entered(_body: Node2D) -> void:
 	# hide() # Player disappears after being hit.
@@ -29,8 +25,6 @@ func _process(_delta: float) -> void:
 func _physics_process(_delta: float) -> void:
 	velocity = _get_velocity_from_input()
 	move_and_slide()
-	position = position.clamp(Vector2.ZERO, screen_size)
-
 
 # PUBLIC METHODS
 
@@ -48,16 +42,17 @@ func _get_velocity_from_input() -> Vector2:
 	else:
 		return velocity_dir.normalized() * speed;
 
-# Use scene unique node to refer to PlayerModel
-func _update_animations() -> void:
+func _update_animations():
 	if velocity.is_zero_approx():
+		$PlayerModel.frame = 0
 		$PlayerModel.stop()
 	else:
-		$PlayerModel.play()
-		if velocity.x != 0:
+		if velocity.x < 0.0:
+			$PlayerModel.animation = WALK_LEFT_ANIMATION
+		elif velocity.x > 0.0:
 			$PlayerModel.animation = WALK_RIGHT_ANIMATION
-			$PlayerModel.flip_v = false
-			$PlayerModel.flip_h = velocity.x < 0
-		elif velocity.y != 0:
+		elif velocity.y < 0.0:
 			$PlayerModel.animation = WALK_UP_ANIMATION
-			$PlayerModel.flip_v = velocity.y > 0
+		else:
+			$PlayerModel.animation = WALK_DOWN_ANIMATION
+		$PlayerModel.play()
