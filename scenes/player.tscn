@@ -35,8 +35,9 @@ animations = [{
 radius = 27.0
 height = 68.0
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_5t08w")
+speed = null
 metadata/_edit_group_ = true
 
 [node name="PlayerModel" type="AnimatedSprite2D" parent="."]
@@ -46,5 +47,3 @@ animation = &"walk"
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_4qokt")
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]

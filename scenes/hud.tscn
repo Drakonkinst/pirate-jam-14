@@ -1,63 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://d3bkgwn8htm03"]
+[gd_scene load_steps=2 format=3 uid="uid://d3bkgwn8htm03"]
 
 [ext_resource type="Script" path="res://scenes/hud.gd" id="1_41lc2"]
 
-[sub_resource type="InputEventAction" id="InputEventAction_8ojis"]
-action = &"start_game"
-
-[sub_resource type="Shortcut" id="Shortcut_pa1fb"]
-events = [SubResource("InputEventAction_8ojis")]
-
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_41lc2")
-
-[node name="ScoreLabel" type="Label" parent="."]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -38.0
-offset_right = 36.0
-offset_bottom = 88.0
-grow_horizontal = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 64
-horizontal_alignment = 1
-
-[node name="Message" type="Label" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -279.5
-offset_top = -44.0
-offset_right = 279.5
-offset_bottom = 44.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 64
-text = "Dodge the creeps!"
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="StartButton" type="Button" parent="."]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -100.0
-offset_top = -158.0
-offset_right = 100.0
-offset_bottom = -58.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_font_sizes/font_size = 64
-shortcut = SubResource("Shortcut_pa1fb")
-text = "Start"
-
-[node name="MessageTimer" type="Timer" parent="."]
-
-[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
