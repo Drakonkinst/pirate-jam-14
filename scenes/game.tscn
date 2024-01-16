@@ -24,6 +24,7 @@ source_geometry_group_name = &"navigation"
 agent_radius = 7.0
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("player", "player_spawn_point")]
+position = Vector2(368, 216)
 script = ExtResource("1_mq68w")
 level_data = ExtResource("2_i1q1b")
 player = NodePath("World/Player")
@@ -86,10 +87,10 @@ y_sort_enabled = true
 
 [node name="Player" parent="World" instance=ExtResource("3_ml610")]
 position = Vector2(153, 135)
-speed = 400.0
 
 [node name="CameraFollow" type="Node2D" parent="World/Player" node_paths=PackedStringArray("camera", "left_bound", "right_bound")]
 script = ExtResource("8_jjgcx")
+enabled = true
 camera = NodePath("../../../Camera2D")
 left_bound = NodePath("LeftMostPos")
 right_bound = NodePath("RightMostPos")
@@ -101,4 +102,5 @@ position = Vector2(-155, 133)
 position = Vector2(1004, 121)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(575, 288)
+position = Vector2(569, 287)
+zoom = Vector2(0.8, 0.8)

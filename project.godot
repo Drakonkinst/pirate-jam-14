@@ -20,6 +20,13 @@ config/icon="res://icon.svg"
 Global="*res://scenes/global.tscn"
 GlobalVariables="*res://global_variables.gd"
 
+[display]
+
+window/size/viewport_width=720
+window/size/viewport_height=480
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_height"
+
 [editor_plugins]
 
 enabled=PackedStringArray()
