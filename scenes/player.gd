@@ -1,4 +1,6 @@
-extends Character
+extends CharacterBody2D
+
+class_name Player
 
 const WALK_DOWN_ANIMATION = "down"
 const WALK_UP_ANIMATION = "up"
@@ -13,8 +15,7 @@ signal hit
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# hide()
-	pass
+	hide()
 
 func _on_body_entered(_body: Node2D) -> void:
 	# hide() # Player disappears after being hit.
@@ -33,10 +34,10 @@ func _physics_process(_delta: float) -> void:
 
 # PUBLIC METHODS
 
-func start(start_pos: Vector2) -> void:
+func initialize(start_pos: Vector2) -> void:
 	position = start_pos
 	show()
-	$PlayerHitbox.disabled = false
+	#$PlayerHitbox.disabled = false
 	
 # HELPER METHODS (should all start with underscore)
 

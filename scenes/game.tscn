@@ -22,9 +22,11 @@ source_geometry_mode = 1
 source_geometry_group_name = &"navigation"
 agent_radius = 7.0
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("player", "player_spawn_point")]
 script = ExtResource("1_mq68w")
 level_data = ExtResource("2_i1q1b")
+player = NodePath("World/Player")
+player_spawn_point = NodePath("Areas/PlayerSpawnPoint")
 
 [node name="HUDLayer" type="CanvasLayer" parent="."]
 
@@ -48,6 +50,7 @@ shape = SubResource("RectangleShape2D_bc27j")
 disabled = true
 
 [node name="PlayerSpawnPoint" type="Marker2D" parent="Areas"]
+position = Vector2(753, 475)
 
 [node name="NPCSpawner" type="Node2D" parent="." node_paths=PackedStringArray("npc_parent", "area_scene", "area_left", "area_right")]
 script = ExtResource("4_f3c1u")
@@ -82,3 +85,7 @@ y_sort_enabled = true
 
 [node name="Player" parent="World" instance=ExtResource("3_ml610")]
 position = Vector2(153, 135)
+speed = 400.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(575, 288)

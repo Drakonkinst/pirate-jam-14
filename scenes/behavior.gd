@@ -13,7 +13,9 @@ enum State {
 @export var min_idle_timer: float = 2
 @export var max_idle_timer: float = 5
 
+@export var personality: Personality
 @export var move_control: MoveControl
+
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 
 var nav_map: RID

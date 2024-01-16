@@ -37,7 +37,7 @@ func spawn_random_npc(pos: Vector2) -> void:
 	npc.personality.set_sociable_type(level_data.generate_sociable())
 	npc.personality.set_cat_opinion(level_data.generate_cat_opinion())
 	npc.personality.set_modifiers(level_data.generate_modifiers())
-	print("Spawned at ", pos)
+	print("NPC spawned at ", pos, " with sociable = ", Personality.Sociable.keys()[npc.personality.get_sociable_type()], ", cat opinion = ", Personality.CatOpinion.keys()[npc.personality.get_cat_opinion()], ", modifiers = ", npc.personality.has_modifier(Personality.Modifier.EMPATHETIC))
 	
 # Spawn NPCs at random valid positions on navmesh
 func _spawn_initial_npcs():
@@ -58,7 +58,6 @@ func _check_spawn_more_npcs():
 func _get_random_point_in_area(area: CollisionShape2D) -> Vector2:
 	var dimensions: Vector2 = area.shape.extents
 	var origin: Vector2 = area.global_position - dimensions
-	print(dimensions, origin)
 	var x: float = randf_range(origin.x, dimensions.x)
 	var y: float = randf_range(origin.y, dimensions.y)
 	return Vector2(x, y)

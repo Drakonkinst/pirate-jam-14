@@ -150,8 +150,9 @@ script = ExtResource("4_gg2jo")
 [node name="MoveControl" type="Node2D" parent="."]
 script = ExtResource("5_3yays")
 
-[node name="Behavior" type="Node2D" parent="." node_paths=PackedStringArray("move_control")]
+[node name="Behavior" type="Node2D" parent="." node_paths=PackedStringArray("personality", "move_control")]
 script = ExtResource("6_kbocg")
+personality = NodePath("../Personality")
 move_control = NodePath("../MoveControl")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="Behavior"]
