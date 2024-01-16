@@ -1,7 +1,12 @@
-[gd_scene load_steps=17 format=3 uid="uid://dmjjey2624xf5"]
+[gd_scene load_steps=22 format=3 uid="uid://dmjjey2624xf5"]
 
 [ext_resource type="Script" path="res://scenes/npc.gd" id="1_dkacp"]
+[ext_resource type="Script" path="res://scenes/animation_control.gd" id="2_732vn"]
 [ext_resource type="Texture2D" uid="uid://dfiuqw157vysl" path="res://assets/art/city_tileset.png" id="2_ie0wr"]
+[ext_resource type="Script" path="res://scenes/mood.gd" id="3_rojyy"]
+[ext_resource type="Script" path="res://scenes/personality.gd" id="4_gg2jo"]
+[ext_resource type="Script" path="res://scenes/move_control.gd" id="5_3yays"]
+[ext_resource type="Script" path="res://scenes/behavior.gd" id="6_kbocg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_njawe"]
 atlas = ExtResource("2_ie0wr")
@@ -119,33 +124,40 @@ collision_mask = 0
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_dkacp")
-speed = null
-acceleration = null
-max_wander_range = null
-min_wander_range = null
-min_idle_timer = null
-max_idle_timer = null
 metadata/_edit_group_ = true
 
-[node name="NPCModel" type="AnimatedSprite2D" parent="."]
+[node name="AnimationControl" type="Node2D" parent="."]
+script = ExtResource("2_732vn")
+
+[node name="Model" type="AnimatedSprite2D" parent="AnimationControl"]
+texture_repeat = 1
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_p1b4l")
-animation = &"down"
+animation = &"up"
 
 [node name="NPCHitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
 shape = SubResource("CapsuleShape2D_17ptb")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(1, 3.5)
-scale = Vector2(2.3, 2.85)
+[node name="Mood" type="Node2D" parent="."]
+script = ExtResource("3_rojyy")
 
-[node name="Navigation" type="Node2D" parent="."]
+[node name="StageChangeCooldown" type="Timer" parent="Mood"]
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Navigation"]
+[node name="Personality" type="Node2D" parent="."]
+script = ExtResource("4_gg2jo")
+
+[node name="MoveControl" type="Node2D" parent="."]
+script = ExtResource("5_3yays")
+
+[node name="Behavior" type="Node2D" parent="." node_paths=PackedStringArray("move_control")]
+script = ExtResource("6_kbocg")
+move_control = NodePath("../MoveControl")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Behavior"]
 avoidance_enabled = true
 
-[node name="Timer" type="Timer" parent="Navigation"]
+[node name="Timer" type="Timer" parent="Behavior"]
 autostart = true
 
-[connection signal="timeout" from="Navigation/Timer" to="." method="_on_navigation_timer_timeout"]
+[connection signal="timeout" from="Mood/StageChangeCooldown" to="Mood" method="_on_stage_change_cooldown_timeout"]
