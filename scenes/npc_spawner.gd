@@ -14,13 +14,20 @@ enum Location { SCENE, LEFT, RIGHT }
 @export var area_left: CollisionShape2D
 @export var area_right: CollisionShape2D
 
+var nav_map: RID
 var level_data: LevelData
+
+func _ready() -> void:
+	nav_map = get_world_2d().navigation_map
 
 func _process(_delta: float) -> void:
 	_check_spawn_more_npcs()
 
 func initialize(data: LevelData) -> void:
 	set_level_data(data)
+	# For some reason, the map isn't initialized on the first frame
+	# So wait exactly one frame before spawning or else everyone spawns at (0, 0)
+	await get_tree().create_timer(0).timeout
 	_spawn_initial_npcs()
 
 # Set level data in case we need to change it later
@@ -48,18 +55,18 @@ func _spawn_initial_npcs():
 
 # Spawn NPC from left or right edge of map
 func _spawn_npc_from_location(location: Location):
-	spawn_random_npc(_get_random_point_in_area(_get_area_from_location(location)))
+	var spawn_pos: Vector2 = GlobalVariables.get_nearest_point_on_map(nav_map, _get_random_point_in_area(_get_area_from_location(location)))
+	spawn_random_npc(spawn_pos)
 	
 # Automatically spawn more
 func _check_spawn_more_npcs():
 	pass
 
-# TODO: Add function to correct for valid positions
 func _get_random_point_in_area(area: CollisionShape2D) -> Vector2:
-	var dimensions: Vector2 = area.shape.extents
-	var origin: Vector2 = area.global_position - dimensions
-	var x: float = randf_range(origin.x, dimensions.x)
-	var y: float = randf_range(origin.y, dimensions.y)
+	var extents: Vector2 = area.shape.extents
+	var origin: Vector2 = area.global_position
+	var x: float = randf_range(origin.x - extents.x, origin.x + extents.x)
+	var y: float = randf_range(origin.y - extents.y, origin.y + extents.y)
 	return Vector2(x, y)
 
 func _get_area_from_location(location: Location):

@@ -120,9 +120,10 @@ radius = 25.0
 height = 62.0
 
 [node name="NPC" type="CharacterBody2D" groups=["mobs"]]
-collision_mask = 0
+collision_layer = 4
 motion_mode = 1
 wall_min_slide_angle = 0.0
+platform_floor_layers = 4278190080
 script = ExtResource("1_dkacp")
 metadata/_edit_group_ = true
 
@@ -149,6 +150,7 @@ script = ExtResource("4_gg2jo")
 
 [node name="MoveControl" type="Node2D" parent="."]
 script = ExtResource("5_3yays")
+speed = 200.0
 
 [node name="Behavior" type="Node2D" parent="." node_paths=PackedStringArray("personality", "move_control")]
 script = ExtResource("6_kbocg")

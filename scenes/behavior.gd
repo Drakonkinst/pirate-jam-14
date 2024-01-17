@@ -2,7 +2,7 @@ extends Node2D
 
 class_name Behavior
 
-const MIN_DISTANCE_THRESHOLD = 4.0
+const MIN_DISTANCE_THRESHOLD = 32.0
 
 enum State {
 	IDLE, WANDER
@@ -34,8 +34,12 @@ func update(delta: float) -> void:
 				idle_timer -= delta
 			else:
 				idle_timer = 0
-				state = State.WANDER
-				nav_agent.target_position = _select_random_nearby_pos()
+				var target_pos: Vector2 = _select_random_nearby_pos()
+				if GlobalVariables.is_valid_navmesh_position(nav_map, target_pos):
+					state = State.WANDER
+					nav_agent.target_position = target_pos
+				else:
+					print("INVALID ", target_pos)
 		State.WANDER:
 			var to_target : Vector2 = nav_agent.get_next_path_position() - global_position
 			move_control.move_in_direction(to_target, delta)
@@ -54,7 +58,6 @@ func _select_random_nearby_pos() -> Vector2:
 	var angle: float = randf() * PI * 2
 	var offset := Vector2(distance * cos(angle), distance * sin(angle))
 	var target_pos: Vector2 = global_position + offset
-	target_pos = NavigationServer2D.map_get_closest_point(nav_map, target_pos)
 	return target_pos
 
 func _generate_idle_time():
