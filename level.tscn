@@ -18,7 +18,7 @@ class_name Level
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	pass
+    pass
 "
 
 [node name="Level" type="Node2D"]

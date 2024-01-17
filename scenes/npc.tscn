@@ -117,7 +117,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1dkxc"]
-radius = 30.0
+radius = 22.0
 
 [node name="NPC" type="CharacterBody2D" node_paths=PackedStringArray("nav_control") groups=["mobs"]]
 collision_layer = 4
@@ -133,7 +133,7 @@ script = ExtResource("2_732vn")
 
 [node name="Model" type="AnimatedSprite2D" parent="AnimationControl"]
 texture_repeat = 1
-scale = Vector2(4, 4)
+scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_p1b4l")
 animation = &"up"
 
@@ -165,7 +165,7 @@ behavior = NodePath("../Behavior")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="NavigationControl"]
 path_max_distance = 10.0
 avoidance_enabled = true
-radius = 30.0
+radius = 22.0
 neighbor_distance = 200.0
 max_neighbors = 5
 time_horizon_agents = 0.5
