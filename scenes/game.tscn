@@ -17,12 +17,12 @@ size = Vector2(3432, 400)
 size = Vector2(112.5, 454)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_dj0ee"]
-vertices = PackedVector2Array(1767, 105, 2282, 105, 2277, 523, -1136, 523, -1138, 105, -619, 105, 533, 105, 533, 57, 615, 57, 615, 105, 1685, 105, 1685, 57, 1767, 57, -537, 105, -537, 57, -619, 57)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 4, 5), PackedInt32Array(6, 7, 8, 9), PackedInt32Array(10, 11, 12, 0), PackedInt32Array(10, 0, 3), PackedInt32Array(9, 10, 3), PackedInt32Array(6, 9, 3), PackedInt32Array(13, 6, 3), PackedInt32Array(13, 3, 5, 14), PackedInt32Array(14, 5, 15)])
+vertices = PackedVector2Array(1749, 123, 2264, 123, 2259, 505, -1118, 505, -1120, 123, -601, 123, 551, 123, 551, 75, 597, 75, 597, 123, 1703, 123, 1703, 75, 1749, 75, -555, 123, -555, 75, -601, 75)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 4, 5), PackedInt32Array(6, 7, 8, 9), PackedInt32Array(10, 11, 12, 0), PackedInt32Array(10, 0, 3), PackedInt32Array(9, 10, 3), PackedInt32Array(6, 9, 3), PackedInt32Array(13, 6, 3), PackedInt32Array(13, 3, 5), PackedInt32Array(14, 13, 5, 15)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-1145, -35, 2291, -33, 2283, 654, -1143, 652)])
 source_geometry_mode = 1
 source_geometry_group_name = &"navigation"
-agent_radius = 7.0
+agent_radius = 30.0
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("player", "player_spawn_point")]
 position = Vector2(368, 216)
@@ -74,7 +74,6 @@ area_right = NodePath("../DespawnHandler/Right/RightArea")
 y_sort_enabled = true
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="World"]
-visible = false
 position = Vector2(2, -2)
 navigation_polygon = SubResource("NavigationPolygon_dj0ee")
 constrain_avoidance = true

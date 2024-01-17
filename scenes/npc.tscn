@@ -116,16 +116,16 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_17ptb"]
-radius = 25.0
-height = 62.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_1dkxc"]
+radius = 30.0
 
-[node name="NPC" type="CharacterBody2D" groups=["mobs"]]
+[node name="NPC" type="CharacterBody2D" node_paths=PackedStringArray("nav_control") groups=["mobs"]]
 collision_layer = 4
 motion_mode = 1
 wall_min_slide_angle = 0.0
 platform_floor_layers = 4278190080
 script = ExtResource("1_dkacp")
+nav_control = NodePath("NavigationControl")
 metadata/_edit_group_ = true
 
 [node name="AnimationControl" type="Node2D" parent="."]
@@ -139,35 +139,42 @@ animation = &"up"
 
 [node name="NPCHitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
-shape = SubResource("CapsuleShape2D_17ptb")
+shape = SubResource("CircleShape2D_1dkxc")
+
+[node name="Personality" type="Node2D" parent="."]
+script = ExtResource("4_gg2jo")
+
+[node name="Behavior" type="Node2D" parent="." node_paths=PackedStringArray("personality", "nav_control")]
+script = ExtResource("6_kbocg")
+personality = NodePath("../Personality")
+nav_control = NodePath("../NavigationControl")
 
 [node name="Mood" type="Node2D" parent="."]
 script = ExtResource("3_rojyy")
 
 [node name="StageChangeCooldown" type="Timer" parent="Mood"]
 
-[node name="Personality" type="Node2D" parent="."]
-script = ExtResource("4_gg2jo")
-
 [node name="MoveControl" type="Node2D" parent="."]
 script = ExtResource("5_3yays")
 
-[node name="Behavior" type="Node2D" parent="." node_paths=PackedStringArray("personality")]
-script = ExtResource("6_kbocg")
-personality = NodePath("../Personality")
-
-[node name="NavigationControl" type="Node2D" parent="Behavior" node_paths=PackedStringArray("move_control", "behavior")]
+[node name="NavigationControl" type="Node2D" parent="." node_paths=PackedStringArray("move_control", "behavior")]
 script = ExtResource("8_2uhr0")
-move_control = NodePath("../../MoveControl")
-behavior = NodePath("..")
+move_control = NodePath("../MoveControl")
+behavior = NodePath("../Behavior")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Behavior/NavigationControl"]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="NavigationControl"]
 path_max_distance = 10.0
 avoidance_enabled = true
+radius = 30.0
+neighbor_distance = 200.0
+max_neighbors = 5
+time_horizon_agents = 0.5
+debug_enabled = true
 
-[node name="RecalculateTargetTimer" type="Timer" parent="Behavior/NavigationControl"]
+[node name="RecalculateTargetTimer" type="Timer" parent="NavigationControl"]
 wait_time = 0.2
 autostart = true
 
 [connection signal="timeout" from="Mood/StageChangeCooldown" to="Mood" method="_on_stage_change_cooldown_timeout"]
-[connection signal="timeout" from="Behavior/NavigationControl/RecalculateTargetTimer" to="Behavior/NavigationControl" method="_on_recalculate_target_timer_timeout"]
+[connection signal="velocity_computed" from="NavigationControl/NavigationAgent2D" to="NavigationControl" method="_on_navigation_agent_2d_velocity_computed"]
+[connection signal="timeout" from="NavigationControl/RecalculateTargetTimer" to="NavigationControl" method="_on_recalculate_target_timer_timeout"]
