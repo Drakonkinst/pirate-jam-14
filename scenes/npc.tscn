@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dmjjey2624xf5"]
+[gd_scene load_steps=23 format=3 uid="uid://dmjjey2624xf5"]
 
 [ext_resource type="Script" path="res://scenes/npc.gd" id="1_dkacp"]
 [ext_resource type="Script" path="res://scenes/animation_control.gd" id="2_732vn"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scenes/personality.gd" id="4_gg2jo"]
 [ext_resource type="Script" path="res://scenes/move_control.gd" id="5_3yays"]
 [ext_resource type="Script" path="res://scenes/behavior.gd" id="6_kbocg"]
+[ext_resource type="Script" path="res://scenes/navigation_control.gd" id="8_2uhr0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_njawe"]
 atlas = ExtResource("2_ie0wr")
@@ -151,15 +152,22 @@ script = ExtResource("4_gg2jo")
 [node name="MoveControl" type="Node2D" parent="."]
 script = ExtResource("5_3yays")
 
-[node name="Behavior" type="Node2D" parent="." node_paths=PackedStringArray("personality", "move_control")]
+[node name="Behavior" type="Node2D" parent="." node_paths=PackedStringArray("personality")]
 script = ExtResource("6_kbocg")
 personality = NodePath("../Personality")
-move_control = NodePath("../MoveControl")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Behavior"]
+[node name="NavigationControl" type="Node2D" parent="Behavior" node_paths=PackedStringArray("move_control", "behavior")]
+script = ExtResource("8_2uhr0")
+move_control = NodePath("../../MoveControl")
+behavior = NodePath("..")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Behavior/NavigationControl"]
+path_max_distance = 10.0
 avoidance_enabled = true
 
-[node name="Timer" type="Timer" parent="Behavior"]
+[node name="RecalculateTargetTimer" type="Timer" parent="Behavior/NavigationControl"]
+wait_time = 0.2
 autostart = true
 
 [connection signal="timeout" from="Mood/StageChangeCooldown" to="Mood" method="_on_stage_change_cooldown_timeout"]
+[connection signal="timeout" from="Behavior/NavigationControl/RecalculateTargetTimer" to="Behavior/NavigationControl" method="_on_recalculate_target_timer_timeout"]

@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_hfj6a")
 is_day = true
+npc_quota = 50
 sociable_normal = 1.0
 sociable_social = 1.0
 sociable_antisocial = 1.0
