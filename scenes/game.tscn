@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://qxsv8wqrj306"]
+[gd_scene load_steps=15 format=3 uid="uid://qxsv8wqrj306"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_mq68w"]
 [ext_resource type="TileSet" uid="uid://bk0ycboeo7qyy" path="res://scenes/city.tres" id="2_a56mi"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://d3bkgwn8htm03" path="res://scenes/hud.tscn" id="4_u8sug"]
 [ext_resource type="Script" path="res://scenes/despawn_handler.gd" id="4_ww6lp"]
 [ext_resource type="Script" path="res://scenes/camera_follow.gd" id="8_jjgcx"]
+[ext_resource type="Script" path="res://scenes/set_mouse.gd" id="10_hh47s"]
+[ext_resource type="Texture2D" uid="uid://hd5icmyjjvga" path="res://assets/art/crosshair.png" id="11_0wsio"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i4j5v"]
 size = Vector2(3432, 304)
@@ -113,8 +115,9 @@ tilemap = NodePath("../../TileMap")
 position = Vector2(570, 325)
 zoom = Vector2(0.95, 0.95)
 
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(394, 364)
+[node name="SetMouse" type="Node2D" parent="."]
+script = ExtResource("10_hh47s")
+default_image = ExtResource("11_0wsio")
 
 [connection signal="on_npc_despawned" from="DespawnHandler" to="NPCSpawner" method="_on_despawn_handler_on_npc_despawned"]
 [connection signal="body_entered" from="DespawnHandler/Left" to="DespawnHandler" method="_on_left_body_entered"]

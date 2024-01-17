@@ -2,8 +2,6 @@ extends Node2D
 
 class_name AnimationControl
 
-const WALK_DOWN_ANIMATION = "down"
-const WALK_UP_ANIMATION = "up"
 const WALK_LEFT_ANIMATION = "left"
 const WALK_RIGHT_ANIMATION = "right"
 
@@ -21,10 +19,6 @@ func update_animations(velocity: Vector2):
 	else:
 		if velocity.x < 0.0:
 			model.animation = WALK_LEFT_ANIMATION
-		elif velocity.x > 0.0:
-			model.animation = WALK_RIGHT_ANIMATION
-		elif velocity.y < 0.0:
-			model.animation = WALK_UP_ANIMATION
 		else:
-			model.animation = WALK_DOWN_ANIMATION
+			model.animation = WALK_RIGHT_ANIMATION
 		model.play()
