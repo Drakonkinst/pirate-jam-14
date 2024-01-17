@@ -17,3 +17,6 @@ func _physics_process(delta: float) -> void:
 
 func _process(_delta: float) -> void:
 	animation_control.update_animations(velocity)
+
+func despawn():
+	queue_free()

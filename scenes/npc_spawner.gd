@@ -16,12 +16,15 @@ enum Location { SCENE, LEFT, RIGHT }
 
 var nav_map: RID
 var level_data: LevelData
+var npc_count: int = 0
+var has_spawned_initial: bool = false
 
 func _ready() -> void:
 	nav_map = get_world_2d().navigation_map
 
 func _process(_delta: float) -> void:
-	_check_spawn_more_npcs()
+	if has_spawned_initial:
+		_check_spawn_more_npcs()
 
 func initialize(data: LevelData) -> void:
 	set_level_data(data)
@@ -35,32 +38,47 @@ func set_level_data(data: LevelData):
 	level_data = data
 
 # Randomize and spawn an NPC based on level data
-func spawn_random_npc(pos: Vector2) -> void:
+func spawn_random_npc(pos: Vector2, location: Location) -> void:
 	var spawned = npc_scene.instantiate()
 	spawned.position = pos
 	npc_parent.add_child(spawned)
 
 	var npc = spawned as NPC
-	npc.personality.set_sociable_type(level_data.generate_sociable())
-	npc.personality.set_cat_opinion(level_data.generate_cat_opinion())
-	npc.personality.set_modifiers(level_data.generate_modifiers())
-	print("NPC spawned at ", pos, " with sociable = ", Personality.Sociable.keys()[npc.personality.get_sociable_type()], ", cat opinion = ", Personality.CatOpinion.keys()[npc.personality.get_cat_opinion()], ", modifiers = ", npc.personality.has_modifier(Personality.Modifier.EMPATHETIC))
+	var personality: Personality = npc.personality
+	personality.set_sociable_type(level_data.generate_sociable())
+	personality.set_cat_opinion(level_data.generate_cat_opinion())
+	personality.set_modifiers(level_data.generate_modifiers())
+
+	var behavior: Behavior = npc.behavior
+	match location:
+		Location.LEFT:
+			behavior.set_moving_east(true)
+		Location.RIGHT:
+			behavior.set_moving_east(false)
+		_:
+			behavior.set_moving_east(randf() < 0.5)
+	npc_count += 1
+	print("NPC spawned at ", pos, " with sociable = ", Personality.Sociable.keys()[personality.get_sociable_type()], ", cat opinion = ", Personality.CatOpinion.keys()[personality.get_cat_opinion()], ", modifiers = ", personality.has_modifier(Personality.Modifier.EMPATHETIC), ", moving_east = ", behavior.is_moving_east())
 	
 # Spawn NPCs at random valid positions on navmesh
 func _spawn_initial_npcs():
-	# TODO: Make this number configurable
-	var num_to_spawn: int = 10
-	for i in num_to_spawn:
+	for i in level_data.npc_quota:
 		_spawn_npc_from_location(Location.SCENE)
+	has_spawned_initial = true
 
 # Spawn NPC from left or right edge of map
-func _spawn_npc_from_location(location: Location):
-	var spawn_pos: Vector2 = GlobalVariables.get_nearest_point_on_map(nav_map, _get_random_point_in_area(_get_area_from_location(location)))
-	spawn_random_npc(spawn_pos)
+func _spawn_npc_from_location(location: Location, must_be_on_navmesh := true):
+	var spawn_pos: Vector2 = _get_random_point_in_area(_get_area_from_location(location))
+	if must_be_on_navmesh:
+		spawn_pos = GlobalVariables.get_nearest_point_on_map(nav_map, spawn_pos)
+	spawn_random_npc(spawn_pos, location)
 	
 # Automatically spawn more
 func _check_spawn_more_npcs():
-	pass
+	while npc_count < level_data.npc_quota:
+		var location: Location = Location.LEFT if randf() < 0.5 else Location.RIGHT
+		_spawn_npc_from_location(location, false)
+	print(npc_count)
 
 func _get_random_point_in_area(area: CollisionShape2D) -> Vector2:
 	var extents: Vector2 = area.shape.extents
@@ -78,3 +96,5 @@ func _get_area_from_location(location: Location):
 		_:
 			return area_scene
 
+func _on_despawn_handler_on_npc_despawned() -> void:
+	npc_count -= 1

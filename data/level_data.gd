@@ -6,6 +6,7 @@ extends Resource
 class_name LevelData
 
 @export var is_day: bool = true
+@export var npc_quota: int = 10
 
 @export_category("Personality Distribution")
 

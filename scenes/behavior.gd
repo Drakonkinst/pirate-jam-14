@@ -3,9 +3,11 @@ extends Node2D
 class_name Behavior
 
 const MIN_DISTANCE_THRESHOLD = 32.0
+const LEFT = Vector2(-1, 0)
+const RIGHT = Vector2(1, 0)
 
 enum State {
-	IDLE, WANDER
+	IDLE, WANDER, WALK_TO_EXIT
 }
 
 @export var max_wander_range: float = 64
@@ -20,7 +22,7 @@ enum State {
 
 var nav_map: RID
 var state := State.IDLE
-var idle_timer: float = _generate_idle_time()
+var idle_timer: float = 1 # This value should probably never be 0
 var moving_east: bool
 
 func _ready() -> void:
@@ -34,18 +36,22 @@ func update(delta: float) -> void:
 				idle_timer -= delta
 			else:
 				idle_timer = 0
-				var target_pos: Vector2 = _select_random_nearby_pos()
-				if GlobalVariables.is_valid_navmesh_position(nav_map, target_pos):
-					state = State.WANDER
-					nav_agent.target_position = target_pos
-				else:
-					print("INVALID ", target_pos)
+				state = State.WALK_TO_EXIT
+				
+				#var target_pos: Vector2 = _select_random_nearby_pos()
+				# Only start moving there if it's a valid position
+				#if GlobalVariables.is_valid_navmesh_position(nav_map, target_pos):
+					#state = State.WANDER
+					#nav_agent.target_position = target_pos
 		State.WANDER:
 			var to_target : Vector2 = nav_agent.get_next_path_position() - global_position
 			move_control.move_in_direction(to_target, delta)
 			if to_target.length_squared() < MIN_DISTANCE_THRESHOLD * MIN_DISTANCE_THRESHOLD:
 				state = State.IDLE
 				idle_timer = _generate_idle_time()
+		State.WALK_TO_EXIT:
+			# TODO: Currently has no pathfinding
+			move_control.move_in_direction(RIGHT if moving_east else LEFT, delta)
 
 func set_moving_east(flag: bool):
 	moving_east = flag
