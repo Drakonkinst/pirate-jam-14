@@ -60,10 +60,6 @@ func add_speed(value: float) -> void:
 func get_speed() -> float:
     return move_control.speed
 
-# func _move_towards_target(target: Vector2, delta: float):
-# 	var to_target : Vector2 = target - global_position
-# 	move_control.move_in_direction(to_target, delta)
-
 func _move_to_target(stopping_distance: float = 0.0) -> bool:
     return _move_to_position(nav_agent.get_next_path_position(), stopping_distance)
 

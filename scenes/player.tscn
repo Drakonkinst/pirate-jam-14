@@ -110,9 +110,8 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4qokt"]
-radius = 25.0
-height = 52.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_ga0ho"]
+radius = 21.095
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
@@ -125,7 +124,10 @@ metadata/_edit_group_ = true
 texture_repeat = 1
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_rwwkg")
-animation = &"down"
+animation = &"right"
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_4qokt")
+shape = SubResource("CircleShape2D_ga0ho")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+radius = 20.0
