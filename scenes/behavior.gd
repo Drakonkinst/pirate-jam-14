@@ -7,7 +7,7 @@ const LEFT = Vector2(-1, 0)
 const RIGHT = Vector2(1, 0)
 
 enum State {
-	IDLE, WANDER, WALK_TO_EXIT
+	IDLE, WANDER, WALK_TO_EXIT, CONVERSE, INTERACT_CAT
 }
 
 @export var max_wander_range: float = 64
@@ -19,9 +19,10 @@ enum State {
 @export var move_control: MoveControl
 
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
+@onready var player: Player = get_tree().get_nodes_in_group(GlobalVariables.PLAYER_GROUP)[0]
 
 var nav_map: RID
-var state := State.IDLE
+var state := State.WALK_TO_EXIT
 var idle_timer: float = 1 # This value should probably never be 0
 var moving_east: bool
 

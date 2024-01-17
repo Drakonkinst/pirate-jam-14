@@ -97,8 +97,9 @@ layer_2/tile_data = PackedInt32Array(-65524, 589824, 1, -65525, 589824, 1, 65536
 [node name="NPCs" type="Node2D" parent="World"]
 y_sort_enabled = true
 
-[node name="Player" parent="World" instance=ExtResource("3_ml610")]
+[node name="Player" parent="World" node_paths=PackedStringArray("tilemap") instance=ExtResource("3_ml610")]
 position = Vector2(153, 135)
+tilemap = NodePath("../TileMap")
 
 [node name="CameraFollow" type="Node2D" parent="World/Player" node_paths=PackedStringArray("camera", "tilemap")]
 script = ExtResource("8_jjgcx")

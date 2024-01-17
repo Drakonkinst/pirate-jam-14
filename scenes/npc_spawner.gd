@@ -57,6 +57,9 @@ func spawn_random_npc(pos: Vector2, location: Location) -> void:
 			behavior.set_moving_east(false)
 		_:
 			behavior.set_moving_east(randf() < 0.5)
+		
+	# Set other stats based on personality
+	npc.initialize()
 	npc_count += 1
 	print("NPC spawned at ", pos, " with sociable = ", Personality.Sociable.keys()[personality.get_sociable_type()], ", cat opinion = ", Personality.CatOpinion.keys()[personality.get_cat_opinion()], ", modifiers = ", personality.has_modifier(Personality.Modifier.EMPATHETIC), ", moving_east = ", behavior.is_moving_east())
 	
@@ -78,7 +81,6 @@ func _check_spawn_more_npcs():
 	while npc_count < level_data.npc_quota:
 		var location: Location = Location.LEFT if randf() < 0.5 else Location.RIGHT
 		_spawn_npc_from_location(location, false)
-	print(npc_count)
 
 func _get_random_point_in_area(area: CollisionShape2D) -> Vector2:
 	var extents: Vector2 = area.shape.extents

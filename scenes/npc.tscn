@@ -150,7 +150,6 @@ script = ExtResource("4_gg2jo")
 
 [node name="MoveControl" type="Node2D" parent="."]
 script = ExtResource("5_3yays")
-speed = 200.0
 
 [node name="Behavior" type="Node2D" parent="." node_paths=PackedStringArray("personality", "move_control")]
 script = ExtResource("6_kbocg")

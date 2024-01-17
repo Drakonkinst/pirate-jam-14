@@ -1,5 +1,6 @@
 extends Node
 
+const PLAYER_GROUP = "player"
 const VALID_THRESHOLD: float = 0.01
 
 func get_nearest_point_on_map(nav_map: RID, target_point: Vector2, min_distance_from_edge: float = 4.0) -> Vector2:
