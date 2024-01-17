@@ -1,7 +1,14 @@
-[gd_scene load_steps=17 format=3 uid="uid://o81jg6153eh1"]
+[gd_scene load_steps=21 format=3 uid="uid://o81jg6153eh1"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_5t08w"]
 [ext_resource type="Texture2D" uid="uid://dy7wrnyedd2i2" path="res://assets/art/lpccatratdog.png" id="2_eyd3b"]
+[ext_resource type="Texture2D" uid="uid://d3fkpw72jhw4d" path="res://assets/art/glow.png" id="3_dl2k3"]
+[ext_resource type="Script" path="res://scenes/glow_size_change.gd" id="4_yymbj"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yhp5r"]
+blend_mode = 1
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_f21kj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7mtvb"]
 atlas = ExtResource("2_eyd3b")
@@ -122,6 +129,17 @@ platform_floor_layers = 4278190080
 script = ExtResource("1_5t08w")
 speed = 350.0
 metadata/_edit_group_ = true
+
+[node name="Glow" type="Sprite2D" parent="."]
+modulate = Color(0.792157, 0.733333, 0.176471, 1)
+material = SubResource("CanvasItemMaterial_yhp5r")
+position = Vector2(2, 2)
+scale = Vector2(2, 2)
+texture = ExtResource("3_dl2k3")
+script = ExtResource("4_yymbj")
+noise = SubResource("FastNoiseLite_f21kj")
+speed = 10.0
+max_bonus = 0.25
 
 [node name="PlayerModel" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

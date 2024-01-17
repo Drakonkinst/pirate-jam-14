@@ -72,3 +72,22 @@ renderer/rendering_method.mobile="gl_compatibility"
 textures/default_filters/anisotropic_filtering_level=0
 textures/decals/filter=0
 textures/light_projectors/filter=0
+
+[shader_globals]
+
+player_pos={
+"type": "vec2",
+"value": Vector2(0.5, 0.5)
+}
+screen_width={
+"type": "float",
+"value": 480.0
+}
+screen_height={
+"type": "float",
+"value": 720.0
+}
+player_world_pos={
+"type": "vec2",
+"value": Vector2(0, 0)
+}

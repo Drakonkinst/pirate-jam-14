@@ -4,9 +4,9 @@ uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
 const float DEFAULT_WIDTH = 720.0;  // Used to apply proper scaling
 
 uniform vec3 tint;
-uniform vec2 player_pos;
-uniform float screen_width;
-uniform float screen_height;
+global uniform vec2 player_pos;
+global uniform float screen_width;
+global uniform float screen_height;
 uniform float scale = 0.5;
 uniform float min_radius = 0.0;
 uniform float max_radius = 0.5;

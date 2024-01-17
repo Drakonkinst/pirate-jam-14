@@ -1,11 +1,14 @@
-[gd_scene load_steps=16 format=3 uid="uid://dmjjey2624xf5"]
+[gd_scene load_steps=21 format=3 uid="uid://dmjjey2624xf5"]
 
 [ext_resource type="Script" path="res://scenes/npc.gd" id="1_dkacp"]
 [ext_resource type="Script" path="res://scenes/animation_control.gd" id="2_732vn"]
+[ext_resource type="Shader" path="res://shader/glow_reveal.gdshader" id="2_bwcji"]
 [ext_resource type="Texture2D" uid="uid://dedwq7ilelv12" path="res://assets/art/npc1_left0.png" id="3_81jhf"]
+[ext_resource type="Texture2D" uid="uid://d3fkpw72jhw4d" path="res://assets/art/glow.png" id="3_koj7s"]
 [ext_resource type="Script" path="res://scenes/mood.gd" id="3_rojyy"]
 [ext_resource type="Script" path="res://scenes/personality.gd" id="4_gg2jo"]
 [ext_resource type="Texture2D" uid="uid://dthbbtx0h2r47" path="res://assets/art/npc1_left1.png" id="4_k47js"]
+[ext_resource type="Script" path="res://scenes/glow_size_change.gd" id="4_nu57j"]
 [ext_resource type="Script" path="res://scenes/move_control.gd" id="5_3yays"]
 [ext_resource type="Texture2D" uid="uid://m4r7ttefa6ov" path="res://assets/art/npc1_left2.png" id="5_tscsb"]
 [ext_resource type="Script" path="res://scenes/behavior.gd" id="6_kbocg"]
@@ -13,6 +16,12 @@
 [ext_resource type="Texture2D" uid="uid://dqef7qptw3crt" path="res://assets/art/npc1_right1.png" id="7_fa8nq"]
 [ext_resource type="Script" path="res://scenes/navigation_control.gd" id="8_2uhr0"]
 [ext_resource type="Texture2D" uid="uid://cgwqskmm4psc0" path="res://assets/art/npc1_right2.png" id="8_iauxo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8q3tg"]
+shader = ExtResource("2_bwcji")
+shader_parameter/radius = 175.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_c3mmn"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p1b4l"]
 animations = [{
@@ -58,6 +67,16 @@ platform_floor_layers = 4278190080
 script = ExtResource("1_dkacp")
 nav_control = NodePath("NavigationControl")
 metadata/_edit_group_ = true
+
+[node name="Glow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 0, 1)
+material = SubResource("ShaderMaterial_8q3tg")
+position = Vector2(1, 1)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("3_koj7s")
+script = ExtResource("4_nu57j")
+noise = SubResource("FastNoiseLite_c3mmn")
+max_bonus = 0.25
 
 [node name="AnimationControl" type="Node2D" parent="."]
 script = ExtResource("2_732vn")

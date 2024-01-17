@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://br2i5owe4u2d5"]
+
+[ext_resource type="Texture2D" uid="uid://d3fkpw72jhw4d" path="res://assets/art/glow.png" id="1_bx2sv"]
+[ext_resource type="Shader" path="res://shader/glow_reveal.gdshader" id="1_p1hh6"]
+[ext_resource type="Script" path="res://scenes/glow_size_change.gd" id="2_dj670"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_20toy"]
+shader = ExtResource("1_p1hh6")
+shader_parameter/scale = 0.5
+shader_parameter/min_radius = 0.0
+shader_parameter/max_radius = 0.5
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ch83b"]
+
+[node name="Glow" type="Node2D"]
+
+[node name="Glow" type="Sprite2D" parent="."]
+modulate = Color(0.792157, 0.733333, 0.176471, 1)
+material = SubResource("ShaderMaterial_20toy")
+position = Vector2(1, 1)
+texture = ExtResource("1_bx2sv")
+script = ExtResource("2_dj670")
+noise = SubResource("FastNoiseLite_ch83b")
