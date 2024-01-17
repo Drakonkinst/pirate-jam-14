@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://cuto6uvh4ti5y"]
+
+[ext_resource type="Texture2D" uid="uid://c3c2lmvvnb3c1" path="res://assets/art/npc/npc6_left0.png" id="1_5bjqj"]
+[ext_resource type="Texture2D" uid="uid://c6yswhbx0yp05" path="res://assets/art/npc/npc6_left1.png" id="2_qplm3"]
+[ext_resource type="Texture2D" uid="uid://bx5cjt4ugo1pj" path="res://assets/art/npc/npc6_left2.png" id="3_51rkx"]
+[ext_resource type="Texture2D" uid="uid://b4upln1h4a2p8" path="res://assets/art/npc/npc6_right0.png" id="4_51o7w"]
+[ext_resource type="Texture2D" uid="uid://dkghn5871ayj5" path="res://assets/art/npc/npc6_right1.png" id="5_a5ptp"]
+[ext_resource type="Texture2D" uid="uid://cqlrwfc88kjqn" path="res://assets/art/npc/npc6_right2.png" id="6_7u3vv"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_5bjqj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_qplm3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_51rkx")
+}],
+"loop": true,
+"name": &"left",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_51o7w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_a5ptp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_7u3vv")
+}],
+"loop": true,
+"name": &"right",
+"speed": 10.0
+}]
