@@ -25,6 +25,8 @@ source_geometry_group_name = &"navigation"
 agent_radius = 22.0
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("player", "player_spawn_point")]
+texture_filter = 1
+texture_repeat = 1
 position = Vector2(368, 216)
 script = ExtResource("1_mq68w")
 level_data = ExtResource("2_i1q1b")

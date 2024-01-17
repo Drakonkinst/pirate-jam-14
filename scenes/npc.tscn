@@ -2,59 +2,61 @@
 
 [ext_resource type="Script" path="res://scenes/npc.gd" id="1_dkacp"]
 [ext_resource type="Script" path="res://scenes/animation_control.gd" id="2_732vn"]
-[ext_resource type="Texture2D" uid="uid://dfiuqw157vysl" path="res://assets/art/city_tileset.png" id="2_ie0wr"]
 [ext_resource type="Script" path="res://scenes/mood.gd" id="3_rojyy"]
 [ext_resource type="Script" path="res://scenes/personality.gd" id="4_gg2jo"]
 [ext_resource type="Script" path="res://scenes/move_control.gd" id="5_3yays"]
 [ext_resource type="Script" path="res://scenes/behavior.gd" id="6_kbocg"]
 [ext_resource type="Script" path="res://scenes/navigation_control.gd" id="8_2uhr0"]
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jyh1q"]
+load_path = "res://.godot/imported/city_tileset.png-38caf292f90b32c3efcafee2ed559abf.ctex"
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_njawe"]
-atlas = ExtResource("2_ie0wr")
+atlas = SubResource("CompressedTexture2D_jyh1q")
 region = Rect2(384, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mn1mw"]
-atlas = ExtResource("2_ie0wr")
+atlas = SubResource("CompressedTexture2D_jyh1q")
 region = Rect2(384, 16, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_65kii"]
-atlas = ExtResource("2_ie0wr")
+atlas = SubResource("CompressedTexture2D_jyh1q")
 region = Rect2(384, 32, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_avcpq"]
-atlas = ExtResource("2_ie0wr")
+atlas = SubResource("CompressedTexture2D_jyh1q")
 region = Rect2(368, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_efx77"]
-atlas = ExtResource("2_ie0wr")
+atlas = SubResource("CompressedTexture2D_jyh1q")
 region = Rect2(368, 16, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bf1f7"]
-atlas = ExtResource("2_ie0wr")
+atlas = SubResource("CompressedTexture2D_jyh1q")
 region = Rect2(368, 32, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4151s"]
-atlas = ExtResource("2_ie0wr")
+atlas = SubResource("CompressedTexture2D_jyh1q")
 region = Rect2(416, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lo4xu"]
-atlas = ExtResource("2_ie0wr")
+atlas = SubResource("CompressedTexture2D_jyh1q")
 region = Rect2(416, 16, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8n73d"]
-atlas = ExtResource("2_ie0wr")
+atlas = SubResource("CompressedTexture2D_jyh1q")
 region = Rect2(416, 32, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tc2rp"]
-atlas = ExtResource("2_ie0wr")
+atlas = SubResource("CompressedTexture2D_jyh1q")
 region = Rect2(400, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5oe6w"]
-atlas = ExtResource("2_ie0wr")
+atlas = SubResource("CompressedTexture2D_jyh1q")
 region = Rect2(400, 16, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r0oe1"]
-atlas = ExtResource("2_ie0wr")
+atlas = SubResource("CompressedTexture2D_jyh1q")
 region = Rect2(400, 32, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p1b4l"]
@@ -120,6 +122,8 @@ animations = [{
 radius = 22.0
 
 [node name="NPC" type="CharacterBody2D" node_paths=PackedStringArray("nav_control") groups=["mobs"]]
+texture_filter = 1
+texture_repeat = 1
 collision_layer = 4
 motion_mode = 1
 wall_min_slide_angle = 0.0
@@ -132,6 +136,7 @@ metadata/_edit_group_ = true
 script = ExtResource("2_732vn")
 
 [node name="Model" type="AnimatedSprite2D" parent="AnimationControl"]
+texture_filter = 1
 texture_repeat = 1
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_p1b4l")
