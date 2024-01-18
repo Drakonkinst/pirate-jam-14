@@ -10,15 +10,17 @@ enum State {
 	IDLE, WANDER, WALK_TO_EXIT, CONVERSE, INTERACT_CAT, AVOID
 }
 
+signal has_pet_cat
+
 @export var min_idle_timer: float = 2
 @export var max_idle_timer: float = 5
-@export var player_detection_range: float = 100.0
+@export var max_time_wasted = 30.0
 
 @export var personality: Personality
 @export var nav_control: NavigationControl
 
 @onready var player: Player = get_tree().get_nodes_in_group(GlobalVariables.PLAYER_GROUP)[0]
-@onready var detection_area: Area2D = $DetectionArea
+
 # Use timer to determine when NPC will want to start conversations
 @onready var start_conversation_timer: Timer = $StartConversationTimer
 @onready var avoid_timer: Timer = $AvoidTimer
@@ -29,14 +31,19 @@ var idle_timer: float = 1 # This value should probably never be 0
 var moving_east: bool
 # Can avoid player or NPC
 var avoid_target: CharacterBody2D = null
-var time_since_spawn: float = 0
+var time_wasted: float = 0.0
 var num_pets: int = 0
 
 func _ready():
+	# Rushed personalities have less tolerance for time wasted
+	if personality.sociable_type == Personality.Sociable.RUSHED:
+		max_time_wasted *= 0.25
+	
 	set_state(State.WALK_TO_EXIT)
 	
 func update(delta: float) -> void:
-	time_since_spawn += delta
+	if state != State.WALK_TO_EXIT:
+		time_wasted += delta
 	match state:
 		State.IDLE:
 			if idle_timer > 0:
@@ -56,7 +63,6 @@ func update(delta: float) -> void:
 				set_state(State.WALK_TO_EXIT)
 				return
 			nav_control.move(MIN_WANDER_DISTANCE_THRESHOLD)
-			# TODO
 			pass
 		State.INTERACT_CAT:
 			var arrived: bool = nav_control.move(MIN_INTERACT_CAT_DISTANCE_THRESHOLD)
@@ -70,6 +76,7 @@ func pet_cat() -> void:
 		return
 	if player.pet():
 		num_pets += 1
+		has_pet_cat.emit()
 		start_pet_timer.start()
 
 # This CAN refresh the avoid state and timer
@@ -77,14 +84,6 @@ func start_avoiding(who: CharacterBody2D) -> void:
 	avoid_timer.start()
 	avoid_target = who
 	set_state(State.AVOID)
-
-func check_surroundings() -> void:
-	# TODO: Chance to attempt to start conversation if NPC is nearby (lower if late)
-	# TODO: If paying attention to cat, chance to stop (higher if late)
-	# TODO: If cat lover, check if player is nearby and chance to try to go to them without prompting
-	# TODO: If allergic, check if player is nearby and react
-	# Send signals to modify mood etc
-	pass # Replace with function body.
 
 func set_state(value: State) -> void:
 	if state != value:
@@ -94,14 +93,17 @@ func set_state(value: State) -> void:
 func set_moving_east(flag: bool):
 	moving_east = flag
 
+func should_lock_face():
+	return state == State.INTERACT_CAT or state == State.CONVERSE
+
+func get_facing_target():
+	return nav_control.goal_pos
+
 func is_moving_east():
 	return moving_east
 
 func _generate_idle_time():
 	return randf_range(min_idle_timer, max_idle_timer)
-
-func _on_update_behavior_timer_timeout() -> void:
-	check_surroundings()
 
 func _on_avoid_timer_timeout() -> void:
 	if state == State.AVOID:
@@ -109,8 +111,14 @@ func _on_avoid_timer_timeout() -> void:
 	avoid_target = null
 	avoid_timer.stop()
 
+# Chance multiplier that can be applied
+# Goes from 1.0 to 0.0 based on how much time has been "wasted"
+func get_time_wasted_multiplier() -> float:
+	var multiplier: float = clamp(1.0 - time_wasted / max_time_wasted, 0.0, 1.0)
+	return multiplier
+
 func _on_start_pet_timer_timeout() -> void:
 	# Chance to stop after every pet
-	if num_pets >= randi() % MAX_NUM_PETS + 1:
+	if num_pets >= randi() % MAX_NUM_PETS + 1 and randf() < get_time_wasted_multiplier():
 		set_state(State.WALK_TO_EXIT)
 	start_pet_timer.stop()

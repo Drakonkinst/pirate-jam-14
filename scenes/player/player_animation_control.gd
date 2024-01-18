@@ -2,7 +2,8 @@ extends AnimationControl
 
 class_name PlayerAnimationControl
 
-func update_animations(velocity: Vector2):
+# Player is never locked to facing, so these params can be ignored
+func update_animations(velocity: Vector2, _locked_facing: bool = false, _face_towards: Vector2 = Vector2.ZERO):
     if velocity.is_zero_approx():
         model.frame = 0
         model.stop()

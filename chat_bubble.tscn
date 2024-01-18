@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://ctc6iva3px6p3"]
+[gd_scene load_steps=35 format=3 uid="uid://ctc6iva3px6p3"]
 
 [ext_resource type="Script" path="res://scenes/npc/chat_bubble.gd" id="1_k6mt4"]
 [ext_resource type="Texture2D" uid="uid://5phqi6o8uc75" path="res://assets/art/chat/emote_alert.png" id="2_wh8rh"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cs2h6r5wycipk" path="res://assets/art/chat/emote_bars.png" id="4_iefyd"]
 [ext_resource type="Texture2D" uid="uid://bx4fi67tynxsc" path="res://assets/art/chat/emote_cash.png" id="5_5ytit"]
 [ext_resource type="Texture2D" uid="uid://df2kkk2rtcy6a" path="res://assets/art/chat/emote_circle.png" id="6_g5bet"]
+[ext_resource type="Texture2D" uid="uid://c7nfae4kygir3" path="res://assets/art/chat/emote_clock.png" id="7_8inca"]
 [ext_resource type="Texture2D" uid="uid://drb34417flb3w" path="res://assets/art/chat/emote_cloud.png" id="7_rnuk1"]
 [ext_resource type="Texture2D" uid="uid://j6uuty26n2cw" path="res://assets/art/chat/emote_cross.png" id="8_b8n4v"]
 [ext_resource type="Texture2D" uid="uid://c48tf7ysqegci" path="res://assets/art/chat/emote_dots1.png" id="9_cwsvd"]
@@ -80,7 +81,7 @@ _data = {
 
 [node name="ChatBubble" type="Node2D"]
 script = ExtResource("1_k6mt4")
-emojis = Array[Texture2D]([ExtResource("2_wh8rh"), ExtResource("3_yxkyu"), ExtResource("4_iefyd"), ExtResource("5_5ytit"), ExtResource("6_g5bet"), ExtResource("7_rnuk1"), ExtResource("8_b8n4v"), ExtResource("9_cwsvd"), ExtResource("10_hg4vb"), ExtResource("11_hkwfw"), ExtResource("12_0ifra"), ExtResource("13_go0o0"), ExtResource("14_mwm37"), ExtResource("15_4vvqt"), ExtResource("16_a2ynp"), ExtResource("17_888vf"), ExtResource("18_w4ufh"), ExtResource("19_4rrju"), ExtResource("20_sy0uu"), ExtResource("21_i5s4n"), ExtResource("22_mu37r"), ExtResource("23_qnmx6"), ExtResource("24_xqp44"), ExtResource("25_w1fgf"), ExtResource("26_6rla4"), ExtResource("27_oev1r"), ExtResource("28_qgb65"), ExtResource("29_dwgs7"), ExtResource("30_3pnnc"), ExtResource("31_ehuv6")])
+emojis = Array[Texture2D]([ExtResource("2_wh8rh"), ExtResource("3_yxkyu"), ExtResource("4_iefyd"), ExtResource("5_5ytit"), ExtResource("6_g5bet"), ExtResource("7_8inca"), ExtResource("7_rnuk1"), ExtResource("8_b8n4v"), ExtResource("9_cwsvd"), ExtResource("10_hg4vb"), ExtResource("11_hkwfw"), ExtResource("12_0ifra"), ExtResource("13_go0o0"), ExtResource("14_mwm37"), ExtResource("15_4vvqt"), ExtResource("16_a2ynp"), ExtResource("17_888vf"), ExtResource("18_w4ufh"), ExtResource("19_4rrju"), ExtResource("20_sy0uu"), ExtResource("21_i5s4n"), ExtResource("22_mu37r"), ExtResource("23_qnmx6"), ExtResource("24_xqp44"), ExtResource("25_w1fgf"), ExtResource("26_6rla4"), ExtResource("27_oev1r"), ExtResource("28_qgb65"), ExtResource("29_dwgs7"), ExtResource("30_3pnnc"), ExtResource("31_ehuv6")])
 
 [node name="EmojiSprite" type="Sprite2D" parent="."]
 z_index = 5

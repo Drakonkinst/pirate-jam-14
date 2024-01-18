@@ -11,6 +11,7 @@ enum Emoji {
     BARS,
     CASH,
     CIRCLE,
+    CLOCK,
     CLOUD,
     CROSS,
     DOTS1,

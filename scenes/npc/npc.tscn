@@ -71,9 +71,9 @@ animations = [{
 radius = 22.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h2tf7"]
-radius = 108.074
+radius = 125.0
 
-[node name="NPC" type="CharacterBody2D" node_paths=PackedStringArray("nav_control") groups=["mobs"]]
+[node name="NPC" type="CharacterBody2D" node_paths=PackedStringArray("nav_control", "detection_area") groups=["mobs"]]
 texture_filter = 1
 texture_repeat = 1
 collision_layer = 4
@@ -82,6 +82,7 @@ wall_min_slide_angle = 0.0
 platform_floor_layers = 4278190080
 script = ExtResource("1_dkacp")
 nav_control = NodePath("NavigationControl")
+detection_area = NodePath("DetectionArea")
 metadata/_edit_group_ = true
 
 [node name="RevealWhenNearby" type="Node2D" parent="."]
@@ -115,6 +116,13 @@ models = Array[SpriteFrames]([ExtResource("13_pleca"), ExtResource("14_snkho"), 
 position = Vector2(0, 4)
 shape = SubResource("CircleShape2D_1dkxc")
 
+[node name="DetectionArea" type="Area2D" parent="."]
+input_pickable = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_h2tf7")
+
 [node name="Personality" type="Node2D" parent="."]
 script = ExtResource("51_6i456")
 
@@ -133,13 +141,6 @@ autostart = true
 
 [node name="StartPetTimer" type="Timer" parent="Behavior"]
 wait_time = 2.0
-
-[node name="DetectionArea" type="Area2D" parent="Behavior"]
-input_pickable = false
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Behavior/DetectionArea"]
-shape = SubResource("CircleShape2D_h2tf7")
 
 [node name="Mood" type="Node2D" parent="."]
 script = ExtResource("53_rfa5q")
@@ -171,7 +172,8 @@ autostart = true
 [node name="RespondNoiseCooldownTimer" type="Timer" parent="."]
 wait_time = 2.0
 
-[connection signal="timeout" from="Behavior/UpdateBehaviorTimer" to="Behavior" method="_on_update_behavior_timer_timeout"]
+[connection signal="has_pet_cat" from="Behavior" to="." method="_on_behavior_has_pet_cat"]
+[connection signal="timeout" from="Behavior/UpdateBehaviorTimer" to="." method="_on_update_behavior_timer_timeout"]
 [connection signal="timeout" from="Behavior/AvoidTimer" to="Behavior" method="_on_avoid_timer_timeout"]
 [connection signal="timeout" from="Behavior/StartPetTimer" to="Behavior" method="_on_start_pet_timer_timeout"]
 [connection signal="timeout" from="Mood/StageChangeCooldown" to="Mood" method="_on_stage_change_cooldown_timeout"]
