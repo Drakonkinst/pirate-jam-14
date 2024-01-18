@@ -1,9 +1,12 @@
-[gd_scene load_steps=21 format=3 uid="uid://o81jg6153eh1"]
+[gd_scene load_steps=24 format=3 uid="uid://o81jg6153eh1"]
 
-[ext_resource type="Script" path="res://scenes/player.gd" id="1_5t08w"]
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_5t08w"]
 [ext_resource type="Texture2D" uid="uid://dy7wrnyedd2i2" path="res://assets/art/lpccatratdog.png" id="2_eyd3b"]
 [ext_resource type="Texture2D" uid="uid://d3fkpw72jhw4d" path="res://assets/art/glow.png" id="3_dl2k3"]
+[ext_resource type="Script" path="res://scenes/player/player_animation_control.gd" id="4_1vm7j"]
 [ext_resource type="Script" path="res://scenes/glow_size_change.gd" id="4_yymbj"]
+[ext_resource type="Script" path="res://scenes/player/player_move_control.gd" id="6_8r2ky"]
+[ext_resource type="Script" path="res://scenes/player/player_actions.gd" id="7_0ui7u"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yhp5r"]
 blend_mode = 1
@@ -128,7 +131,6 @@ collision_layer = 2
 collision_mask = 7
 platform_floor_layers = 4278190080
 script = ExtResource("1_5t08w")
-speed = 350.0
 metadata/_edit_group_ = true
 
 [node name="Glow" type="Sprite2D" parent="."]
@@ -145,7 +147,10 @@ noise = SubResource("FastNoiseLite_f21kj")
 speed = 10.0
 max_bonus = 0.25
 
-[node name="PlayerModel" type="AnimatedSprite2D" parent="."]
+[node name="PlayerAnimationControl" type="Node2D" parent="."]
+script = ExtResource("4_1vm7j")
+
+[node name="Model" type="AnimatedSprite2D" parent="PlayerAnimationControl"]
 texture_filter = 1
 texture_repeat = 1
 scale = Vector2(1.15, 1.15)
@@ -157,3 +162,11 @@ shape = SubResource("CircleShape2D_ga0ho")
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
 radius = 17.0
+
+[node name="PlayerMoveControl" type="Node2D" parent="."]
+script = ExtResource("6_8r2ky")
+
+[node name="PlayerActions" type="Node2D" parent="."]
+script = ExtResource("7_0ui7u")
+
+[connection signal="made_noise" from="PlayerActions" to="." method="_on_player_actions_made_noise"]

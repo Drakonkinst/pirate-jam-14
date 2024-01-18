@@ -4,8 +4,8 @@
 
 [resource]
 shader = ExtResource("1_3i45v")
-shader_parameter/tint = Vector3(0.26, 0.12, 0)
+shader_parameter/tint = Vector3(0.15, 0.1, 0.2)
 shader_parameter/scale = 0.5
 shader_parameter/min_radius = 0.25
 shader_parameter/max_radius = 0.5
-shader_parameter/desaturation = 0.75
+shader_parameter/desaturation = 0.5

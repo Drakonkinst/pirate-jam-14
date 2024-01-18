@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b5b6cllfoqy1x"]
 
 [ext_resource type="Script" path="res://scenes/npc_spawner.gd" id="2_q3noi"]
-[ext_resource type="PackedScene" uid="uid://dmjjey2624xf5" path="res://scenes/npc.tscn" id="3_xjsbe"]
+[ext_resource type="PackedScene" uid="uid://dmjjey2624xf5" path="res://scenes/npc/npc.tscn" id="3_xjsbe"]
 
 [sub_resource type="GDScript" id="GDScript_ucad5"]
 script/source = "extends Node

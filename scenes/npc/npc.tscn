@@ -1,31 +1,28 @@
-[gd_scene load_steps=65 format=3 uid="uid://dmjjey2624xf5"]
+[gd_scene load_steps=63 format=3 uid="uid://dmjjey2624xf5"]
 
-[ext_resource type="Script" path="res://scenes/npc.gd" id="1_dkacp"]
+[ext_resource type="Script" path="res://scenes/npc/npc.gd" id="1_dkacp"]
 [ext_resource type="Shader" path="res://shader/reveal.gdshader" id="2_720b1"]
-[ext_resource type="Script" path="res://scenes/animation_control.gd" id="2_732vn"]
 [ext_resource type="Shader" path="res://shader/glow_reveal.gdshader" id="2_bwcji"]
 [ext_resource type="Texture2D" uid="uid://boy33b3vn14i3" path="res://assets/art/npc/npc1_left0.png" id="3_81jhf"]
 [ext_resource type="Texture2D" uid="uid://d3fkpw72jhw4d" path="res://assets/art/glow.png" id="3_koj7s"]
-[ext_resource type="Script" path="res://scenes/mood.gd" id="3_rojyy"]
-[ext_resource type="Script" path="res://scenes/personality.gd" id="4_gg2jo"]
 [ext_resource type="Texture2D" uid="uid://m87deb8ghu1u" path="res://assets/art/npc/npc1_left1.png" id="4_k47js"]
 [ext_resource type="Script" path="res://scenes/glow_size_change.gd" id="4_nu57j"]
-[ext_resource type="Script" path="res://scenes/move_control.gd" id="5_3yays"]
+[ext_resource type="Script" path="res://scenes/npc/move_control.gd" id="5_3yays"]
 [ext_resource type="Texture2D" uid="uid://c2cqjb1a3de1j" path="res://assets/art/npc/npc1_left2.png" id="5_tscsb"]
-[ext_resource type="Script" path="res://scenes/behavior.gd" id="6_kbocg"]
+[ext_resource type="Script" path="res://scenes/npc/animation_control.gd" id="6_6x70e"]
 [ext_resource type="Texture2D" uid="uid://mhx8ltcq6633" path="res://assets/art/chat/emote_heart.png" id="6_ml636"]
 [ext_resource type="Texture2D" uid="uid://c7sbjed57u7ow" path="res://assets/art/npc/npc1_right0.png" id="6_nuhfu"]
 [ext_resource type="Texture2D" uid="uid://b0uikguyg0or6" path="res://assets/art/npc/npc1_right1.png" id="7_fa8nq"]
-[ext_resource type="Script" path="res://scenes/navigation_control.gd" id="8_2uhr0"]
+[ext_resource type="Script" path="res://scenes/npc/navigation_control.gd" id="8_2uhr0"]
 [ext_resource type="Texture2D" uid="uid://chh8gfs6ro6fg" path="res://assets/art/npc/npc1_right2.png" id="8_iauxo"]
-[ext_resource type="Script" path="res://scenes/npc_model.gd" id="12_oacit"]
+[ext_resource type="Script" path="res://scenes/npc/npc_model.gd" id="12_oacit"]
 [ext_resource type="SpriteFrames" uid="uid://d0hsu8hkui0cw" path="res://data/npc_model/npc_model1.tres" id="13_pleca"]
 [ext_resource type="SpriteFrames" uid="uid://bqo2u6t0nhluu" path="res://data/npc_model/npc_model2.tres" id="14_snkho"]
 [ext_resource type="SpriteFrames" uid="uid://uf26wrebx2fs" path="res://data/npc_model/npc_model3.tres" id="15_la1ox"]
 [ext_resource type="SpriteFrames" uid="uid://b283vpqmagkn6" path="res://data/npc_model/npc_model4.tres" id="16_f44sn"]
 [ext_resource type="SpriteFrames" uid="uid://b2oso4gwqgfx6" path="res://data/npc_model/npc_model5.tres" id="17_uhn06"]
 [ext_resource type="SpriteFrames" uid="uid://cuto6uvh4ti5y" path="res://data/npc_model/npc_model6.tres" id="18_cr72q"]
-[ext_resource type="Script" path="res://scenes/chat_bubble.gd" id="20_k45wp"]
+[ext_resource type="Script" path="res://scenes/npc/chat_bubble.gd" id="20_c3fnh"]
 [ext_resource type="Texture2D" uid="uid://5phqi6o8uc75" path="res://assets/art/chat/emote_alert.png" id="21_o7d0g"]
 [ext_resource type="Texture2D" uid="uid://k2xay8tglmjf" path="res://assets/art/chat/emote_anger.png" id="22_q5bvs"]
 [ext_resource type="Texture2D" uid="uid://cs2h6r5wycipk" path="res://assets/art/chat/emote_bars.png" id="23_4hwo7"]
@@ -55,6 +52,9 @@
 [ext_resource type="Texture2D" uid="uid://dq47rx7uuv0oj" path="res://assets/art/chat/emote_stars.png" id="48_5rpks"]
 [ext_resource type="Texture2D" uid="uid://co0x5i2uraxkg" path="res://assets/art/chat/emote_swirl.png" id="49_shqoc"]
 [ext_resource type="Texture2D" uid="uid://bvw5nsj777wco" path="res://assets/art/chat/emote__.png" id="50_42lsa"]
+[ext_resource type="Script" path="res://scenes/npc/personality.gd" id="51_6i456"]
+[ext_resource type="Script" path="res://scenes/npc/behavior.gd" id="52_1j522"]
+[ext_resource type="Script" path="res://scenes/npc/mood.gd" id="53_rfa5q"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4drds"]
 shader = ExtResource("2_720b1")
@@ -138,89 +138,9 @@ tracks/2/keys = {
 "values": [0.0, 0.388629, 0.0, -0.195968, 0.00915647]
 }
 
-[sub_resource type="Animation" id="Animation_iqoea"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("EmojiSprite:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -55)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("EmojiSprite:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("EmojiSprite:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(3.4, 3.4)]
-}
-
-[sub_resource type="Animation" id="Animation_0e4rs"]
-resource_name = "pop_out"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("EmojiSprite:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, -55), Vector2(-4.28408e-08, -32)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("EmojiSprite:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0158846]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("EmojiSprite:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(3.4, 3.4), Vector2(0.426216, 0.426216)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b1n31"]
 _data = {
-"RESET": SubResource("Animation_iqoea"),
-"pop_in": SubResource("Animation_74uyq"),
-"pop_out": SubResource("Animation_0e4rs")
+"pop_in": SubResource("Animation_74uyq")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1dkxc"]
@@ -251,7 +171,7 @@ noise = SubResource("FastNoiseLite_c3mmn")
 max_bonus = 0.25
 
 [node name="AnimationControl" type="Node2D" parent="."]
-script = ExtResource("2_732vn")
+script = ExtResource("6_6x70e")
 
 [node name="Model" type="AnimatedSprite2D" parent="AnimationControl"]
 texture_filter = 1
@@ -263,13 +183,14 @@ script = ExtResource("12_oacit")
 models = Array[SpriteFrames]([ExtResource("13_pleca"), ExtResource("14_snkho"), ExtResource("15_la1ox"), ExtResource("16_f44sn"), ExtResource("17_uhn06"), ExtResource("18_cr72q")])
 
 [node name="ChatBubble" type="Node2D" parent="."]
-script = ExtResource("20_k45wp")
+script = ExtResource("20_c3fnh")
 emojis = Array[Texture2D]([ExtResource("21_o7d0g"), ExtResource("22_q5bvs"), ExtResource("23_4hwo7"), ExtResource("24_ip5i6"), ExtResource("25_xp5mv"), ExtResource("26_rcd87"), ExtResource("27_767o7"), ExtResource("28_cjt4u"), ExtResource("29_pds76"), ExtResource("30_2odih"), ExtResource("31_m2fnt"), ExtResource("32_qcfkg"), ExtResource("33_mkfmg"), ExtResource("34_4qtx4"), ExtResource("35_gj2je"), ExtResource("36_pdmu6"), ExtResource("37_np1yk"), ExtResource("6_ml636"), ExtResource("39_rip7k"), ExtResource("40_sfi26"), ExtResource("41_abnf6"), ExtResource("42_vr4mm"), ExtResource("43_dfr45"), ExtResource("44_bu7do"), ExtResource("45_jw71v"), ExtResource("46_3p0un"), ExtResource("47_nu2y8"), ExtResource("48_5rpks"), ExtResource("49_shqoc"), ExtResource("50_42lsa")])
 
 [node name="EmojiSprite" type="Sprite2D" parent="ChatBubble"]
 z_index = 5
-position = Vector2(0, -55)
-scale = Vector2(3.4, 3.4)
+position = Vector2(5, -42)
+rotation = 0.388629
+scale = Vector2(1.87, 1.87)
 texture = ExtResource("6_ml636")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ChatBubble/EmojiSprite"]
@@ -286,15 +207,15 @@ position = Vector2(0, 4)
 shape = SubResource("CircleShape2D_1dkxc")
 
 [node name="Personality" type="Node2D" parent="."]
-script = ExtResource("4_gg2jo")
+script = ExtResource("51_6i456")
 
 [node name="Behavior" type="Node2D" parent="." node_paths=PackedStringArray("personality", "nav_control")]
-script = ExtResource("6_kbocg")
+script = ExtResource("52_1j522")
 personality = NodePath("../Personality")
 nav_control = NodePath("../NavigationControl")
 
 [node name="Mood" type="Node2D" parent="."]
-script = ExtResource("3_rojyy")
+script = ExtResource("53_rfa5q")
 
 [node name="StageChangeCooldown" type="Timer" parent="Mood"]
 

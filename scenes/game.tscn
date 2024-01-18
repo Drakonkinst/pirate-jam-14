@@ -1,11 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://qxsv8wqrj306"]
+[gd_scene load_steps=22 format=3 uid="uid://qxsv8wqrj306"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_mq68w"]
 [ext_resource type="TileSet" uid="uid://bk0ycboeo7qyy" path="res://scenes/city.tres" id="2_a56mi"]
 [ext_resource type="Resource" uid="uid://blkeplr178jbt" path="res://data/level_1.tres" id="2_i1q1b"]
-[ext_resource type="PackedScene" uid="uid://o81jg6153eh1" path="res://scenes/player.tscn" id="3_ml610"]
+[ext_resource type="PackedScene" uid="uid://o81jg6153eh1" path="res://scenes/player/player.tscn" id="3_ml610"]
 [ext_resource type="Script" path="res://scenes/npc_spawner.gd" id="4_f3c1u"]
-[ext_resource type="PackedScene" uid="uid://dmjjey2624xf5" path="res://scenes/npc.tscn" id="4_kxhr6"]
+[ext_resource type="PackedScene" uid="uid://dmjjey2624xf5" path="res://scenes/npc/npc.tscn" id="4_kxhr6"]
 [ext_resource type="PackedScene" uid="uid://d3bkgwn8htm03" path="res://scenes/hud.tscn" id="4_u8sug"]
 [ext_resource type="Script" path="res://scenes/despawn_handler.gd" id="4_ww6lp"]
 [ext_resource type="Material" uid="uid://bvluuc1qjhaox" path="res://shader/night_shader.tres" id="5_2k0h2"]
@@ -14,6 +14,8 @@
 [ext_resource type="Material" uid="uid://6f3ir8yvdn4g" path="res://shader/day_shader.tres" id="10_holxx"]
 [ext_resource type="Texture2D" uid="uid://hd5icmyjjvga" path="res://assets/art/crosshair.png" id="11_0wsio"]
 [ext_resource type="Script" path="res://shader/shader_control.gd" id="12_kpomg"]
+[ext_resource type="Script" path="res://scenes/noise_handler.gd" id="13_2tq4c"]
+[ext_resource type="PackedScene" uid="uid://csv60xwlxwo2l" path="res://scenes/noise_particle.tscn" id="14_frmeb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i4j5v"]
 size = Vector2(3432, 304)
@@ -62,7 +64,7 @@ camera = NodePath("../../Camera2D")
 day_shader = NodePath("../DayShader")
 night_shader = NodePath("../NightShader")
 canvas_modulate = NodePath("../../CanvasModulate")
-day_tint = Color(0.964706, 0.729412, 0.580392, 1)
+day_tint = Color(0.976471, 0.941176, 0.898039, 1)
 night_tint = Color(0.839216, 0.792157, 0.890196, 1)
 
 [node name="NightShader" type="ColorRect" parent="ShaderLayer"]
@@ -145,15 +147,22 @@ layer_2/tile_data = PackedInt32Array(524288, 589824, 17, 589824, 589824, 0, 6553
 z_as_relative = false
 y_sort_enabled = true
 
-[node name="Player" parent="World" node_paths=PackedStringArray("tilemap") instance=ExtResource("3_ml610")]
+[node name="Player" parent="World" node_paths=PackedStringArray("ref_tilemap") instance=ExtResource("3_ml610")]
 position = Vector2(153, 135)
-tilemap = NodePath("../TileMap")
+ref_tilemap = NodePath("../TileMap")
 
 [node name="CameraFollow" type="Node2D" parent="World/Player" node_paths=PackedStringArray("camera", "tilemap")]
 script = ExtResource("8_jjgcx")
 enabled = true
 camera = NodePath("../../../Camera2D")
 tilemap = NodePath("../../TileMap")
+
+[node name="NoiseHandler" type="Node2D" parent="World"]
+z_index = 7
+z_as_relative = false
+script = ExtResource("13_2tq4c")
+noise_particle_scene = ExtResource("14_frmeb")
+distance_ahead = 40.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(570, 325)
@@ -180,3 +189,4 @@ shadow_enabled = true
 [connection signal="on_npc_despawned" from="DespawnHandler" to="NPCSpawner" method="_on_despawn_handler_on_npc_despawned"]
 [connection signal="body_entered" from="DespawnHandler/Left" to="DespawnHandler" method="_on_left_body_entered"]
 [connection signal="body_entered" from="DespawnHandler/Right" to="DespawnHandler" method="_on_right_body_entered"]
+[connection signal="made_noise" from="World/Player" to="World/NoiseHandler" method="_on_player_made_noise"]
