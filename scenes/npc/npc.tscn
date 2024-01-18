@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://dmjjey2624xf5"]
+[gd_scene load_steps=31 format=3 uid="uid://dmjjey2624xf5"]
 
 [ext_resource type="Script" path="res://scenes/npc/npc.gd" id="1_dkacp"]
 [ext_resource type="Shader" path="res://shader/reveal.gdshader" id="2_720b1"]
@@ -10,7 +10,6 @@
 [ext_resource type="Script" path="res://scenes/npc/move_control.gd" id="5_3yays"]
 [ext_resource type="Texture2D" uid="uid://c2cqjb1a3de1j" path="res://assets/art/npc/npc1_left2.png" id="5_tscsb"]
 [ext_resource type="Script" path="res://scenes/npc/animation_control.gd" id="6_6x70e"]
-[ext_resource type="Texture2D" uid="uid://mhx8ltcq6633" path="res://assets/art/chat/emote_heart.png" id="6_ml636"]
 [ext_resource type="Texture2D" uid="uid://c7sbjed57u7ow" path="res://assets/art/npc/npc1_right0.png" id="6_nuhfu"]
 [ext_resource type="Texture2D" uid="uid://b0uikguyg0or6" path="res://assets/art/npc/npc1_right1.png" id="7_fa8nq"]
 [ext_resource type="Script" path="res://scenes/npc/navigation_control.gd" id="8_2uhr0"]
@@ -22,36 +21,7 @@
 [ext_resource type="SpriteFrames" uid="uid://b283vpqmagkn6" path="res://data/npc_model/npc_model4.tres" id="16_f44sn"]
 [ext_resource type="SpriteFrames" uid="uid://b2oso4gwqgfx6" path="res://data/npc_model/npc_model5.tres" id="17_uhn06"]
 [ext_resource type="SpriteFrames" uid="uid://cuto6uvh4ti5y" path="res://data/npc_model/npc_model6.tres" id="18_cr72q"]
-[ext_resource type="Script" path="res://scenes/npc/chat_bubble.gd" id="20_c3fnh"]
-[ext_resource type="Texture2D" uid="uid://5phqi6o8uc75" path="res://assets/art/chat/emote_alert.png" id="21_o7d0g"]
-[ext_resource type="Texture2D" uid="uid://k2xay8tglmjf" path="res://assets/art/chat/emote_anger.png" id="22_q5bvs"]
-[ext_resource type="Texture2D" uid="uid://cs2h6r5wycipk" path="res://assets/art/chat/emote_bars.png" id="23_4hwo7"]
-[ext_resource type="Texture2D" uid="uid://bx4fi67tynxsc" path="res://assets/art/chat/emote_cash.png" id="24_ip5i6"]
-[ext_resource type="Texture2D" uid="uid://df2kkk2rtcy6a" path="res://assets/art/chat/emote_circle.png" id="25_xp5mv"]
-[ext_resource type="Texture2D" uid="uid://drb34417flb3w" path="res://assets/art/chat/emote_cloud.png" id="26_rcd87"]
-[ext_resource type="Texture2D" uid="uid://j6uuty26n2cw" path="res://assets/art/chat/emote_cross.png" id="27_767o7"]
-[ext_resource type="Texture2D" uid="uid://c48tf7ysqegci" path="res://assets/art/chat/emote_dots1.png" id="28_cjt4u"]
-[ext_resource type="Texture2D" uid="uid://cahngwt24u6wn" path="res://assets/art/chat/emote_dots2.png" id="29_pds76"]
-[ext_resource type="Texture2D" uid="uid://c1nht71noidak" path="res://assets/art/chat/emote_dots3.png" id="30_2odih"]
-[ext_resource type="Texture2D" uid="uid://da2eb6qb1a56h" path="res://assets/art/chat/emote_drop.png" id="31_m2fnt"]
-[ext_resource type="Texture2D" uid="uid://2tgsf2tpsveh" path="res://assets/art/chat/emote_drops.png" id="32_qcfkg"]
-[ext_resource type="Texture2D" uid="uid://l0w4jt3giv87" path="res://assets/art/chat/emote_exclamation.png" id="33_mkfmg"]
-[ext_resource type="Texture2D" uid="uid://en3kblk2q1v1" path="res://assets/art/chat/emote_exclamations.png" id="34_4qtx4"]
-[ext_resource type="Texture2D" uid="uid://pboflh0yhrj" path="res://assets/art/chat/emote_faceAngry.png" id="35_gj2je"]
-[ext_resource type="Texture2D" uid="uid://bk13y8av0w03q" path="res://assets/art/chat/emote_faceHappy.png" id="36_pdmu6"]
-[ext_resource type="Texture2D" uid="uid://ri0jokcwcmru" path="res://assets/art/chat/emote_faceSad.png" id="37_np1yk"]
-[ext_resource type="Texture2D" uid="uid://cdgepirokxpc6" path="res://assets/art/chat/emote_heartBroken.png" id="39_rip7k"]
-[ext_resource type="Texture2D" uid="uid://cpj1vne2f0ek4" path="res://assets/art/chat/emote_hearts.png" id="40_sfi26"]
-[ext_resource type="Texture2D" uid="uid://d1d2hnpse1ilq" path="res://assets/art/chat/emote_idea.png" id="41_abnf6"]
-[ext_resource type="Texture2D" uid="uid://dtf86d4xay2xh" path="res://assets/art/chat/emote_laugh.png" id="42_vr4mm"]
-[ext_resource type="Texture2D" uid="uid://bddm7tqoep36n" path="res://assets/art/chat/emote_music.png" id="43_dfr45"]
-[ext_resource type="Texture2D" uid="uid://c1dewkgnrivam" path="res://assets/art/chat/emote_question.png" id="44_bu7do"]
-[ext_resource type="Texture2D" uid="uid://dpn4638kop7au" path="res://assets/art/chat/emote_sleep.png" id="45_jw71v"]
-[ext_resource type="Texture2D" uid="uid://l01nv1458kss" path="res://assets/art/chat/emote_sleeps.png" id="46_3p0un"]
-[ext_resource type="Texture2D" uid="uid://2kh7gpwp07yn" path="res://assets/art/chat/emote_star.png" id="47_nu2y8"]
-[ext_resource type="Texture2D" uid="uid://dq47rx7uuv0oj" path="res://assets/art/chat/emote_stars.png" id="48_5rpks"]
-[ext_resource type="Texture2D" uid="uid://co0x5i2uraxkg" path="res://assets/art/chat/emote_swirl.png" id="49_shqoc"]
-[ext_resource type="Texture2D" uid="uid://bvw5nsj777wco" path="res://assets/art/chat/emote__.png" id="50_42lsa"]
+[ext_resource type="PackedScene" uid="uid://ctc6iva3px6p3" path="res://chat_bubble.tscn" id="20_ocpmv"]
 [ext_resource type="Script" path="res://scenes/npc/personality.gd" id="51_6i456"]
 [ext_resource type="Script" path="res://scenes/npc/behavior.gd" id="52_1j522"]
 [ext_resource type="Script" path="res://scenes/npc/mood.gd" id="53_rfa5q"]
@@ -97,52 +67,6 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="Animation" id="Animation_74uyq"]
-resource_name = "pop_in"
-length = 0.4
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("EmojiSprite:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0.85, 0.85), Vector2(3.4, 3.4), Vector2(3.4, 3.4)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("EmojiSprite:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.25, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0, -37), Vector2(5, -42), Vector2(-4.47035e-07, -50), Vector2(-5, -54), Vector2(0, -55)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("EmojiSprite:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.25, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.0, 0.388629, 0.0, -0.195968, 0.00915647]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_b1n31"]
-_data = {
-"pop_in": SubResource("Animation_74uyq")
-}
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_1dkxc"]
 radius = 22.0
 
@@ -182,25 +106,7 @@ animation = &"left"
 script = ExtResource("12_oacit")
 models = Array[SpriteFrames]([ExtResource("13_pleca"), ExtResource("14_snkho"), ExtResource("15_la1ox"), ExtResource("16_f44sn"), ExtResource("17_uhn06"), ExtResource("18_cr72q")])
 
-[node name="ChatBubble" type="Node2D" parent="."]
-script = ExtResource("20_c3fnh")
-emojis = Array[Texture2D]([ExtResource("21_o7d0g"), ExtResource("22_q5bvs"), ExtResource("23_4hwo7"), ExtResource("24_ip5i6"), ExtResource("25_xp5mv"), ExtResource("26_rcd87"), ExtResource("27_767o7"), ExtResource("28_cjt4u"), ExtResource("29_pds76"), ExtResource("30_2odih"), ExtResource("31_m2fnt"), ExtResource("32_qcfkg"), ExtResource("33_mkfmg"), ExtResource("34_4qtx4"), ExtResource("35_gj2je"), ExtResource("36_pdmu6"), ExtResource("37_np1yk"), ExtResource("6_ml636"), ExtResource("39_rip7k"), ExtResource("40_sfi26"), ExtResource("41_abnf6"), ExtResource("42_vr4mm"), ExtResource("43_dfr45"), ExtResource("44_bu7do"), ExtResource("45_jw71v"), ExtResource("46_3p0un"), ExtResource("47_nu2y8"), ExtResource("48_5rpks"), ExtResource("49_shqoc"), ExtResource("50_42lsa")])
-
-[node name="EmojiSprite" type="Sprite2D" parent="ChatBubble"]
-z_index = 5
-position = Vector2(5, -42)
-rotation = 0.388629
-scale = Vector2(1.87, 1.87)
-texture = ExtResource("6_ml636")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ChatBubble/EmojiSprite"]
-root_node = NodePath("../..")
-libraries = {
-"": SubResource("AnimationLibrary_b1n31")
-}
-
-[node name="HideTimer" type="Timer" parent="ChatBubble"]
-wait_time = 3.0
+[node name="ChatBubble" parent="." instance=ExtResource("20_ocpmv")]
 
 [node name="NPCHitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
@@ -211,6 +117,8 @@ script = ExtResource("51_6i456")
 
 [node name="Behavior" type="Node2D" parent="." node_paths=PackedStringArray("personality", "nav_control")]
 script = ExtResource("52_1j522")
+min_idle_timer = null
+max_idle_timer = null
 personality = NodePath("../Personality")
 nav_control = NodePath("../NavigationControl")
 
@@ -224,10 +132,11 @@ script = ExtResource("53_rfa5q")
 [node name="MoveControl" type="Node2D" parent="."]
 script = ExtResource("5_3yays")
 
-[node name="NavigationControl" type="Node2D" parent="." node_paths=PackedStringArray("move_control", "behavior")]
+[node name="NavigationControl" type="Node2D" parent="." node_paths=PackedStringArray("move_control", "behavior", "nav_agent")]
 script = ExtResource("8_2uhr0")
 move_control = NodePath("../MoveControl")
 behavior = NodePath("../Behavior")
+nav_agent = NodePath("NavigationAgent2D")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="NavigationControl"]
 path_max_distance = 10.0
@@ -236,13 +145,17 @@ radius = 22.0
 neighbor_distance = 200.0
 max_neighbors = 5
 time_horizon_agents = 0.5
+avoidance_mask = 3
 
 [node name="RecalculateTargetTimer" type="Timer" parent="NavigationControl"]
 wait_time = 0.2
 autostart = true
 
-[connection signal="timeout" from="ChatBubble/HideTimer" to="ChatBubble" method="_on_hide_timer_timeout"]
+[node name="RespondNoiseCooldownTimer" type="Timer" parent="."]
+wait_time = 3.0
+
 [connection signal="timeout" from="Behavior/UpdateBehaviorTimer" to="Behavior" method="_on_update_behavior_timer_timeout"]
 [connection signal="timeout" from="Mood/StageChangeCooldown" to="Mood" method="_on_stage_change_cooldown_timeout"]
 [connection signal="velocity_computed" from="NavigationControl/NavigationAgent2D" to="NavigationControl" method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="timeout" from="NavigationControl/RecalculateTargetTimer" to="NavigationControl" method="_on_recalculate_target_timer_timeout"]
+[connection signal="timeout" from="RespondNoiseCooldownTimer" to="." method="_on_respond_noise_cooldown_timer_timeout"]

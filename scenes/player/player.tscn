@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://o81jg6153eh1"]
+[gd_scene load_steps=25 format=3 uid="uid://o81jg6153eh1"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_5t08w"]
 [ext_resource type="Texture2D" uid="uid://dy7wrnyedd2i2" path="res://assets/art/lpccatratdog.png" id="2_eyd3b"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scenes/player/player_animation_control.gd" id="4_1vm7j"]
 [ext_resource type="Script" path="res://scenes/glow_size_change.gd" id="4_yymbj"]
 [ext_resource type="Script" path="res://scenes/player/player_move_control.gd" id="6_8r2ky"]
+[ext_resource type="PackedScene" uid="uid://ctc6iva3px6p3" path="res://chat_bubble.tscn" id="6_mwfxq"]
 [ext_resource type="Script" path="res://scenes/player/player_actions.gd" id="7_0ui7u"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yhp5r"]
@@ -160,8 +161,11 @@ animation = &"right"
 [node name="PlayerHitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ga0ho")
 
+[node name="ChatBubble" parent="." instance=ExtResource("6_mwfxq")]
+
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
 radius = 17.0
+avoidance_layers = 2
 
 [node name="PlayerMoveControl" type="Node2D" parent="."]
 script = ExtResource("6_8r2ky")

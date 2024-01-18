@@ -3,7 +3,7 @@ extends Node2D
 class_name Behavior
 
 const MIN_WANDER_DISTANCE_THRESHOLD: float = 32.0
-const MIN_INTERACT_CAT_DISTANCE_THRESHOLD: float = 16.0
+const MIN_INTERACT_CAT_DISTANCE_THRESHOLD: float = 45.0
 
 enum State {
 	IDLE, WANDER, WALK_TO_EXIT, CONVERSE, INTERACT_CAT, AVOID
@@ -15,16 +15,20 @@ enum State {
 @export var personality: Personality
 @export var nav_control: NavigationControl
 
+@onready var player: Player = get_tree().get_nodes_in_group(GlobalVariables.PLAYER_GROUP)[0]
+
 var state: State
 var idle_timer: float = 1 # This value should probably never be 0
 var moving_east: bool
 # Can avoid player or NPC
 var avoid_target: CharacterBody2D = null
+var time_since_spawn: float = 0
 
 func _ready():
 	set_state(State.WALK_TO_EXIT)
 	
 func update(delta: float) -> void:
+	time_since_spawn += delta
 	match state:
 		State.IDLE:
 			if idle_timer > 0:
@@ -42,6 +46,7 @@ func update(delta: float) -> void:
 		State.INTERACT_CAT:
 			var arrived: bool = nav_control.move(MIN_INTERACT_CAT_DISTANCE_THRESHOLD)
 			if arrived:
+				player.pet()
 				# Interact with cat
 				pass
 			
@@ -59,6 +64,8 @@ func _generate_idle_time():
 	return randf_range(min_idle_timer, max_idle_timer)
 
 func _on_update_behavior_timer_timeout() -> void:
-	# TODO: Attempt to start conversation if NPC is nearby
-	# TODO: Attempt to 
+	# TODO: Chance to attempt to start conversation if NPC is nearby (lower if late)
+	# TODO: If paying attention to cat, chance to stop (higher if late)
+	# TODO: If cat lover, check if player is nearby and chance to try to go to them without prompting
+	# TODO: If allergic, check if player is nearby and react
 	pass # Replace with function body.

@@ -8,6 +8,7 @@ signal made_noise(action: PlayerActions.Action, direction: float, origin: Vector
 
 @onready var animation_control: PlayerAnimationControl = $PlayerAnimationControl
 @onready var move_control: PlayerMoveControl = $PlayerMoveControl
+@onready var chat_bubble: ChatBubble = $ChatBubble
 
 func _ready() -> void:
 	hide()
@@ -22,6 +23,9 @@ func _physics_process(delta: float) -> void:
 func initialize(start_pos: Vector2) -> void:
 	position = start_pos
 	show()
+
+func pet() -> void:
+	chat_bubble.show_emoji(ChatBubble.Emoji.HEART)
 
 func _on_player_actions_made_noise(action: PlayerActions.Action, direction: float, origin: Vector2) -> void:
 	made_noise.emit(action, direction, origin)

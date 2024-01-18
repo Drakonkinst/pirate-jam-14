@@ -59,3 +59,4 @@ func show_emoji(emoji: Emoji) -> void:
     
 func _on_hide_timer_timeout() -> void:
     emoji_sprite.hide()
+    hide_timer.stop()

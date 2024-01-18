@@ -8,11 +8,14 @@ class_name NoiseHandler
 func _on_player_made_noise(action: PlayerActions.Action, direction: float, origin: Vector2) -> void:
     for body in player_noise_area.get_overlapping_bodies():
         if body is NPC:
+            var npc: NPC = body as NPC
+            if not npc.can_respond_to_noise():
+                continue
             match action:
                 PlayerActions.Action.MEOW:
-                    body.was_meowed = true
+                    npc.was_meowed = true
                 PlayerActions.Action.HISS:
-                    body.was_hissed = true
+                    npc.was_hissed = true
     _spawn_noise_particle(action, direction, origin)
 
 func _spawn_noise_particle(action: PlayerActions.Action, angle: float, origin: Vector2):
