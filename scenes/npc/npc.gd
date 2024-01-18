@@ -7,8 +7,13 @@ class_name NPC
 @onready var move_control: MoveControl = $MoveControl
 @onready var animation_control: AnimationControl = $AnimationControl
 @onready var behavior: Behavior = $Behavior
+@onready var chat_bubble: ChatBubble = $ChatBubble
 
 @export var nav_control: NavigationControl
+
+# Deferred signals
+var was_meowed: bool = false
+var was_hissed: bool = false
 
 func initialize():
 	# Set walking speed
@@ -18,11 +23,21 @@ func initialize():
 		nav_control.randomize_speed(100, 50)
 
 func _physics_process(delta: float) -> void:
+	_handle_deferred_signals()
 	behavior.update(delta)
 	move_control.update(self, delta)
 
 func _process(_delta: float) -> void:
 	animation_control.update_animations(velocity)
+
+func _handle_deferred_signals() -> void:
+	if was_meowed:
+		print("meowed")
+		if personality.cat_opinion == Personality.CatOpinion.LOVE:
+			chat_bubble.show_emoji(ChatBubble.Emoji.HEART)
+			behavior.set_state(Behavior.State.INTERACT_CAT)
+	was_meowed = false
+	was_hissed = false
 
 func despawn():
 	queue_free()

@@ -3,12 +3,16 @@ extends Node2D
 class_name NoiseHandler
 
 @export var noise_particle_scene: PackedScene
+@export var player_noise_area: Area2D
 
 func _on_player_made_noise(action: PlayerActions.Action, direction: float, origin: Vector2) -> void:
-    if action == PlayerActions.Action.MEOW:
-        print("MEOW")
-    else:
-        print("HISS")
+    for body in player_noise_area.get_overlapping_bodies():
+        if body is NPC:
+            match action:
+                PlayerActions.Action.MEOW:
+                    body.was_meowed = true
+                PlayerActions.Action.HISS:
+                    body.was_hissed = true
     _spawn_noise_particle(action, direction, origin)
 
 func _spawn_noise_particle(action: PlayerActions.Action, angle: float, origin: Vector2):

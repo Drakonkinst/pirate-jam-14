@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://qxsv8wqrj306"]
+[gd_scene load_steps=24 format=3 uid="uid://qxsv8wqrj306"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_mq68w"]
 [ext_resource type="TileSet" uid="uid://bk0ycboeo7qyy" path="res://scenes/city.tres" id="2_a56mi"]
@@ -14,7 +14,8 @@
 [ext_resource type="Material" uid="uid://6f3ir8yvdn4g" path="res://shader/day_shader.tres" id="10_holxx"]
 [ext_resource type="Texture2D" uid="uid://hd5icmyjjvga" path="res://assets/art/crosshair.png" id="11_0wsio"]
 [ext_resource type="Script" path="res://shader/shader_control.gd" id="12_kpomg"]
-[ext_resource type="Script" path="res://scenes/noise_handler.gd" id="13_2tq4c"]
+[ext_resource type="Script" path="res://scenes/noise_spawner.gd" id="13_2tq4c"]
+[ext_resource type="Script" path="res://scenes/rotate_towards_mouse.gd" id="13_4iuk7"]
 [ext_resource type="PackedScene" uid="uid://csv60xwlxwo2l" path="res://scenes/noise_particle.tscn" id="14_frmeb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i4j5v"]
@@ -30,6 +31,9 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-1140, 82, 2283, 97, 22
 source_geometry_mode = 1
 source_geometry_group_name = &"navigation"
 agent_radius = 22.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5mqvf"]
+radius = 29.2746
 
 [sub_resource type="Gradient" id="Gradient_rsalw"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
@@ -86,6 +90,7 @@ grow_vertical = 2
 
 [node name="Areas" type="Area2D" parent="."]
 visible = false
+monitorable = false
 
 [node name="SceneArea" type="CollisionShape2D" parent="Areas"]
 position = Vector2(578, 360)
@@ -100,6 +105,7 @@ script = ExtResource("4_ww6lp")
 
 [node name="Left" type="Area2D" parent="DespawnHandler"]
 collision_mask = 5
+monitorable = false
 
 [node name="LeftArea" type="CollisionShape2D" parent="DespawnHandler/Left"]
 position = Vector2(-1234, 358)
@@ -107,6 +113,7 @@ shape = SubResource("RectangleShape2D_bc27j")
 
 [node name="Right" type="Area2D" parent="DespawnHandler"]
 collision_mask = 5
+monitorable = false
 
 [node name="RightArea" type="CollisionShape2D" parent="DespawnHandler/Right"]
 position = Vector2(2390, 359)
@@ -157,12 +164,26 @@ enabled = true
 camera = NodePath("../../../Camera2D")
 tilemap = NodePath("../../TileMap")
 
-[node name="NoiseHandler" type="Node2D" parent="World"]
+[node name="NoiseEffectArea" type="Area2D" parent="World/Player"]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="SmallRadius" type="CollisionShape2D" parent="World/Player/NoiseEffectArea"]
+shape = SubResource("CircleShape2D_5mqvf")
+debug_color = Color(1, 0.898039, 0.945098, 0.419608)
+
+[node name="DirectedRadius" type="CollisionPolygon2D" parent="World/Player/NoiseEffectArea" node_paths=PackedStringArray("origin")]
+polygon = PackedVector2Array(20, 10, 20, -10, 175, -50, 175, 50)
+script = ExtResource("13_4iuk7")
+origin = NodePath("../..")
+
+[node name="NoiseSpawner" type="Node2D" parent="World" node_paths=PackedStringArray("player_noise_area")]
 z_index = 7
 z_as_relative = false
 script = ExtResource("13_2tq4c")
 noise_particle_scene = ExtResource("14_frmeb")
-distance_ahead = 40.0
+player_noise_area = NodePath("../Player/NoiseEffectArea")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(570, 325)
@@ -189,4 +210,4 @@ shadow_enabled = true
 [connection signal="on_npc_despawned" from="DespawnHandler" to="NPCSpawner" method="_on_despawn_handler_on_npc_despawned"]
 [connection signal="body_entered" from="DespawnHandler/Left" to="DespawnHandler" method="_on_left_body_entered"]
 [connection signal="body_entered" from="DespawnHandler/Right" to="DespawnHandler" method="_on_right_body_entered"]
-[connection signal="made_noise" from="World/Player" to="World/NoiseHandler" method="_on_player_made_noise"]
+[connection signal="made_noise" from="World/Player" to="World/NoiseSpawner" method="_on_player_made_noise"]

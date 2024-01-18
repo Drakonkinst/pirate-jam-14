@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name ChatBubble
+
 const POP_IN_ANIMATION = "pop_in"
 const POP_OUT_ANIMATION = "pop_out"
 
@@ -32,7 +34,7 @@ enum Emoji {
     STAR,
     STARS,
     SWIRL,
-    EMPTY
+    EMPTY,
 }
 
 # Should be in the same order as the enum
@@ -41,19 +43,15 @@ enum Emoji {
 @onready var emoji_sprite: Sprite2D = $EmojiSprite
 @onready var emoji_animator: AnimationPlayer = $EmojiSprite/AnimationPlayer
 @onready var hide_timer: Timer = $HideTimer
-    
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     emoji_sprite.hide()
-    pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-    if not emoji_sprite.visible:
-        #show_emoji(Emoji.HEART)
-        show_emoji(randi() % emojis.size())
-    
 func show_emoji(emoji: Emoji) -> void:
+    # Prevent if on cooldown
+    if not hide_timer.is_stopped():
+        return
     emoji_sprite.show()
     emoji_sprite.texture = emojis[emoji]
     emoji_animator.play(POP_IN_ANIMATION)

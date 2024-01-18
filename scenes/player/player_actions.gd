@@ -12,7 +12,7 @@ enum Action {
 # https://docs.godotengine.org/en/latest/tutorials/scripting/instancing_with_signals.html
 signal made_noise(action: Action, direction: float, origin: Vector2)
 
-# TODO: Joint cooldown
+@onready var noise_cooldown: Timer = $NoiseCooldownTimer
 
 func _input(event):
     if event.is_action_pressed(MEOW_INPUT):
@@ -21,6 +21,11 @@ func _input(event):
         _attempt_make_noise(Action.HISS)
 
 func _attempt_make_noise(action: Action):
+    if not noise_cooldown.is_stopped():
+        return
     var direction: Vector2 = get_global_mouse_position() - global_position
-    print(get_viewport().get_mouse_position(), ", ", global_position)
     made_noise.emit(action, direction.angle(), global_position)
+    noise_cooldown.start()
+
+func _on_noise_cooldown_timer_timeout() -> void:
+    noise_cooldown.stop()

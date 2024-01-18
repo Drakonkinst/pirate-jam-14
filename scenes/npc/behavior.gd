@@ -57,3 +57,8 @@ func is_moving_east():
 
 func _generate_idle_time():
 	return randf_range(min_idle_timer, max_idle_timer)
+
+func _on_update_behavior_timer_timeout() -> void:
+	# TODO: Attempt to start conversation if NPC is nearby
+	# TODO: Attempt to 
+	pass # Replace with function body.

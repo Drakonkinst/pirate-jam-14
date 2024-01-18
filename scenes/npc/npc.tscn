@@ -214,6 +214,8 @@ script = ExtResource("52_1j522")
 personality = NodePath("../Personality")
 nav_control = NodePath("../NavigationControl")
 
+[node name="UpdateBehaviorTimer" type="Timer" parent="Behavior"]
+
 [node name="Mood" type="Node2D" parent="."]
 script = ExtResource("53_rfa5q")
 
@@ -240,6 +242,7 @@ wait_time = 0.2
 autostart = true
 
 [connection signal="timeout" from="ChatBubble/HideTimer" to="ChatBubble" method="_on_hide_timer_timeout"]
+[connection signal="timeout" from="Behavior/UpdateBehaviorTimer" to="Behavior" method="_on_update_behavior_timer_timeout"]
 [connection signal="timeout" from="Mood/StageChangeCooldown" to="Mood" method="_on_stage_change_cooldown_timeout"]
 [connection signal="velocity_computed" from="NavigationControl/NavigationAgent2D" to="NavigationControl" method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="timeout" from="NavigationControl/RecalculateTargetTimer" to="NavigationControl" method="_on_recalculate_target_timer_timeout"]
