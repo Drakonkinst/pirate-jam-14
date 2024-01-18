@@ -1,42 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://csv60xwlxwo2l"]
+[gd_scene load_steps=3 format=3 uid="uid://csv60xwlxwo2l"]
 
 [ext_resource type="Script" path="res://scenes/noise_particle.gd" id="1_qf7kh"]
-[ext_resource type="Texture2D" uid="uid://b0bugenipsibp" path="res://assets/art/sound_0.png" id="2_d331l"]
-[ext_resource type="Texture2D" uid="uid://cm5jgnvvi1xrp" path="res://assets/art/sound_1.png" id="3_3xjc3"]
-[ext_resource type="Texture2D" uid="uid://dy7svavn8lhnj" path="res://assets/art/sound_2.png" id="4_dtmn1"]
-[ext_resource type="Texture2D" uid="uid://ci3lhuftot5h4" path="res://assets/art/sound_3.png" id="5_nbnme"]
-[ext_resource type="Texture2D" uid="uid://x3ilw2il2qr4" path="res://assets/art/sound_4.png" id="6_iu7pi"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_ik48g"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_d331l")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_3xjc3")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_dtmn1")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_nbnme")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_iu7pi")
-}],
-"loop": true,
-"name": &"default",
-"speed": 8.0
-}]
+[ext_resource type="SpriteFrames" uid="uid://bo3hpgk33h0ch" path="res://data/meow.tres" id="2_ndmhc"]
 
 [node name="NoiseParticle" type="Node2D"]
 script = ExtResource("1_qf7kh")
+meow_sprite = ExtResource("2_ndmhc")
+hiss_sprite = ExtResource("2_ndmhc")
 meow_color = Color(0.407843, 0.905882, 0.968627, 1)
 hiss_color = Color(1, 0.337255, 0.270588, 1)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1.75, 1.75)
-sprite_frames = SubResource("SpriteFrames_ik48g")
+sprite_frames = ExtResource("2_ndmhc")
 
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dmjjey2624xf5"]
+[gd_scene load_steps=32 format=3 uid="uid://dmjjey2624xf5"]
 
 [ext_resource type="Script" path="res://scenes/npc/npc.gd" id="1_dkacp"]
 [ext_resource type="Shader" path="res://shader/reveal.gdshader" id="2_720b1"]
@@ -70,6 +70,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_1dkxc"]
 radius = 22.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_h2tf7"]
+radius = 108.074
+
 [node name="NPC" type="CharacterBody2D" node_paths=PackedStringArray("nav_control") groups=["mobs"]]
 texture_filter = 1
 texture_repeat = 1
@@ -117,12 +120,26 @@ script = ExtResource("51_6i456")
 
 [node name="Behavior" type="Node2D" parent="." node_paths=PackedStringArray("personality", "nav_control")]
 script = ExtResource("52_1j522")
-min_idle_timer = null
-max_idle_timer = null
 personality = NodePath("../Personality")
 nav_control = NodePath("../NavigationControl")
 
 [node name="UpdateBehaviorTimer" type="Timer" parent="Behavior"]
+wait_time = 2.0
+autostart = true
+
+[node name="StartConversationTimer" type="Timer" parent="Behavior"]
+
+[node name="AvoidTimer" type="Timer" parent="Behavior"]
+
+[node name="StartPetTimer" type="Timer" parent="Behavior"]
+wait_time = 2.0
+
+[node name="DetectionArea" type="Area2D" parent="Behavior"]
+input_pickable = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Behavior/DetectionArea"]
+shape = SubResource("CircleShape2D_h2tf7")
 
 [node name="Mood" type="Node2D" parent="."]
 script = ExtResource("53_rfa5q")
@@ -152,9 +169,11 @@ wait_time = 0.2
 autostart = true
 
 [node name="RespondNoiseCooldownTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 2.0
 
 [connection signal="timeout" from="Behavior/UpdateBehaviorTimer" to="Behavior" method="_on_update_behavior_timer_timeout"]
+[connection signal="timeout" from="Behavior/AvoidTimer" to="Behavior" method="_on_avoid_timer_timeout"]
+[connection signal="timeout" from="Behavior/StartPetTimer" to="Behavior" method="_on_start_pet_timer_timeout"]
 [connection signal="timeout" from="Mood/StageChangeCooldown" to="Mood" method="_on_stage_change_cooldown_timeout"]
 [connection signal="velocity_computed" from="NavigationControl/NavigationAgent2D" to="NavigationControl" method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="timeout" from="NavigationControl/RecalculateTargetTimer" to="NavigationControl" method="_on_recalculate_target_timer_timeout"]

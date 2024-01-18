@@ -90,6 +90,7 @@ grow_vertical = 2
 
 [node name="Areas" type="Area2D" parent="."]
 visible = false
+input_pickable = false
 monitorable = false
 
 [node name="SceneArea" type="CollisionShape2D" parent="Areas"]
@@ -105,6 +106,7 @@ script = ExtResource("4_ww6lp")
 
 [node name="Left" type="Area2D" parent="DespawnHandler"]
 collision_mask = 5
+input_pickable = false
 monitorable = false
 
 [node name="LeftArea" type="CollisionShape2D" parent="DespawnHandler/Left"]
@@ -113,6 +115,7 @@ shape = SubResource("RectangleShape2D_bc27j")
 
 [node name="Right" type="Area2D" parent="DespawnHandler"]
 collision_mask = 5
+input_pickable = false
 monitorable = false
 
 [node name="RightArea" type="CollisionShape2D" parent="DespawnHandler/Right"]
@@ -167,6 +170,7 @@ tilemap = NodePath("../../TileMap")
 [node name="NoiseEffectArea" type="Area2D" parent="World/Player"]
 collision_layer = 0
 collision_mask = 4
+input_pickable = false
 monitorable = false
 
 [node name="SmallRadius" type="CollisionShape2D" parent="World/Player/NoiseEffectArea"]

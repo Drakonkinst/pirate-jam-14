@@ -25,6 +25,7 @@ enum Emoji {
     FACE_SAD,
     HEART,
     HEART_BROKEN,
+    HEARTS,
     IDEA,
     LAUGH,
     MUSIC,
@@ -48,14 +49,15 @@ enum Emoji {
 func _ready() -> void:
     emoji_sprite.hide()
 
-func show_emoji(emoji: Emoji) -> void:
+func show_emoji(emoji: Emoji) -> bool:
     # Prevent if on cooldown
     if not hide_timer.is_stopped():
-        return
+        return false
     emoji_sprite.show()
     emoji_sprite.texture = emojis[emoji]
     emoji_animator.play(POP_IN_ANIMATION)
     hide_timer.start()
+    return true
     
 func _on_hide_timer_timeout() -> void:
     emoji_sprite.hide()

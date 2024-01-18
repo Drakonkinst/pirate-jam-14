@@ -2,6 +2,8 @@ extends Node2D
 
 class_name NoiseParticle
 
+@export var meow_sprite: SpriteFrames
+@export var hiss_sprite: SpriteFrames
 @export var meow_color: Color
 @export var hiss_color: Color
 @export var forward_speed: float = 60.0
@@ -11,7 +13,9 @@ class_name NoiseParticle
 var action: PlayerActions.Action
 var direction: Vector2
 
+# Set action and position before calling add_child()
 func _ready() -> void:
+    sprite.sprite_frames = meow_sprite if action == PlayerActions.Action.MEOW else hiss_sprite
     sprite.modulate = meow_color if action == PlayerActions.Action.MEOW else hiss_color
     sprite.position += start_forward_distance * Vector2.RIGHT
     sprite.play()

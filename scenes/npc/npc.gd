@@ -21,9 +21,9 @@ var was_hissed: bool = false
 func initialize():
 	# Set walking speed
 	if personality.get_sociable_type() == Personality.Sociable.RUSHED:
-		nav_control.randomize_speed(200, 50)
+		nav_control.randomize_base_speed(200, 50)
 	else:
-		nav_control.randomize_speed(100, 50)
+		nav_control.randomize_base_speed(100, 50)
 
 func _physics_process(delta: float) -> void:
 	_handle_deferred_signals()
@@ -34,16 +34,60 @@ func _process(_delta: float) -> void:
 	animation_control.update_animations(velocity)
 
 func _handle_deferred_signals() -> void:
-	if was_meowed:
-		if personality.cat_opinion == Personality.CatOpinion.LOVE:
-			chat_bubble.show_emoji(ChatBubble.Emoji.HEART)
-			behavior.set_state(Behavior.State.INTERACT_CAT)
-	elif was_hissed:
-		if personality.cat_opinion == Personality.CatOpinion.LOVE:
-			chat_bubble.show_emoji(ChatBubble.Emoji.HEART_BROKEN)
+	if can_respond_to_noise():
+		if was_meowed:
+			_receive_meow()
+			respond_noise_cooldown.start()
+		elif was_hissed:
+			_receive_hiss()
+			respond_noise_cooldown.start()
 	was_meowed = false
 	was_hissed = false
 
+func _receive_meow() -> void:
+	match personality.cat_opinion:
+		Personality.CatOpinion.LOVE:
+			chat_bubble.show_emoji(ChatBubble.Emoji.HEART)
+			behavior.set_state(Behavior.State.INTERACT_CAT)
+			mood.increase_mood(60)
+		Personality.CatOpinion.LIKE:
+			chat_bubble.show_emoji(ChatBubble.Emoji.HEART)
+			behavior.set_state(Behavior.State.INTERACT_CAT)
+			mood.increase_mood(40)
+		Personality.CatOpinion.DISLIKE:
+			chat_bubble.show_emoji(ChatBubble.Emoji.QUESTION)
+			mood.decrease_mood(10)
+			behavior.start_avoiding(player)
+		Personality.CatOpinion.ALLERGIC:
+			chat_bubble.show_emoji(ChatBubble.Emoji.CROSS)
+			mood.decrease_mood(20)
+			behavior.start_avoiding(player)
+
+
+func _receive_hiss() -> void:
+	match personality.cat_opinion:
+		Personality.CatOpinion.LOVE:
+			chat_bubble.show_emoji(ChatBubble.Emoji.HEART_BROKEN)
+			mood.decrease_mood(40)
+			if behavior.state == Behavior.State.INTERACT_CAT:
+				behavior.set_state(Behavior.State.WALK_TO_EXIT)
+			else:
+				behavior.start_avoiding(player)
+		Personality.CatOpinion.LIKE:
+			mood.decrease_mood(20)
+			if behavior.state == Behavior.State.INTERACT_CAT:
+				behavior.set_state(Behavior.State.WALK_TO_EXIT)
+			else:
+				behavior.start_avoiding(player)
+		Personality.CatOpinion.DISLIKE:
+			chat_bubble.show_emoji(ChatBubble.Emoji.QUESTION)
+			mood.decrease_mood(20)
+			behavior.start_avoiding(player)
+		Personality.CatOpinion.ALLERGIC:
+			chat_bubble.show_emoji(ChatBubble.Emoji.CROSS)
+			mood.decrease_mood(20)
+			behavior.start_avoiding(player)
+			
 func despawn():
 	queue_free()
 

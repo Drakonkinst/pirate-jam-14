@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cm5jgnvvi1xrp"
-path="res://.godot/imported/sound_1.png-47cc227c619bc07f09fc9ae0401236b6.ctex"
+uid="uid://ci3lhuftot5h4"
+path="res://.godot/imported/meow_3.png-e796be6b1d4075601607a7e40a8eff09.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/sound_1.png"
-dest_files=["res://.godot/imported/sound_1.png-47cc227c619bc07f09fc9ae0401236b6.ctex"]
+source_file="res://assets/art/meow_3.png"
+dest_files=["res://.godot/imported/meow_3.png-e796be6b1d4075601607a7e40a8eff09.ctex"]
 
 [params]
 
