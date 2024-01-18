@@ -10,14 +10,16 @@ global uniform float screen_height;
 uniform float scale = 0.5;
 uniform float min_radius = 0.0;
 uniform float max_radius = 0.5;
+uniform float desaturation = 1.0;  // 1.0 for full grayscale, 0.5 for darken, 0.0 for original color
 
 void fragment() {
     // Get the current color
     COLOR = texture(SCREEN_TEXTURE, SCREEN_UV);
     // Average the color
-    COLOR.rgb = vec3(COLOR.r + COLOR.g + COLOR.b) / 3.0;
+    float grayscale = (COLOR.r + COLOR.g + COLOR.b) / 3.0;
+    COLOR.rgb = vec3(mix(COLOR.r, grayscale, desaturation), mix(COLOR.g, grayscale, desaturation), mix(COLOR.b, grayscale, desaturation));
     // Add our tint to the color by averaging them together
-    COLOR.rgb = (COLOR.rgb + tint.rgb) * 0.5;
+    COLOR.rgb = COLOR.rgb * 0.5 + tint.rgb * 0.5;
     
     // Create a clear circle around the player
     float aspect_ratio = screen_height / screen_width;

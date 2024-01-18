@@ -121,6 +121,7 @@ animations = [{
 radius = 17.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+z_as_relative = false
 texture_filter = 1
 texture_repeat = 1
 collision_layer = 2
@@ -131,10 +132,13 @@ speed = 350.0
 metadata/_edit_group_ = true
 
 [node name="Glow" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(0.792157, 0.733333, 0.176471, 1)
+z_index = 2
+z_as_relative = false
 material = SubResource("CanvasItemMaterial_yhp5r")
 position = Vector2(2, 2)
-scale = Vector2(2, 2)
+scale = Vector2(2.25, 2.25)
 texture = ExtResource("3_dl2k3")
 script = ExtResource("4_yymbj")
 noise = SubResource("FastNoiseLite_f21kj")
