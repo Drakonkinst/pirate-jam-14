@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://ctc6iva3px6p3"]
+[gd_scene load_steps=37 format=3 uid="uid://ctc6iva3px6p3"]
 
 [ext_resource type="Script" path="res://scenes/npc/chat_bubble.gd" id="1_k6mt4"]
 [ext_resource type="Texture2D" uid="uid://5phqi6o8uc75" path="res://assets/art/emote/emote_alert.png" id="2_33xc5"]
@@ -33,6 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://co0x5i2uraxkg" path="res://assets/art/emote/emote_swirl.png" id="31_yks4k"]
 [ext_resource type="Texture2D" uid="uid://bvw5nsj777wco" path="res://assets/art/emote/emote__.png" id="32_d7m4h"]
 [ext_resource type="Resource" uid="uid://dqlebd1q6fwaa" path="res://data/dialogue.tres" id="33_0pw2r"]
+[ext_resource type="Texture2D" uid="uid://bm2lhhunmlgtp" path="res://assets/art/speech/speech_medium.png" id="34_5tslv"]
 
 [sub_resource type="Animation" id="Animation_74uyq"]
 resource_name = "pop_in"
@@ -96,6 +97,35 @@ root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_b1n31")
 }
+
+[node name="DialogueSprite" type="Sprite2D" parent="."]
+visible = false
+z_index = 5
+position = Vector2(0, -55)
+scale = Vector2(3.4, 3.4)
+texture = ExtResource("34_5tslv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DialogueSprite"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_b1n31")
+}
+
+[node name="Node2D" type="Node2D" parent="DialogueSprite"]
+scale = Vector2(0.5, 0.5)
+
+[node name="DialogueLabel" type="Label" parent="DialogueSprite/Node2D"]
+offset_left = -28.0
+offset_top = -16.0
+offset_right = 28.0
+offset_bottom = 10.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "hey, a cat!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+text_overrun_behavior = 1
+visible_characters_behavior = 1
 
 [node name="HideTimer" type="Timer" parent="."]
 wait_time = 2.5

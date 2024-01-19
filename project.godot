@@ -31,6 +31,10 @@ window/stretch/aspect="keep_height"
 
 enabled=PackedStringArray()
 
+[gui]
+
+theme/custom_font="res://assets/font/Kenney Mini.ttf"
+
 [input]
 
 move_right={
