@@ -18,7 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*res://scenes/global.tscn"
-GlobalVariables="*res://global_variables.gd"
+GlobalVariables="*res://scenes/global_variables.gd"
 
 [display]
 
@@ -33,7 +33,11 @@ enabled=PackedStringArray()
 
 [gui]
 
-theme/custom_font="res://assets/font/Kenney Mini.ttf"
+fonts/dynamic_fonts/use_oversampling=false
+theme/custom_font="res://assets/font/Kenney Pixel.ttf"
+theme/default_font_antialiasing=0
+theme/default_font_hinting=0
+theme/default_font_subpixel_positioning=0
 
 [input]
 
@@ -87,9 +91,10 @@ hiss={
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-textures/default_filters/anisotropic_filtering_level=0
+textures/default_filters/anisotropic_filtering_level=1
 textures/decals/filter=0
 textures/light_projectors/filter=0
+anti_aliasing/quality/msaa_2d=1
 
 [shader_globals]
 

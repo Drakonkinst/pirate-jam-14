@@ -10,6 +10,7 @@ enum State {
 	IDLE, WANDER, WALK_TO_EXIT, CONVERSE, INTERACT_CAT, AVOID
 }
 
+signal behavior_tick
 signal has_pet_cat
 
 @export var min_idle_timer: float = 2
@@ -22,6 +23,7 @@ signal has_pet_cat
 @onready var player: Player = get_tree().get_nodes_in_group(GlobalVariables.PLAYER_GROUP)[0]
 
 # Use timer to determine when NPC will want to start conversations
+@onready var behavior_timer: Timer = $StartConversationTimer
 @onready var start_conversation_timer: Timer = $StartConversationTimer
 @onready var avoid_timer: Timer = $AvoidTimer
 @onready var start_pet_timer: Timer = $StartPetTimer
@@ -122,3 +124,7 @@ func _on_start_pet_timer_timeout() -> void:
 	if num_pets >= randi() % MAX_NUM_PETS + 1 and randf() < get_time_wasted_multiplier():
 		set_state(State.WALK_TO_EXIT)
 	start_pet_timer.stop()
+
+
+func _on_update_behavior_timer_timeout() -> void:
+	behavior_tick.emit()

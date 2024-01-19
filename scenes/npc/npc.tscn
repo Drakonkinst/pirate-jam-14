@@ -21,7 +21,7 @@
 [ext_resource type="SpriteFrames" uid="uid://b283vpqmagkn6" path="res://data/sprite/npc_model/npc_model4.tres" id="17_pbbfv"]
 [ext_resource type="SpriteFrames" uid="uid://b2oso4gwqgfx6" path="res://data/sprite/npc_model/npc_model5.tres" id="18_1wdqm"]
 [ext_resource type="SpriteFrames" uid="uid://cuto6uvh4ti5y" path="res://data/sprite/npc_model/npc_model6.tres" id="19_hma47"]
-[ext_resource type="PackedScene" uid="uid://ctc6iva3px6p3" path="res://chat_bubble.tscn" id="20_ocpmv"]
+[ext_resource type="PackedScene" uid="uid://ctc6iva3px6p3" path="res://scenes/npc/chat_bubble.tscn" id="20_iadok"]
 [ext_resource type="Script" path="res://scenes/npc/personality.gd" id="51_6i456"]
 [ext_resource type="Script" path="res://scenes/npc/behavior.gd" id="52_1j522"]
 [ext_resource type="Script" path="res://scenes/npc/mood.gd" id="53_rfa5q"]
@@ -110,7 +110,7 @@ animation = &"left"
 script = ExtResource("12_oacit")
 models = Array[SpriteFrames]([ExtResource("14_v0eqm"), ExtResource("15_wqilt"), ExtResource("16_57gev"), ExtResource("17_pbbfv"), ExtResource("18_1wdqm"), ExtResource("19_hma47")])
 
-[node name="ChatBubble" parent="." instance=ExtResource("20_ocpmv")]
+[node name="ChatBubble" parent="." instance=ExtResource("20_iadok")]
 
 [node name="NPCHitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
@@ -174,8 +174,9 @@ autostart = true
 [node name="RespondNoiseCooldownTimer" type="Timer" parent="."]
 wait_time = 2.0
 
+[connection signal="behavior_tick" from="Behavior" to="." method="_on_behavior_behavior_tick"]
 [connection signal="has_pet_cat" from="Behavior" to="." method="_on_behavior_has_pet_cat"]
-[connection signal="timeout" from="Behavior/UpdateBehaviorTimer" to="." method="_on_update_behavior_timer_timeout"]
+[connection signal="timeout" from="Behavior/UpdateBehaviorTimer" to="Behavior" method="_on_update_behavior_timer_timeout"]
 [connection signal="timeout" from="Behavior/AvoidTimer" to="Behavior" method="_on_avoid_timer_timeout"]
 [connection signal="timeout" from="Behavior/StartPetTimer" to="Behavior" method="_on_start_pet_timer_timeout"]
 [connection signal="mood_stage_changed" from="Mood" to="." method="_on_mood_mood_stage_changed"]

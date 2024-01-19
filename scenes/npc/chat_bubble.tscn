@@ -1,0 +1,161 @@
+[gd_scene load_steps=39 format=3 uid="uid://ctc6iva3px6p3"]
+
+[ext_resource type="Script" path="res://scenes/npc/chat_bubble.gd" id="1_oka1h"]
+[ext_resource type="Texture2D" uid="uid://5phqi6o8uc75" path="res://assets/art/emote/emote_alert.png" id="2_u7l1s"]
+[ext_resource type="Texture2D" uid="uid://k2xay8tglmjf" path="res://assets/art/emote/emote_anger.png" id="3_3n6su"]
+[ext_resource type="Texture2D" uid="uid://cs2h6r5wycipk" path="res://assets/art/emote/emote_bars.png" id="4_3di6v"]
+[ext_resource type="Texture2D" uid="uid://bx4fi67tynxsc" path="res://assets/art/emote/emote_cash.png" id="5_nieh3"]
+[ext_resource type="Texture2D" uid="uid://df2kkk2rtcy6a" path="res://assets/art/emote/emote_circle.png" id="6_u2oy4"]
+[ext_resource type="Texture2D" uid="uid://c7nfae4kygir3" path="res://assets/art/emote/emote_clock.png" id="7_nrhn7"]
+[ext_resource type="Texture2D" uid="uid://drb34417flb3w" path="res://assets/art/emote/emote_cloud.png" id="8_6fvo3"]
+[ext_resource type="Texture2D" uid="uid://j6uuty26n2cw" path="res://assets/art/emote/emote_cross.png" id="9_u0q61"]
+[ext_resource type="Texture2D" uid="uid://c48tf7ysqegci" path="res://assets/art/emote/emote_dots1.png" id="10_4np5d"]
+[ext_resource type="Texture2D" uid="uid://cahngwt24u6wn" path="res://assets/art/emote/emote_dots2.png" id="11_feqni"]
+[ext_resource type="Texture2D" uid="uid://c1nht71noidak" path="res://assets/art/emote/emote_dots3.png" id="12_e61d7"]
+[ext_resource type="Texture2D" uid="uid://da2eb6qb1a56h" path="res://assets/art/emote/emote_drop.png" id="13_bsu00"]
+[ext_resource type="Texture2D" uid="uid://2tgsf2tpsveh" path="res://assets/art/emote/emote_drops.png" id="14_oensk"]
+[ext_resource type="Texture2D" uid="uid://l0w4jt3giv87" path="res://assets/art/emote/emote_exclamation.png" id="15_ant47"]
+[ext_resource type="Texture2D" uid="uid://en3kblk2q1v1" path="res://assets/art/emote/emote_exclamations.png" id="16_i3wsp"]
+[ext_resource type="Texture2D" uid="uid://pboflh0yhrj" path="res://assets/art/emote/emote_faceAngry.png" id="17_ivx4p"]
+[ext_resource type="Texture2D" uid="uid://bk13y8av0w03q" path="res://assets/art/emote/emote_faceHappy.png" id="18_ipyr3"]
+[ext_resource type="Texture2D" uid="uid://ri0jokcwcmru" path="res://assets/art/emote/emote_faceSad.png" id="19_hr8km"]
+[ext_resource type="Texture2D" uid="uid://mhx8ltcq6633" path="res://assets/art/emote/emote_heart.png" id="20_jrsum"]
+[ext_resource type="Texture2D" uid="uid://cdgepirokxpc6" path="res://assets/art/emote/emote_heartBroken.png" id="21_xu0n7"]
+[ext_resource type="Texture2D" uid="uid://cpj1vne2f0ek4" path="res://assets/art/emote/emote_hearts.png" id="22_1kvdu"]
+[ext_resource type="Texture2D" uid="uid://d1d2hnpse1ilq" path="res://assets/art/emote/emote_idea.png" id="23_mt3j0"]
+[ext_resource type="Texture2D" uid="uid://dtf86d4xay2xh" path="res://assets/art/emote/emote_laugh.png" id="24_4cko1"]
+[ext_resource type="Texture2D" uid="uid://bddm7tqoep36n" path="res://assets/art/emote/emote_music.png" id="25_3tyhc"]
+[ext_resource type="Texture2D" uid="uid://c1dewkgnrivam" path="res://assets/art/emote/emote_question.png" id="26_v0m7w"]
+[ext_resource type="Texture2D" uid="uid://dpn4638kop7au" path="res://assets/art/emote/emote_sleep.png" id="27_0unw2"]
+[ext_resource type="Texture2D" uid="uid://l01nv1458kss" path="res://assets/art/emote/emote_sleeps.png" id="28_nxfhc"]
+[ext_resource type="Texture2D" uid="uid://2kh7gpwp07yn" path="res://assets/art/emote/emote_star.png" id="29_64rmj"]
+[ext_resource type="Texture2D" uid="uid://dq47rx7uuv0oj" path="res://assets/art/emote/emote_stars.png" id="30_6v5lr"]
+[ext_resource type="Texture2D" uid="uid://co0x5i2uraxkg" path="res://assets/art/emote/emote_swirl.png" id="31_yrse6"]
+[ext_resource type="Texture2D" uid="uid://bvw5nsj777wco" path="res://assets/art/emote/emote__.png" id="32_rj22b"]
+[ext_resource type="Script" path="res://scenes/npc/dialogue_control.gd" id="33_fykqi"]
+[ext_resource type="Resource" uid="uid://dqlebd1q6fwaa" path="res://data/dialogue.tres" id="33_i84pm"]
+[ext_resource type="Texture2D" uid="uid://bm2lhhunmlgtp" path="res://assets/art/speech/speech_medium.png" id="34_x1l3j"]
+
+[sub_resource type="Animation" id="Animation_6d2s7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EmojiSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-5, -53)]
+}
+
+[sub_resource type="Animation" id="Animation_74uyq"]
+resource_name = "pop_in"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EmojiSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(3, 3), Vector2(3, 3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EmojiSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.25, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -37), Vector2(5, -42), Vector2(-4.47035e-07, -50), Vector2(-5, -53), Vector2(0, -52)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("EmojiSprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.25, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.388629, 0.0, -0.195968, 0.00915647]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b1n31"]
+_data = {
+"RESET": SubResource("Animation_6d2s7"),
+"pop_in": SubResource("Animation_74uyq")
+}
+
+[node name="ChatBubble" type="Node2D"]
+script = ExtResource("1_oka1h")
+emojis = Array[Texture2D]([ExtResource("2_u7l1s"), ExtResource("3_3n6su"), ExtResource("4_3di6v"), ExtResource("5_nieh3"), ExtResource("6_u2oy4"), ExtResource("7_nrhn7"), ExtResource("8_6fvo3"), ExtResource("9_u0q61"), ExtResource("10_4np5d"), ExtResource("11_feqni"), ExtResource("12_e61d7"), ExtResource("13_bsu00"), ExtResource("14_oensk"), ExtResource("15_ant47"), ExtResource("16_i3wsp"), ExtResource("17_ivx4p"), ExtResource("18_ipyr3"), ExtResource("19_hr8km"), ExtResource("20_jrsum"), ExtResource("21_xu0n7"), ExtResource("22_1kvdu"), ExtResource("23_mt3j0"), ExtResource("24_4cko1"), ExtResource("25_3tyhc"), ExtResource("26_v0m7w"), ExtResource("27_0unw2"), ExtResource("28_nxfhc"), ExtResource("29_64rmj"), ExtResource("30_6v5lr"), ExtResource("31_yrse6"), ExtResource("32_rj22b")])
+dialogue = ExtResource("33_i84pm")
+
+[node name="EmojiSprite" type="Sprite2D" parent="."]
+z_index = 5
+position = Vector2(-5, -53)
+rotation = 0.00915647
+scale = Vector2(3, 3)
+texture = ExtResource("20_jrsum")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="EmojiSprite"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_b1n31")
+}
+
+[node name="DialogueControl" type="Node2D" parent="." node_paths=PackedStringArray("dialogue_label")]
+position = Vector2(-2.98023e-08, 0)
+script = ExtResource("33_fykqi")
+dialogue_label = NodePath("Node2D/DialogueLabel")
+
+[node name="DialogueSprite" type="Sprite2D" parent="DialogueControl"]
+z_index = 5
+position = Vector2(2.98023e-08, -55)
+scale = Vector2(3, 3)
+texture = ExtResource("34_x1l3j")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DialogueControl/DialogueSprite"]
+root_node = NodePath("../../..")
+libraries = {
+"": SubResource("AnimationLibrary_b1n31")
+}
+
+[node name="Node2D" type="Node2D" parent="DialogueControl"]
+z_index = 5
+position = Vector2(2.98023e-08, -55)
+
+[node name="DialogueLabel" type="Label" parent="DialogueControl/Node2D"]
+offset_left = -42.0
+offset_top = -24.0
+offset_right = 42.0
+offset_bottom = 15.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+text = "This is the max amount of text I can fit without losing my mind"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+text_overrun_behavior = 1
+visible_characters_behavior = 1
+
+[node name="HideTimer" type="Timer" parent="DialogueControl"]
+wait_time = 1.5
+
+[node name="HideTimer" type="Timer" parent="."]
+wait_time = 2.5
+
+[connection signal="timeout" from="DialogueControl/HideTimer" to="DialogueControl" method="_on_hide_timer_timeout"]
+[connection signal="timeout" from="HideTimer" to="." method="_on_hide_timer_timeout"]

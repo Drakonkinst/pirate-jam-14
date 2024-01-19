@@ -189,10 +189,6 @@ script = ExtResource("13_2tq4c")
 noise_particle_scene = ExtResource("14_frmeb")
 player_noise_area = NodePath("../Player/NoiseEffectArea")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(570, 325)
-zoom = Vector2(0.95, 0.95)
-
 [node name="SetMouse" type="Node2D" parent="."]
 script = ExtResource("10_hh47s")
 default_image = ExtResource("11_0wsio")
@@ -210,6 +206,15 @@ visible = false
 rotation = -0.719076
 energy = 0.1
 shadow_enabled = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(360, 342)
+drag_horizontal_enabled = true
+drag_left_margin = 0.1
+drag_top_margin = 0.1
+drag_right_margin = 0.1
+drag_bottom_margin = 0.1
+editor_draw_drag_margin = true
 
 [connection signal="on_npc_despawned" from="DespawnHandler" to="NPCSpawner" method="_on_despawn_handler_on_npc_despawned"]
 [connection signal="body_entered" from="DespawnHandler/Left" to="DespawnHandler" method="_on_left_body_entered"]

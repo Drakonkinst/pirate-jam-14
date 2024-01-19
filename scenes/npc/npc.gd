@@ -25,12 +25,15 @@ signal mood_stage_changed(from: Mood.Stage, to: Mood.Stage)
 var was_meowed: bool = false
 var was_hissed: bool = false
 
+var speech: Dialogue
+
 func initialize():
 	# Set walking speed
 	if personality.get_sociable_type() == Personality.Sociable.RUSHED:
 		nav_control.randomize_base_speed(200, 50)
 	else:
 		nav_control.randomize_base_speed(100, 50)
+	speech = chat_bubble.dialogue
 
 func _physics_process(delta: float) -> void:
 	_handle_deferred_signals()
@@ -52,6 +55,10 @@ func _handle_deferred_signals() -> void:
 	was_hissed = false
 
 func _receive_meow() -> void:
+	
+	# DEBUG ONLY
+	# chat_bubble.show_dialogue(speech.generate_line(speech.greet_cat))
+	
 	match personality.cat_opinion:
 		Personality.CatOpinion.LOVE:
 			chat_bubble.show_emoji(ChatBubble.Emoji.HEART)
@@ -191,9 +198,6 @@ func _on_respond_noise_cooldown_timer_timeout() -> void:
 func _on_behavior_has_pet_cat() -> void:
 	mood.increase_mood(20)
 
-func _on_update_behavior_timer_timeout() -> void:
-	check_surroundings()
-
 func _on_mood_mood_stage_changed(from: Mood.Stage, to: Mood.Stage) -> void:
 	if to == Mood.Stage.HAPPY:
 		print("Happy!")
@@ -201,3 +205,7 @@ func _on_mood_mood_stage_changed(from: Mood.Stage, to: Mood.Stage) -> void:
 		print("Sad :(")
 	# TODO: Change mood visuals
 	mood_stage_changed.emit(from, to)
+
+
+func _on_behavior_behavior_tick() -> void:
+	check_surroundings()
