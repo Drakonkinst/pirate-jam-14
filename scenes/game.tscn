@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_mq68w"]
 [ext_resource type="TileSet" uid="uid://bk0ycboeo7qyy" path="res://scenes/city.tres" id="2_a56mi"]
-[ext_resource type="Resource" uid="uid://blkeplr178jbt" path="res://data/level_1.tres" id="2_i1q1b"]
+[ext_resource type="Resource" uid="uid://blkeplr178jbt" path="res://data/level/level_1.tres" id="2_i1q1b"]
 [ext_resource type="PackedScene" uid="uid://o81jg6153eh1" path="res://scenes/player/player.tscn" id="3_ml610"]
 [ext_resource type="Script" path="res://scenes/npc_spawner.gd" id="4_f3c1u"]
 [ext_resource type="PackedScene" uid="uid://dmjjey2624xf5" path="res://scenes/npc/npc.tscn" id="4_kxhr6"]

@@ -127,7 +127,7 @@ func _handle_surroundings_state_changes() -> bool:
 		return false
 	# If allergic, try to avoid cat
 	if behavior.state != Behavior.State.AVOID and personality.cat_opinion == Personality.CatOpinion.ALLERGIC and can_see_player:
-		mood.decrease_mood(20)
+		mood.decrease_mood(5)
 		chat_bubble.show_emoji(ChatBubble.Emoji.CROSS)
 		behavior.start_avoiding(player)
 		return false

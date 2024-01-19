@@ -41,6 +41,7 @@ enum Emoji {
 
 # Should be in the same order as the enum
 @export var emojis: Array[Texture2D]
+@export var dialogue: Dialogue
 
 @onready var emoji_sprite: Sprite2D = $EmojiSprite
 @onready var emoji_animator: AnimationPlayer = $EmojiSprite/AnimationPlayer

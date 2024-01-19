@@ -1,37 +1,38 @@
-[gd_scene load_steps=35 format=3 uid="uid://ctc6iva3px6p3"]
+[gd_scene load_steps=36 format=3 uid="uid://ctc6iva3px6p3"]
 
 [ext_resource type="Script" path="res://scenes/npc/chat_bubble.gd" id="1_k6mt4"]
-[ext_resource type="Texture2D" uid="uid://5phqi6o8uc75" path="res://assets/art/chat/emote_alert.png" id="2_wh8rh"]
-[ext_resource type="Texture2D" uid="uid://k2xay8tglmjf" path="res://assets/art/chat/emote_anger.png" id="3_yxkyu"]
-[ext_resource type="Texture2D" uid="uid://cs2h6r5wycipk" path="res://assets/art/chat/emote_bars.png" id="4_iefyd"]
-[ext_resource type="Texture2D" uid="uid://bx4fi67tynxsc" path="res://assets/art/chat/emote_cash.png" id="5_5ytit"]
-[ext_resource type="Texture2D" uid="uid://df2kkk2rtcy6a" path="res://assets/art/chat/emote_circle.png" id="6_g5bet"]
-[ext_resource type="Texture2D" uid="uid://c7nfae4kygir3" path="res://assets/art/chat/emote_clock.png" id="7_8inca"]
-[ext_resource type="Texture2D" uid="uid://drb34417flb3w" path="res://assets/art/chat/emote_cloud.png" id="7_rnuk1"]
-[ext_resource type="Texture2D" uid="uid://j6uuty26n2cw" path="res://assets/art/chat/emote_cross.png" id="8_b8n4v"]
-[ext_resource type="Texture2D" uid="uid://c48tf7ysqegci" path="res://assets/art/chat/emote_dots1.png" id="9_cwsvd"]
-[ext_resource type="Texture2D" uid="uid://cahngwt24u6wn" path="res://assets/art/chat/emote_dots2.png" id="10_hg4vb"]
-[ext_resource type="Texture2D" uid="uid://c1nht71noidak" path="res://assets/art/chat/emote_dots3.png" id="11_hkwfw"]
-[ext_resource type="Texture2D" uid="uid://da2eb6qb1a56h" path="res://assets/art/chat/emote_drop.png" id="12_0ifra"]
-[ext_resource type="Texture2D" uid="uid://2tgsf2tpsveh" path="res://assets/art/chat/emote_drops.png" id="13_go0o0"]
-[ext_resource type="Texture2D" uid="uid://l0w4jt3giv87" path="res://assets/art/chat/emote_exclamation.png" id="14_mwm37"]
-[ext_resource type="Texture2D" uid="uid://en3kblk2q1v1" path="res://assets/art/chat/emote_exclamations.png" id="15_4vvqt"]
-[ext_resource type="Texture2D" uid="uid://pboflh0yhrj" path="res://assets/art/chat/emote_faceAngry.png" id="16_a2ynp"]
-[ext_resource type="Texture2D" uid="uid://bk13y8av0w03q" path="res://assets/art/chat/emote_faceHappy.png" id="17_888vf"]
-[ext_resource type="Texture2D" uid="uid://ri0jokcwcmru" path="res://assets/art/chat/emote_faceSad.png" id="18_w4ufh"]
-[ext_resource type="Texture2D" uid="uid://mhx8ltcq6633" path="res://assets/art/chat/emote_heart.png" id="19_4rrju"]
-[ext_resource type="Texture2D" uid="uid://cdgepirokxpc6" path="res://assets/art/chat/emote_heartBroken.png" id="20_sy0uu"]
-[ext_resource type="Texture2D" uid="uid://cpj1vne2f0ek4" path="res://assets/art/chat/emote_hearts.png" id="21_i5s4n"]
-[ext_resource type="Texture2D" uid="uid://d1d2hnpse1ilq" path="res://assets/art/chat/emote_idea.png" id="22_mu37r"]
-[ext_resource type="Texture2D" uid="uid://dtf86d4xay2xh" path="res://assets/art/chat/emote_laugh.png" id="23_qnmx6"]
-[ext_resource type="Texture2D" uid="uid://bddm7tqoep36n" path="res://assets/art/chat/emote_music.png" id="24_xqp44"]
-[ext_resource type="Texture2D" uid="uid://c1dewkgnrivam" path="res://assets/art/chat/emote_question.png" id="25_w1fgf"]
-[ext_resource type="Texture2D" uid="uid://dpn4638kop7au" path="res://assets/art/chat/emote_sleep.png" id="26_6rla4"]
-[ext_resource type="Texture2D" uid="uid://l01nv1458kss" path="res://assets/art/chat/emote_sleeps.png" id="27_oev1r"]
-[ext_resource type="Texture2D" uid="uid://2kh7gpwp07yn" path="res://assets/art/chat/emote_star.png" id="28_qgb65"]
-[ext_resource type="Texture2D" uid="uid://dq47rx7uuv0oj" path="res://assets/art/chat/emote_stars.png" id="29_dwgs7"]
-[ext_resource type="Texture2D" uid="uid://co0x5i2uraxkg" path="res://assets/art/chat/emote_swirl.png" id="30_3pnnc"]
-[ext_resource type="Texture2D" uid="uid://bvw5nsj777wco" path="res://assets/art/chat/emote__.png" id="31_ehuv6"]
+[ext_resource type="Texture2D" uid="uid://5phqi6o8uc75" path="res://assets/art/emote/emote_alert.png" id="2_33xc5"]
+[ext_resource type="Texture2D" uid="uid://k2xay8tglmjf" path="res://assets/art/emote/emote_anger.png" id="3_hbdgm"]
+[ext_resource type="Texture2D" uid="uid://cs2h6r5wycipk" path="res://assets/art/emote/emote_bars.png" id="4_vtu8v"]
+[ext_resource type="Texture2D" uid="uid://bx4fi67tynxsc" path="res://assets/art/emote/emote_cash.png" id="5_2tekg"]
+[ext_resource type="Texture2D" uid="uid://df2kkk2rtcy6a" path="res://assets/art/emote/emote_circle.png" id="6_oqoji"]
+[ext_resource type="Texture2D" uid="uid://c7nfae4kygir3" path="res://assets/art/emote/emote_clock.png" id="7_eft42"]
+[ext_resource type="Texture2D" uid="uid://drb34417flb3w" path="res://assets/art/emote/emote_cloud.png" id="8_lhwj8"]
+[ext_resource type="Texture2D" uid="uid://j6uuty26n2cw" path="res://assets/art/emote/emote_cross.png" id="9_o1p5g"]
+[ext_resource type="Texture2D" uid="uid://c48tf7ysqegci" path="res://assets/art/emote/emote_dots1.png" id="10_m4m45"]
+[ext_resource type="Texture2D" uid="uid://cahngwt24u6wn" path="res://assets/art/emote/emote_dots2.png" id="11_dqe2h"]
+[ext_resource type="Texture2D" uid="uid://c1nht71noidak" path="res://assets/art/emote/emote_dots3.png" id="12_st1lm"]
+[ext_resource type="Texture2D" uid="uid://da2eb6qb1a56h" path="res://assets/art/emote/emote_drop.png" id="13_ktt1f"]
+[ext_resource type="Texture2D" uid="uid://2tgsf2tpsveh" path="res://assets/art/emote/emote_drops.png" id="14_wqats"]
+[ext_resource type="Texture2D" uid="uid://l0w4jt3giv87" path="res://assets/art/emote/emote_exclamation.png" id="15_u5vly"]
+[ext_resource type="Texture2D" uid="uid://en3kblk2q1v1" path="res://assets/art/emote/emote_exclamations.png" id="16_x5q76"]
+[ext_resource type="Texture2D" uid="uid://pboflh0yhrj" path="res://assets/art/emote/emote_faceAngry.png" id="17_nlh05"]
+[ext_resource type="Texture2D" uid="uid://bk13y8av0w03q" path="res://assets/art/emote/emote_faceHappy.png" id="18_ularc"]
+[ext_resource type="Texture2D" uid="uid://ri0jokcwcmru" path="res://assets/art/emote/emote_faceSad.png" id="19_uom0q"]
+[ext_resource type="Texture2D" uid="uid://mhx8ltcq6633" path="res://assets/art/emote/emote_heart.png" id="20_oepts"]
+[ext_resource type="Texture2D" uid="uid://cdgepirokxpc6" path="res://assets/art/emote/emote_heartBroken.png" id="21_m06n0"]
+[ext_resource type="Texture2D" uid="uid://cpj1vne2f0ek4" path="res://assets/art/emote/emote_hearts.png" id="22_wulrr"]
+[ext_resource type="Texture2D" uid="uid://d1d2hnpse1ilq" path="res://assets/art/emote/emote_idea.png" id="23_m3f83"]
+[ext_resource type="Texture2D" uid="uid://dtf86d4xay2xh" path="res://assets/art/emote/emote_laugh.png" id="24_tilyg"]
+[ext_resource type="Texture2D" uid="uid://bddm7tqoep36n" path="res://assets/art/emote/emote_music.png" id="25_hwvwi"]
+[ext_resource type="Texture2D" uid="uid://c1dewkgnrivam" path="res://assets/art/emote/emote_question.png" id="26_reeur"]
+[ext_resource type="Texture2D" uid="uid://dpn4638kop7au" path="res://assets/art/emote/emote_sleep.png" id="27_gdtfr"]
+[ext_resource type="Texture2D" uid="uid://l01nv1458kss" path="res://assets/art/emote/emote_sleeps.png" id="28_1kdcu"]
+[ext_resource type="Texture2D" uid="uid://2kh7gpwp07yn" path="res://assets/art/emote/emote_star.png" id="29_rruxg"]
+[ext_resource type="Texture2D" uid="uid://dq47rx7uuv0oj" path="res://assets/art/emote/emote_stars.png" id="30_2hdg8"]
+[ext_resource type="Texture2D" uid="uid://co0x5i2uraxkg" path="res://assets/art/emote/emote_swirl.png" id="31_yks4k"]
+[ext_resource type="Texture2D" uid="uid://bvw5nsj777wco" path="res://assets/art/emote/emote__.png" id="32_d7m4h"]
+[ext_resource type="Resource" uid="uid://dqlebd1q6fwaa" path="res://data/dialogue.tres" id="33_0pw2r"]
 
 [sub_resource type="Animation" id="Animation_74uyq"]
 resource_name = "pop_in"
@@ -81,13 +82,14 @@ _data = {
 
 [node name="ChatBubble" type="Node2D"]
 script = ExtResource("1_k6mt4")
-emojis = Array[Texture2D]([ExtResource("2_wh8rh"), ExtResource("3_yxkyu"), ExtResource("4_iefyd"), ExtResource("5_5ytit"), ExtResource("6_g5bet"), ExtResource("7_8inca"), ExtResource("7_rnuk1"), ExtResource("8_b8n4v"), ExtResource("9_cwsvd"), ExtResource("10_hg4vb"), ExtResource("11_hkwfw"), ExtResource("12_0ifra"), ExtResource("13_go0o0"), ExtResource("14_mwm37"), ExtResource("15_4vvqt"), ExtResource("16_a2ynp"), ExtResource("17_888vf"), ExtResource("18_w4ufh"), ExtResource("19_4rrju"), ExtResource("20_sy0uu"), ExtResource("21_i5s4n"), ExtResource("22_mu37r"), ExtResource("23_qnmx6"), ExtResource("24_xqp44"), ExtResource("25_w1fgf"), ExtResource("26_6rla4"), ExtResource("27_oev1r"), ExtResource("28_qgb65"), ExtResource("29_dwgs7"), ExtResource("30_3pnnc"), ExtResource("31_ehuv6")])
+emojis = Array[Texture2D]([ExtResource("2_33xc5"), ExtResource("3_hbdgm"), ExtResource("4_vtu8v"), ExtResource("5_2tekg"), ExtResource("6_oqoji"), ExtResource("7_eft42"), ExtResource("8_lhwj8"), ExtResource("9_o1p5g"), ExtResource("10_m4m45"), ExtResource("11_dqe2h"), ExtResource("12_st1lm"), ExtResource("13_ktt1f"), ExtResource("14_wqats"), ExtResource("15_u5vly"), ExtResource("16_x5q76"), ExtResource("17_nlh05"), ExtResource("18_ularc"), ExtResource("19_uom0q"), ExtResource("20_oepts"), ExtResource("21_m06n0"), ExtResource("22_wulrr"), ExtResource("23_m3f83"), ExtResource("24_tilyg"), ExtResource("25_hwvwi"), ExtResource("26_reeur"), ExtResource("27_gdtfr"), ExtResource("28_1kdcu"), ExtResource("29_rruxg"), ExtResource("30_2hdg8"), ExtResource("31_yks4k"), ExtResource("32_d7m4h")])
+dialogue = ExtResource("33_0pw2r")
 
 [node name="EmojiSprite" type="Sprite2D" parent="."]
 z_index = 5
 position = Vector2(0, -37)
 scale = Vector2(0.85, 0.85)
-texture = ExtResource("19_4rrju")
+texture = ExtResource("20_oepts")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="EmojiSprite"]
 root_node = NodePath("../..")
@@ -96,6 +98,6 @@ libraries = {
 }
 
 [node name="HideTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 2.5
 
 [connection signal="timeout" from="HideTimer" to="." method="_on_hide_timer_timeout"]

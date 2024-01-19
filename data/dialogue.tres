@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Dialogue" load_steps=2 format=3 uid="uid://dqlebd1q6fwaa"]
+
+[ext_resource type="Script" path="res://data/dialogue.gd" id="1_0h2kf"]
+
+[resource]
+script = ExtResource("1_0h2kf")
+greet_cat = Array[String](["Aw, hello there!"])

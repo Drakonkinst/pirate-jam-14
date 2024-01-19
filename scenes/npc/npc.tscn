@@ -4,9 +4,9 @@
 [ext_resource type="Shader" path="res://shader/reveal.gdshader" id="2_720b1"]
 [ext_resource type="Shader" path="res://shader/glow_reveal.gdshader" id="2_bwcji"]
 [ext_resource type="Texture2D" uid="uid://boy33b3vn14i3" path="res://assets/art/npc/npc1_left0.png" id="3_81jhf"]
-[ext_resource type="Texture2D" uid="uid://d3fkpw72jhw4d" path="res://assets/art/glow.png" id="3_koj7s"]
 [ext_resource type="Texture2D" uid="uid://m87deb8ghu1u" path="res://assets/art/npc/npc1_left1.png" id="4_k47js"]
 [ext_resource type="Script" path="res://scenes/glow_size_change.gd" id="4_nu57j"]
+[ext_resource type="Texture2D" uid="uid://d3fkpw72jhw4d" path="res://assets/art/particle/glow.png" id="4_t85j7"]
 [ext_resource type="Script" path="res://scenes/npc/move_control.gd" id="5_3yays"]
 [ext_resource type="Texture2D" uid="uid://c2cqjb1a3de1j" path="res://assets/art/npc/npc1_left2.png" id="5_tscsb"]
 [ext_resource type="Script" path="res://scenes/npc/animation_control.gd" id="6_6x70e"]
@@ -15,12 +15,12 @@
 [ext_resource type="Script" path="res://scenes/npc/navigation_control.gd" id="8_2uhr0"]
 [ext_resource type="Texture2D" uid="uid://chh8gfs6ro6fg" path="res://assets/art/npc/npc1_right2.png" id="8_iauxo"]
 [ext_resource type="Script" path="res://scenes/npc/npc_model.gd" id="12_oacit"]
-[ext_resource type="SpriteFrames" uid="uid://d0hsu8hkui0cw" path="res://data/npc_model/npc_model1.tres" id="13_pleca"]
-[ext_resource type="SpriteFrames" uid="uid://bqo2u6t0nhluu" path="res://data/npc_model/npc_model2.tres" id="14_snkho"]
-[ext_resource type="SpriteFrames" uid="uid://uf26wrebx2fs" path="res://data/npc_model/npc_model3.tres" id="15_la1ox"]
-[ext_resource type="SpriteFrames" uid="uid://b283vpqmagkn6" path="res://data/npc_model/npc_model4.tres" id="16_f44sn"]
-[ext_resource type="SpriteFrames" uid="uid://b2oso4gwqgfx6" path="res://data/npc_model/npc_model5.tres" id="17_uhn06"]
-[ext_resource type="SpriteFrames" uid="uid://cuto6uvh4ti5y" path="res://data/npc_model/npc_model6.tres" id="18_cr72q"]
+[ext_resource type="SpriteFrames" uid="uid://d0hsu8hkui0cw" path="res://data/sprite/npc_model/npc_model1.tres" id="14_v0eqm"]
+[ext_resource type="SpriteFrames" uid="uid://bqo2u6t0nhluu" path="res://data/sprite/npc_model/npc_model2.tres" id="15_wqilt"]
+[ext_resource type="SpriteFrames" uid="uid://uf26wrebx2fs" path="res://data/sprite/npc_model/npc_model3.tres" id="16_57gev"]
+[ext_resource type="SpriteFrames" uid="uid://b283vpqmagkn6" path="res://data/sprite/npc_model/npc_model4.tres" id="17_pbbfv"]
+[ext_resource type="SpriteFrames" uid="uid://b2oso4gwqgfx6" path="res://data/sprite/npc_model/npc_model5.tres" id="18_1wdqm"]
+[ext_resource type="SpriteFrames" uid="uid://cuto6uvh4ti5y" path="res://data/sprite/npc_model/npc_model6.tres" id="19_hma47"]
 [ext_resource type="PackedScene" uid="uid://ctc6iva3px6p3" path="res://chat_bubble.tscn" id="20_ocpmv"]
 [ext_resource type="Script" path="res://scenes/npc/personality.gd" id="51_6i456"]
 [ext_resource type="Script" path="res://scenes/npc/behavior.gd" id="52_1j522"]
@@ -93,7 +93,7 @@ modulate = Color(1, 1, 0, 1)
 material = SubResource("ShaderMaterial_8q3tg")
 position = Vector2(1, 1)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_koj7s")
+texture = ExtResource("4_t85j7")
 script = ExtResource("4_nu57j")
 noise = SubResource("FastNoiseLite_c3mmn")
 max_bonus = 0.25
@@ -108,7 +108,7 @@ scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_p1b4l")
 animation = &"left"
 script = ExtResource("12_oacit")
-models = Array[SpriteFrames]([ExtResource("13_pleca"), ExtResource("14_snkho"), ExtResource("15_la1ox"), ExtResource("16_f44sn"), ExtResource("17_uhn06"), ExtResource("18_cr72q")])
+models = Array[SpriteFrames]([ExtResource("14_v0eqm"), ExtResource("15_wqilt"), ExtResource("16_57gev"), ExtResource("17_pbbfv"), ExtResource("18_1wdqm"), ExtResource("19_hma47")])
 
 [node name="ChatBubble" parent="." instance=ExtResource("20_ocpmv")]
 
