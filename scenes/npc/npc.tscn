@@ -117,6 +117,8 @@ position = Vector2(0, 4)
 shape = SubResource("CircleShape2D_1dkxc")
 
 [node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
 input_pickable = false
 monitorable = false
 
@@ -176,6 +178,7 @@ wait_time = 2.0
 [connection signal="timeout" from="Behavior/UpdateBehaviorTimer" to="." method="_on_update_behavior_timer_timeout"]
 [connection signal="timeout" from="Behavior/AvoidTimer" to="Behavior" method="_on_avoid_timer_timeout"]
 [connection signal="timeout" from="Behavior/StartPetTimer" to="Behavior" method="_on_start_pet_timer_timeout"]
+[connection signal="mood_stage_changed" from="Mood" to="." method="_on_mood_mood_stage_changed"]
 [connection signal="timeout" from="Mood/StageChangeCooldown" to="Mood" method="_on_stage_change_cooldown_timeout"]
 [connection signal="velocity_computed" from="NavigationControl/NavigationAgent2D" to="NavigationControl" method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="timeout" from="NavigationControl/RecalculateTargetTimer" to="NavigationControl" method="_on_recalculate_target_timer_timeout"]

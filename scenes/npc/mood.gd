@@ -11,8 +11,7 @@ enum Stage {
 const MIN_MOOD: int = -100
 const MAX_MOOD: int = 100
 
-signal mood_changed
-signal mood_stage_changed
+signal mood_stage_changed(from: Stage, to: Stage)
 
 @onready var mood_change_cooldown: Timer = $StageChangeCooldown
 var mood: int = 0
@@ -28,12 +27,16 @@ func set_mood(value: int) -> void:
 	var next_mood: int = clamp(value, MIN_MOOD, MAX_MOOD)
 	if mood_stage != Stage.SAD and next_mood <= MIN_MOOD:
 		next_mood = MIN_MOOD
+		mood_stage_changed.emit(mood_stage, Stage.SAD)
 		_set_mood_stage(Stage.SAD)
+		mood_stage_changed.emit()
 	elif mood_stage != Stage.HAPPY and next_mood >= MAX_MOOD:
 		next_mood = MAX_MOOD
+		mood_stage_changed.emit(mood_stage, Stage.HAPPY)
 		_set_mood_stage(Stage.HAPPY)
-	if next_mood != mood:
-		mood_changed.emit()
+	# Mood change reactions should be handled at a higher level
+	#if next_mood != mood:
+		# mood_changed.emit()
 	mood = next_mood
 
 func get_mood() -> int:
