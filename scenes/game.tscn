@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://o81jg6153eh1" path="res://scenes/player/player.tscn" id="3_ml610"]
 [ext_resource type="Script" path="res://scenes/npc_spawner.gd" id="4_f3c1u"]
 [ext_resource type="PackedScene" uid="uid://dmjjey2624xf5" path="res://scenes/npc/npc.tscn" id="4_kxhr6"]
-[ext_resource type="PackedScene" uid="uid://d3bkgwn8htm03" path="res://scenes/hud.tscn" id="4_u8sug"]
 [ext_resource type="Script" path="res://scenes/despawn_handler.gd" id="4_ww6lp"]
 [ext_resource type="Material" uid="uid://bvluuc1qjhaox" path="res://shader/night_shader.tres" id="5_2k0h2"]
 [ext_resource type="Script" path="res://scenes/camera_follow.gd" id="8_jjgcx"]
@@ -18,11 +17,14 @@
 [ext_resource type="Script" path="res://scenes/rotate_towards_mouse.gd" id="13_4iuk7"]
 [ext_resource type="PackedScene" uid="uid://csv60xwlxwo2l" path="res://scenes/noise_particle.tscn" id="14_frmeb"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bc27j"]
+size = Vector2(112.5, 670)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i4j5v"]
 size = Vector2(3432, 304)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bc27j"]
-size = Vector2(112.5, 337)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d0wlv"]
+size = Vector2(112.5, 305)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_dj0ee"]
 vertices = PackedVector2Array(2261, 508, -1120, 508, -1119, 216, -604, 216, 548, 216, 548, 168, 600, 168, 600, 216, 1700, 216, 1700, 168, 1752, 168, 1752, 216, 2261, 216, -604, 168, -552, 168, -552, 216)
@@ -55,8 +57,6 @@ player_spawn_point = NodePath("Areas/PlayerSpawnPoint")
 [node name="HUDLayer" type="CanvasLayer" parent="."]
 layer = 99
 
-[node name="HUD" parent="HUDLayer" instance=ExtResource("4_u8sug")]
-
 [node name="ShaderLayer" type="CanvasLayer" parent="."]
 layer = 10
 
@@ -65,6 +65,7 @@ position = Vector2(938, 541)
 script = ExtResource("12_kpomg")
 player = NodePath("../../World/Player")
 camera = NodePath("../../Camera2D")
+time_of_day = 1
 day_shader = NodePath("../DayShader")
 night_shader = NodePath("../NightShader")
 canvas_modulate = NodePath("../../CanvasModulate")
@@ -88,8 +89,28 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="DespawnHandler" type="Node2D" parent="."]
+script = ExtResource("4_ww6lp")
+
+[node name="Left" type="Area2D" parent="DespawnHandler"]
+collision_mask = 5
+input_pickable = false
+monitorable = false
+
+[node name="LeftArea" type="CollisionShape2D" parent="DespawnHandler/Left"]
+position = Vector2(-1234, 334)
+shape = SubResource("RectangleShape2D_bc27j")
+
+[node name="Right" type="Area2D" parent="DespawnHandler"]
+collision_mask = 5
+input_pickable = false
+monitorable = false
+
+[node name="RightArea" type="CollisionShape2D" parent="DespawnHandler/Right"]
+position = Vector2(2391, 334)
+shape = SubResource("RectangleShape2D_bc27j")
+
 [node name="Areas" type="Area2D" parent="."]
-visible = false
 input_pickable = false
 monitorable = false
 
@@ -101,34 +122,31 @@ disabled = true
 [node name="PlayerSpawnPoint" type="Marker2D" parent="Areas"]
 position = Vector2(753, 475)
 
-[node name="DespawnHandler" type="Node2D" parent="."]
-script = ExtResource("4_ww6lp")
-
-[node name="Left" type="Area2D" parent="DespawnHandler"]
+[node name="SpawnLeft" type="Area2D" parent="Areas"]
 collision_mask = 5
 input_pickable = false
 monitorable = false
 
-[node name="LeftArea" type="CollisionShape2D" parent="DespawnHandler/Left"]
+[node name="LeftArea" type="CollisionShape2D" parent="Areas/SpawnLeft"]
 position = Vector2(-1234, 358)
-shape = SubResource("RectangleShape2D_bc27j")
+shape = SubResource("RectangleShape2D_d0wlv")
 
-[node name="Right" type="Area2D" parent="DespawnHandler"]
+[node name="SpawnRight" type="Area2D" parent="Areas"]
 collision_mask = 5
 input_pickable = false
 monitorable = false
 
-[node name="RightArea" type="CollisionShape2D" parent="DespawnHandler/Right"]
-position = Vector2(2390, 359)
-shape = SubResource("RectangleShape2D_bc27j")
+[node name="RightArea" type="CollisionShape2D" parent="Areas/SpawnRight"]
+position = Vector2(2390, 350.5)
+shape = SubResource("RectangleShape2D_d0wlv")
 
 [node name="NPCSpawner" type="Node2D" parent="." node_paths=PackedStringArray("npc_parent", "area_scene", "area_left", "area_right")]
 script = ExtResource("4_f3c1u")
 npc_scene = ExtResource("4_kxhr6")
 npc_parent = NodePath("../World/NPCs")
 area_scene = NodePath("../Areas/SceneArea")
-area_left = NodePath("../DespawnHandler/Left/LeftArea")
-area_right = NodePath("../DespawnHandler/Right/RightArea")
+area_left = NodePath("../Areas/SpawnLeft/LeftArea")
+area_right = NodePath("../Areas/SpawnRight/RightArea")
 
 [node name="World" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -219,4 +237,6 @@ editor_draw_drag_margin = true
 [connection signal="on_npc_despawned" from="DespawnHandler" to="NPCSpawner" method="_on_despawn_handler_on_npc_despawned"]
 [connection signal="body_entered" from="DespawnHandler/Left" to="DespawnHandler" method="_on_left_body_entered"]
 [connection signal="body_entered" from="DespawnHandler/Right" to="DespawnHandler" method="_on_right_body_entered"]
+[connection signal="body_entered" from="Areas/SpawnLeft" to="DespawnHandler" method="_on_left_body_entered"]
+[connection signal="body_entered" from="Areas/SpawnRight" to="DespawnHandler" method="_on_right_body_entered"]
 [connection signal="made_noise" from="World/Player" to="World/NoiseSpawner" method="_on_player_made_noise"]

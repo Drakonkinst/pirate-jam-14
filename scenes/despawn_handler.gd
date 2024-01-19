@@ -16,5 +16,5 @@ func _handle_node(node: Node2D, is_right: bool) -> void:
 	var npc: NPC = node as NPC
 	var moving_east: bool = npc.behavior.is_moving_east()
 	if moving_east == is_right:
-		npc.despawn()
-		on_npc_despawned.emit()
+		if npc.despawn():
+			on_npc_despawned.emit()

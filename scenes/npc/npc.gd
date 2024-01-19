@@ -24,6 +24,7 @@ signal mood_stage_changed(from: Mood.Stage, to: Mood.Stage)
 # Deferred signals
 var was_meowed: bool = false
 var was_hissed: bool = false
+var despawned: bool = false
 
 var speech: Dialogue
 
@@ -187,7 +188,13 @@ func _handle_surroundings_ambient() -> void:
 			chat_bubble.show_emoji(ChatBubble.Emoji.CLOCK)
 
 func despawn():
+	if despawned:
+		return false
+	despawned = true
+	# queue_free() only destroys the NPC on the next frame, so prevent
+	# additional triggers with the despawned flag
 	queue_free()
+	return true
 
 func can_respond_to_noise() -> bool:
 	return respond_noise_cooldown.is_stopped()
