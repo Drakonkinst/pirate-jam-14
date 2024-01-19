@@ -29,7 +29,6 @@ func set_mood(value: int) -> void:
 		next_mood = MIN_MOOD
 		mood_stage_changed.emit(mood_stage, Stage.SAD)
 		_set_mood_stage(Stage.SAD)
-		mood_stage_changed.emit()
 	elif mood_stage != Stage.HAPPY and next_mood >= MAX_MOOD:
 		next_mood = MAX_MOOD
 		mood_stage_changed.emit(mood_stage, Stage.HAPPY)

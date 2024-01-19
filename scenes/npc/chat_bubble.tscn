@@ -148,7 +148,8 @@ text = "This is the max amount of text I can fit without losing my mind"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
-text_overrun_behavior = 1
+clip_text = true
+text_overrun_behavior = 2
 visible_characters_behavior = 1
 
 [node name="HideTimer" type="Timer" parent="DialogueControl"]

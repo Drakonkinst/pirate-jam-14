@@ -4,4 +4,5 @@
 
 [resource]
 script = ExtResource("1_0h2kf")
-greet_cat = Array[String](["Aw, hello there!"])
+greet_cat = Array[String](["Aw, hello there!", "OMG a cat", "Hello!"])
+shoo_cat = Array[String](["Go away!"])

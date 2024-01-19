@@ -3,6 +3,7 @@ extends Resource
 class_name Dialogue
 
 @export var greet_cat: Array[String]
+@export var shoo_cat: Array[String]
 
 func _init() -> void:
 	pass
