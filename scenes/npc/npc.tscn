@@ -203,10 +203,11 @@ autostart = true
 script = ExtResource("26_pnjc2")
 chat_bubble = NodePath("../ChatBubble")
 positive_emojis = Array[int]([16, 22, 21, 28, 20, 0, 23, 10])
-negative_emojis = Array[int]([17, 15, 24, 1, 0, 5, 11])
+negative_emojis = Array[int]([17, 24, 1, 0, 5, 11])
 harasser_emojis = Array[int]([14, 3, 22, 10])
 
 [node name="ConversationTickTimer" type="Timer" parent="ConversationControl"]
+wait_time = 1.5
 autostart = true
 
 [node name="ConversationFinishTimer" type="Timer" parent="ConversationControl"]

@@ -256,10 +256,12 @@ func _handle_surroundings_state_changes() -> bool:
 	if personality.has_modifier(Personality.Modifier.EMPATHETIC) and num_other_npcs > 0 and behavior.state == Behavior.State.WALK_TO_EXIT:
 		var average_mood: float = clamp(empathy_mood_change * 1.0 / num_other_npcs, mood.MIN_MOOD, mood.MAX_MOOD)
 		var mood_change: int = int(average_mood * EMPATHY_MULTIPLIER)
+		# Visual hint they are empathetic
+		# FACE_SAD should feel more impactful, so should not be used ambiently
 		if mood_change > 10:
 			chat_bubble.show_emoji(ChatBubble.Emoji.STARS)
-		elif mood_change < 10:
-			chat_bubble.show_emoji(ChatBubble.Emoji.FACE_SAD)
+		# elif mood_change < 10:
+		# 	chat_bubble.show_emoji(ChatBubble.Emoji.FACE_SAD)
 		print("EMPATHY ", mood_change)
 		mood.increase_mood(mood_change)
 	
@@ -272,14 +274,6 @@ func _handle_surroundings_state_changes() -> bool:
 
 func _handle_surroundings_ambient() -> void:
 	if randf() < AMBIENT_CHANCE and behavior.state == Behavior.State.WALK_TO_EXIT:
-		# if mood.get_mood() >= 100:
-		# 	chat_bubble.show_emoji(ChatBubble.Emoji.STAR)
-		# if mood.get_mood() >= 50:
-		# 	chat_bubble.show_emoji(ChatBubble.Emoji.FACE_HAPPY)
-		# elif mood.get_mood() <= -100:
-		# 	chat_bubble.show_emoji(ChatBubble.Emoji.FACE_ANGRY)
-		# elif mood.get_mood() <= -50:
-		# 	chat_bubble.show_emoji(ChatBubble.Emoji.FACE_SAD)
 		if personality.sociable_type == Personality.Sociable.RUSHED:
 			chat_bubble.show_emoji(ChatBubble.Emoji.CLOCK)
 		elif personality.sociable_type == Personality.Sociable.HARASSER:
@@ -305,10 +299,9 @@ func _on_behavior_has_pet_cat() -> void:
 
 func _on_mood_mood_stage_changed(from: Mood.Stage, to: Mood.Stage) -> void:
 	if to == Mood.Stage.HAPPY:
-		print("Happy!")
+		chat_bubble.show_emoji(ChatBubble.Emoji.STAR, true)
 	elif to == Mood.Stage.SAD:
-		print("Sad :(")
-	# TODO: Change mood visuals
+		chat_bubble.show_emoji(ChatBubble.Emoji.FACE_ANGRY, true)
 	mood_stage_changed.emit(self, from, to)
 
 
