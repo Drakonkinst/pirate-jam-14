@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://o81jg6153eh1"]
+[gd_scene load_steps=20 format=3 uid="uid://o81jg6153eh1"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_5t08w"]
 [ext_resource type="Texture2D" uid="uid://dy7wrnyedd2i2" path="res://assets/art/lpccatratdog.png" id="2_eyd3b"]
 [ext_resource type="Texture2D" uid="uid://d3fkpw72jhw4d" path="res://assets/art/particle/glow.png" id="3_dl2k3"]
 [ext_resource type="Script" path="res://scenes/player/player_animation_control.gd" id="4_1vm7j"]
 [ext_resource type="Script" path="res://scenes/glow_size_change.gd" id="4_yymbj"]
+[ext_resource type="Texture2D" uid="uid://c6mn74ywrk7if" path="res://assets/art/shadow.png" id="6_7w41a"]
 [ext_resource type="Script" path="res://scenes/player/player_move_control.gd" id="6_8r2ky"]
 [ext_resource type="PackedScene" uid="uid://ctc6iva3px6p3" path="res://scenes/npc/chat_bubble.tscn" id="6_bpcj0"]
 [ext_resource type="Script" path="res://scenes/player/player_actions.gd" id="7_0ui7u"]
@@ -96,8 +97,9 @@ noise = SubResource("FastNoiseLite_f21kj")
 speed = 10.0
 max_bonus = 0.25
 
-[node name="PlayerAnimationControl" type="Node2D" parent="."]
+[node name="PlayerAnimationControl" type="Node2D" parent="." node_paths=PackedStringArray("shadow_sprite")]
 script = ExtResource("4_1vm7j")
+shadow_sprite = NodePath("Shadow")
 
 [node name="Model" type="AnimatedSprite2D" parent="PlayerAnimationControl"]
 texture_filter = 1
@@ -105,6 +107,13 @@ texture_repeat = 1
 scale = Vector2(1.15, 1.15)
 sprite_frames = SubResource("SpriteFrames_rwwkg")
 animation = &"left"
+
+[node name="Shadow" type="Sprite2D" parent="PlayerAnimationControl"]
+modulate = Color(1, 1, 1, 0.196078)
+z_index = -1
+position = Vector2(0, 16)
+scale = Vector2(3, 3)
+texture = ExtResource("6_7w41a")
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ga0ho")

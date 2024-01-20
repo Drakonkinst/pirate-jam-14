@@ -5,12 +5,20 @@ class_name AnimationControl
 const WALK_LEFT_ANIMATION = "left"
 const WALK_RIGHT_ANIMATION = "right"
 
+@export var shadow_sprite: Sprite2D
+
 @onready var model: AnimatedSprite2D = $Model
 
 func _ready() -> void:
 	# Face a random direction to start
 	var animations: PackedStringArray = model.sprite_frames.get_animation_names()
 	model.animation = animations[randi() % animations.size()]
+
+func set_shadow(flag: bool) -> void:
+	if flag:
+		shadow_sprite.show()
+	else:
+		shadow_sprite.hide()
 	
 func update_animations(velocity: Vector2, locked_facing: bool = false, face_towards: Vector2 = Vector2.ZERO):
 	if locked_facing:

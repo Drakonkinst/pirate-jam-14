@@ -230,7 +230,7 @@ z_as_relative = false
 y_sort_enabled = true
 
 [node name="Player" parent="World" node_paths=PackedStringArray("ref_tilemap") instance=ExtResource("3_ml610")]
-position = Vector2(153, 135)
+position = Vector2(289, 371)
 ref_tilemap = NodePath("../TileMap")
 
 [node name="CameraFollow" type="Node2D" parent="World/Player" node_paths=PackedStringArray("camera", "tilemap")]

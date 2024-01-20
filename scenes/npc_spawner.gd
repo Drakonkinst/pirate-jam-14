@@ -63,9 +63,12 @@ func spawn_random_npc(pos: Vector2, location: Location) -> void:
 	# Set other stats based on personality
 	var starting_mood = randi_range(level_data.min_starting_mood, level_data.max_starting_mood)
 	npc.mood.set_mood(starting_mood)
+	npc.animation_control.set_shadow(level_data.is_day)
 	#print("INITIAL MOOD = ", npc.mood.get_mood(), " ", level_data.min_starting_mood, " ", level_data.max_starting_mood)
 	npc.initialize()
 	npc_count += 1
+	
+	
 	#print("NPC spawned at ", pos, " with sociable = ", Personality.Sociable.keys()[personality.get_sociable_type()], ", cat opinion = ", Personality.CatOpinion.keys()[personality.get_cat_opinion()], ", modifiers = ", personality.has_modifier(Personality.Modifier.EMPATHETIC), ", moving_east = ", behavior.is_moving_east())
 	#print("NPC spawned (", npc_count, ") (", get_tree().get_nodes_in_group("mobs").size(), ")")
 	

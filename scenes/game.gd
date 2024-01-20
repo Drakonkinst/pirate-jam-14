@@ -15,6 +15,7 @@ func _ready() -> void:
 func initialize():
 	npc_spawner.initialize(level_data)
 	player.initialize(player_spawn_point.position)
+	player.animation_control.set_shadow(level_data.is_day)
 	shader_control.set_time_of_day(ShaderControl.TimeOfDay.DAY if level_data.is_day else ShaderControl.TimeOfDay.NIGHT)
 
 func _on_npc_spawner_npc_mood_changed(who: NPC, _from: Mood.Stage, to: Mood.Stage) -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dmjjey2624xf5"]
+[gd_scene load_steps=39 format=3 uid="uid://dmjjey2624xf5"]
 
 [ext_resource type="Script" path="res://scenes/npc/npc.gd" id="1_dkacp"]
 [ext_resource type="Shader" path="res://shader/reveal.gdshader" id="2_720b1"]
@@ -24,6 +24,7 @@
 [ext_resource type="SpriteFrames" uid="uid://b2oso4gwqgfx6" path="res://data/sprite/npc_model/npc_model5.tres" id="18_1wdqm"]
 [ext_resource type="SpriteFrames" uid="uid://cuto6uvh4ti5y" path="res://data/sprite/npc_model/npc_model6.tres" id="19_hma47"]
 [ext_resource type="PackedScene" uid="uid://ctc6iva3px6p3" path="res://scenes/npc/chat_bubble.tscn" id="20_iadok"]
+[ext_resource type="Texture2D" uid="uid://c6mn74ywrk7if" path="res://assets/art/shadow.png" id="22_pkb6b"]
 [ext_resource type="Texture2D" uid="uid://sh5tdjjgehbp" path="res://assets/art/rainy.png" id="25_cve5x"]
 [ext_resource type="Script" path="res://scenes/npc/conversation_control.gd" id="26_pnjc2"]
 [ext_resource type="Texture2D" uid="uid://sx5dybwdjhs2" path="res://assets/art/normal.png" id="27_4p3ox"]
@@ -113,8 +114,9 @@ texture = ExtResource("6_aj6vf")
 script = ExtResource("7_uefu2")
 chat_bubble = NodePath("../../ChatBubble")
 
-[node name="AnimationControl" type="Node2D" parent="."]
+[node name="AnimationControl" type="Node2D" parent="." node_paths=PackedStringArray("shadow_sprite")]
 script = ExtResource("6_6x70e")
+shadow_sprite = NodePath("Model/Shadow")
 
 [node name="Model" type="AnimatedSprite2D" parent="AnimationControl"]
 texture_filter = 1
@@ -124,6 +126,12 @@ sprite_frames = SubResource("SpriteFrames_p1b4l")
 animation = &"left"
 script = ExtResource("12_oacit")
 models = Array[SpriteFrames]([ExtResource("14_v0eqm"), ExtResource("15_wqilt"), ExtResource("16_57gev"), ExtResource("17_pbbfv"), ExtResource("18_1wdqm"), ExtResource("19_hma47")])
+
+[node name="Shadow" type="Sprite2D" parent="AnimationControl/Model"]
+modulate = Color(1, 1, 1, 0.196078)
+z_index = -1
+position = Vector2(0, 7.33333)
+texture = ExtResource("22_pkb6b")
 
 [node name="ChatBubble" parent="." instance=ExtResource("20_iadok")]
 
@@ -169,7 +177,7 @@ normal = ExtResource("27_4p3ox")
 sunny = ExtResource("27_qnw36")
 
 [node name="StageChangeCooldown" type="Timer" parent="Mood"]
-wait_time = 0.1
+wait_time = 5.0
 
 [node name="MoveControl" type="Node2D" parent="."]
 script = ExtResource("5_3yays")
@@ -194,7 +202,6 @@ wait_time = 0.2
 autostart = true
 
 [node name="RespondNoiseCooldownTimer" type="Timer" parent="."]
-wait_time = 2.0
 
 [node name="LifetimeTimer" type="Timer" parent="."]
 wait_time = 90.0
@@ -203,9 +210,9 @@ autostart = true
 [node name="ConversationControl" type="Node2D" parent="." node_paths=PackedStringArray("chat_bubble")]
 script = ExtResource("26_pnjc2")
 chat_bubble = NodePath("../ChatBubble")
-positive_emojis = Array[int]([16, 22, 21, 28, 20, 0, 23, 10])
-negative_emojis = Array[int]([17, 24, 1, 0, 5, 11])
-harasser_emojis = Array[int]([14, 3, 22, 10])
+positive_emojis = Array[int]([16, 22, 21, 23, 20])
+negative_emojis = Array[int]([17, 1, 0])
+harasser_emojis = Array[int]([14, 3, 24])
 
 [node name="ConversationTickTimer" type="Timer" parent="ConversationControl"]
 wait_time = 0.5

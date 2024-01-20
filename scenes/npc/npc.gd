@@ -93,7 +93,7 @@ func have_conversation(with: NPC, was_voluntary: bool) -> void:
 	conversation_control.start(with, self_mood_change, conversation_time, true, not was_voluntary)
 	with.conversation_control.start(self, other_mood_change, conversation_time, was_voluntary, false)
 	on_start_conversation(true)
-	print("CONVERSATION STARTED ", self_mood_change, " vs ", other_mood_change)
+	# print("CONVERSATION STARTED ", self_mood_change, " vs ", other_mood_change)
 	with.on_start_conversation(was_voluntary)
 
 func on_start_conversation(was_voluntary: bool) -> void:
@@ -109,7 +109,7 @@ func on_start_conversation(was_voluntary: bool) -> void:
 	
 func _on_conversation_control_on_finished_conversation(mood_change: int) -> void:
 	mood.increase_mood(mood_change)
-	print("CONVERSATION FINISHED")
+	# print("CONVERSATION FINISHED")
 	behavior.set_state(Behavior.State.WALK_TO_EXIT)
 
 func _physics_process(delta: float) -> void:
@@ -203,7 +203,7 @@ func interrupt_conversation():
 		chat_bubble.show_emoji(ChatBubble.Emoji.EXCLAMATION, true)
 		other.chat_bubble.show_emoji(ChatBubble.Emoji.EXCLAMATION, true)
 		behavior.set_state(Behavior.State.WALK_TO_EXIT)
-		print("CONVERSATION INTERRUPTED")
+		# print("CONVERSATION INTERRUPTED")
 		
 		# Interrupt
 		other.conversation_control.interrupt()

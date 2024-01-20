@@ -30,6 +30,8 @@ func decrease_mood(value: int) -> void:
 	set_mood(mood - value)
 		
 func set_mood(value: int) -> void:
+	if not mood_change_cooldown.is_stopped():
+		return
 	var next_mood: int = clamp(value, MIN_MOOD, MAX_MOOD)
 	if mood_stage != Stage.SAD and next_mood <= MIN_MOOD:
 		next_mood = MIN_MOOD
@@ -64,7 +66,7 @@ func get_mood_stage() -> Stage:
 	return mood_stage
 
 func _set_mood_stage(stage: Stage):
-	if mood_change_cooldown.is_stopped() and stage != mood_stage:
+	if stage != mood_stage:
 		mood_stage = stage
 		mood_change_cooldown.start()
 
