@@ -9,6 +9,7 @@ class_name LevelData
 @export var npc_quota: int = 10
 @export var min_starting_mood: int
 @export var max_starting_mood: int
+@export var max_minutes: float = 2.0
 
 @export_category("Personality Distribution")
 

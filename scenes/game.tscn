@@ -1,8 +1,10 @@
-[gd_scene load_steps=25 format=3 uid="uid://qxsv8wqrj306"]
+[gd_scene load_steps=28 format=3 uid="uid://qxsv8wqrj306"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_mq68w"]
 [ext_resource type="TileSet" uid="uid://bk0ycboeo7qyy" path="res://scenes/city.tres" id="2_a56mi"]
 [ext_resource type="Resource" uid="uid://blkeplr178jbt" path="res://data/level/level_1.tres" id="2_i1q1b"]
+[ext_resource type="Script" path="res://scenes/pause_menu.gd" id="3_4dg2k"]
+[ext_resource type="Shader" path="res://shader/paused.gdshader" id="3_b20q6"]
 [ext_resource type="PackedScene" uid="uid://o81jg6153eh1" path="res://scenes/player/player.tscn" id="3_ml610"]
 [ext_resource type="Script" path="res://scenes/npc_spawner.gd" id="4_f3c1u"]
 [ext_resource type="PackedScene" uid="uid://dmjjey2624xf5" path="res://scenes/npc/npc.tscn" id="4_kxhr6"]
@@ -17,6 +19,10 @@
 [ext_resource type="Script" path="res://scenes/rotate_towards_mouse.gd" id="13_4iuk7"]
 [ext_resource type="PackedScene" uid="uid://csv60xwlxwo2l" path="res://scenes/noise_particle.tscn" id="14_frmeb"]
 [ext_resource type="Script" path="res://scenes/pause_control.gd" id="17_am3tw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g7gcb"]
+shader = ExtResource("3_b20q6")
+shader_parameter/blur_amount = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bc27j"]
 size = Vector2(112.5, 670)
@@ -56,10 +62,41 @@ level_data = ExtResource("2_i1q1b")
 player = NodePath("World/Player")
 player_spawn_point = NodePath("Areas/PlayerSpawnPoint")
 
-[node name="HUDLayer" type="CanvasLayer" parent="."]
+[node name="PauseMenuLayer" type="CanvasLayer" parent="."]
+process_mode = 3
 layer = 99
+visible = false
+script = ExtResource("3_4dg2k")
+
+[node name="BlurBackground" type="ColorRect" parent="PauseMenuLayer"]
+material = SubResource("ShaderMaterial_g7gcb")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseText" type="Label" parent="PauseMenuLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -56.0
+offset_right = 72.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "Paused"
+
+[node name="HUDLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+layer = 20
 
 [node name="ShaderLayer" type="CanvasLayer" parent="."]
+process_mode = 3
 layer = 10
 
 [node name="ShaderControl" type="Node2D" parent="ShaderLayer" node_paths=PackedStringArray("player", "camera", "day_shader", "night_shader", "canvas_modulate")]
@@ -67,7 +104,6 @@ position = Vector2(938, 541)
 script = ExtResource("12_kpomg")
 player = NodePath("../../World/Player")
 camera = NodePath("../../Camera2D")
-time_of_day = 1
 day_shader = NodePath("../DayShader")
 night_shader = NodePath("../NightShader")
 canvas_modulate = NodePath("../../CanvasModulate")
@@ -182,6 +218,7 @@ position = Vector2(153, 135)
 ref_tilemap = NodePath("../TileMap")
 
 [node name="CameraFollow" type="Node2D" parent="World/Player" node_paths=PackedStringArray("camera", "tilemap")]
+process_mode = 3
 script = ExtResource("8_jjgcx")
 enabled = true
 camera = NodePath("../../../Camera2D")
@@ -228,6 +265,7 @@ energy = 0.1
 shadow_enabled = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
+process_mode = 3
 position = Vector2(360, 342)
 drag_horizontal_enabled = true
 drag_left_margin = 0.1
@@ -246,3 +284,5 @@ script = ExtResource("17_am3tw")
 [connection signal="body_entered" from="Areas/SpawnLeft" to="DespawnHandler" method="_on_left_body_entered"]
 [connection signal="body_entered" from="Areas/SpawnRight" to="DespawnHandler" method="_on_right_body_entered"]
 [connection signal="made_noise" from="World/Player" to="World/NoiseSpawner" method="_on_player_made_noise"]
+[connection signal="pause" from="PauseControl" to="PauseMenuLayer" method="_on_pause_control_pause"]
+[connection signal="unpause" from="PauseControl" to="PauseMenuLayer" method="_on_pause_control_unpause"]
