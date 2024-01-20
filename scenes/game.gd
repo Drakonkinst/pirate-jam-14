@@ -6,6 +6,7 @@ extends Node2D
 @export var shader_control: ShaderControl
 
 @onready var npc_spawner: NPCSpawner = $NPCSpawner
+@export var text_particle_spawner: TextParticleSpawner
 
 func _ready() -> void:
 	# Can possibly load something else first, then call initialize()
@@ -16,3 +17,9 @@ func initialize():
 	player.initialize(player_spawn_point.position)
 	shader_control.set_time_of_day(ShaderControl.TimeOfDay.DAY if level_data.is_day else ShaderControl.TimeOfDay.NIGHT)
 
+func _on_npc_spawner_npc_mood_changed(who: NPC, _from: Mood.Stage, to: Mood.Stage) -> void:
+	print("SPAWNED")
+	if to == Mood.Stage.HAPPY:
+		text_particle_spawner.spawn_increase_mood_text(who.global_position)
+	elif to == Mood.Stage.SAD:
+		text_particle_spawner.spawn_decrease_mood_text(who.global_position)

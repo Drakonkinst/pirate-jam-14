@@ -163,27 +163,28 @@ func _receive_hiss() -> void:
 	if conversation_control.in_conversation:
 		if conversation_control.next_mood_change < 0 or randf() < 0.5:
 			interrupt_conversation()
+		return
 	match personality.cat_opinion:
 		Personality.CatOpinion.LOVE:
 			chat_bubble.show_emoji(ChatBubble.Emoji.HEART_BROKEN)
-			mood.decrease_mood(40)
+			mood.decrease_mood(80)
 			if behavior.state == Behavior.State.INTERACT_CAT:
 				behavior.set_state(Behavior.State.WALK_TO_EXIT)
 			else:
 				behavior.start_avoiding(player)
 		Personality.CatOpinion.LIKE:
-			mood.decrease_mood(20)
+			mood.decrease_mood(40)
 			if behavior.state == Behavior.State.INTERACT_CAT:
 				behavior.set_state(Behavior.State.WALK_TO_EXIT)
 			else:
 				behavior.start_avoiding(player)
 		Personality.CatOpinion.DISLIKE:
 			chat_bubble.do_shoo_cat()
-			mood.decrease_mood(20)
+			mood.decrease_mood(40)
 			behavior.start_avoiding(player)
 		Personality.CatOpinion.ALLERGIC:
 			chat_bubble.show_emoji(ChatBubble.Emoji.CROSS)
-			mood.decrease_mood(20)
+			mood.decrease_mood(40)
 			behavior.start_avoiding(player)
 
 func interrupt_conversation():
@@ -227,17 +228,23 @@ func _handle_surroundings_state_changes() -> bool:
 		chat_bubble.show_emoji(ChatBubble.Emoji.CLOCK)
 		behavior.set_state(Behavior.State.WALK_TO_EXIT)
 		return false
-	# If cat lover, chance to approach cat without prompting
-	if behavior.state == Behavior.State.WALK_TO_EXIT and personality.cat_opinion == Personality.CatOpinion.LOVE and can_see_player and randf() < 0.3 * time_wasted_multiplier:
-		chat_bubble.do_greet_cat()
-		behavior.set_state(Behavior.State.INTERACT_CAT)
-		return false
-	# If allergic, try to avoid cat
-	if behavior.state == Behavior.State.WALK_TO_EXIT and personality.cat_opinion == Personality.CatOpinion.ALLERGIC and can_see_player:
-		mood.decrease_mood(5)
-		chat_bubble.show_emoji(ChatBubble.Emoji.CROSS)
-		behavior.start_avoiding(player)
-		return false
+	if behavior.state == Behavior.State.WALK_TO_EXIT and can_see_player and randf() < 0.3:
+		# Play ambient emote/message to show what the player thinks about the cat
+		if personality.cat_opinion == Personality.CatOpinion.LOVE:
+			chat_bubble.do_greet_cat()
+			if randf() < time_wasted_multiplier:
+				behavior.set_state(Behavior.State.INTERACT_CAT)
+				return false
+		elif personality.cat_opinion == Personality.CatOpinion.LIKE:
+			chat_bubble.do_greet_cat()
+		elif personality.cat_opinion == Personality.CatOpinion.DISLIKE:
+			chat_bubble.do_shoo_cat()
+	# If allergic, always try to avoid cat
+	if behavior.state == Behavior.State.WALK_TO_EXIT and can_see_player and personality.cat_opinion == Personality.CatOpinion.ALLERGIC:
+			mood.decrease_mood(5)
+			chat_bubble.do_allergic_cat()
+			behavior.start_avoiding(player)
+			return false
 	
 	var nearby_npcs: Array[Node2D] = detection_area.get_overlapping_bodies()
 	var empathy_mood_change: int = 0

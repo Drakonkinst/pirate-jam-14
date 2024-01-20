@@ -169,7 +169,7 @@ normal = ExtResource("27_4p3ox")
 sunny = ExtResource("27_qnw36")
 
 [node name="StageChangeCooldown" type="Timer" parent="Mood"]
-wait_time = 15.0
+wait_time = 0.1
 
 [node name="MoveControl" type="Node2D" parent="."]
 script = ExtResource("5_3yays")
@@ -208,6 +208,7 @@ negative_emojis = Array[int]([17, 24, 1, 0, 5, 11])
 harasser_emojis = Array[int]([14, 3, 22, 10])
 
 [node name="ConversationTickTimer" type="Timer" parent="ConversationControl"]
+wait_time = 0.5
 autostart = true
 
 [node name="ConversationFinishTimer" type="Timer" parent="ConversationControl"]

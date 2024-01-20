@@ -2,6 +2,8 @@ extends Node2D
 
 class_name ConversationControl
 
+const MIN_DIST_THRESHOLD = 64.0
+
 @export var chat_bubble: ChatBubble
 @export var positive_emojis: Array[ChatBubble.Emoji]
 @export var negative_emojis: Array[ChatBubble.Emoji]
@@ -46,6 +48,8 @@ func _on_conversation_finish_timer_timeout() -> void:
 func _on_conversation_tick_timer_timeout() -> void:
     # Play an emoji based on outcome of the conversation
     if not in_conversation:
+        return
+    if get_target_pos().distance_squared_to(global_position) > MIN_DIST_THRESHOLD * MIN_DIST_THRESHOLD:
         return
     if was_forced:
         _play_random(harasser_emojis)
