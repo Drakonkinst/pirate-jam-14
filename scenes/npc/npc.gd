@@ -3,7 +3,8 @@ extends CharacterBody2D
 class_name NPC
 
 const AMBIENT_CHANCE := 0.1
-const EMPATHY_MULTIPLIER := 0.1
+const EMPATHY_MULTIPLIER := 0.2
+const CONVERSATION_MOOD_MULTIPLIER := 1.0
 
 signal mood_stage_changed(who: NPC, from: Mood.Stage, to: Mood.Stage)
 signal lifetime_expired
@@ -71,17 +72,28 @@ func respond_conversation(from: NPC) -> bool:
 func have_conversation(with: NPC, was_voluntary: bool) -> void:
 	var self_mood_change: int = 0
 	var other_mood_change: int = 0
-	# Should be based on current mood
-	# TODO: Lose mood if talking to a harasser
-	# TODO: Calculate result of conversation and have NPC register it later
-	# TODO: Calculate mood
+	var self_mood = mood.get_mood()
+	var other_mood = with.mood.get_mood()
+	if not was_voluntary:
+		self_mood_change = 20
+		other_mood_change = -50
+	elif self_mood * other_mood >= 0:
+		# They are both the same sign, so affect both
+		self_mood_change = int(other_mood * CONVERSATION_MOOD_MULTIPLIER)
+		other_mood_change = int(self_mood * CONVERSATION_MOOD_MULTIPLIER)
+	elif abs(self_mood) > abs(other_mood):
+		other_mood_change = int(self_mood * CONVERSATION_MOOD_MULTIPLIER)
+		self_mood_change = 1 if self_mood >= 0 else -1
+	else:
+		self_mood_change = int(other_mood * CONVERSATION_MOOD_MULTIPLIER)
+		other_mood_change = 1 if other_mood >= 0 else -1
 	
 	var conversation_time: float = randf_range(7.0, 15.0)
 	
 	conversation_control.start(with, self_mood_change, conversation_time, true, not was_voluntary)
 	with.conversation_control.start(self, other_mood_change, conversation_time, was_voluntary, false)
 	on_start_conversation(true)
-	print("CONVERSATION STARTED")
+	print("CONVERSATION STARTED ", self_mood_change, " vs ", other_mood_change)
 	with.on_start_conversation(was_voluntary)
 
 func on_start_conversation(was_voluntary: bool) -> void:
@@ -221,7 +233,7 @@ func _handle_surroundings_state_changes() -> bool:
 		behavior.set_state(Behavior.State.INTERACT_CAT)
 		return false
 	# If allergic, try to avoid cat
-	if behavior.state != Behavior.State.AVOID and personality.cat_opinion == Personality.CatOpinion.ALLERGIC and can_see_player:
+	if behavior.state == Behavior.State.WALK_TO_EXIT and personality.cat_opinion == Personality.CatOpinion.ALLERGIC and can_see_player:
 		mood.decrease_mood(5)
 		chat_bubble.show_emoji(ChatBubble.Emoji.CROSS)
 		behavior.start_avoiding(player)
@@ -298,10 +310,10 @@ func _on_behavior_has_pet_cat() -> void:
 	mood.increase_mood(20)
 
 func _on_mood_mood_stage_changed(from: Mood.Stage, to: Mood.Stage) -> void:
-	if to == Mood.Stage.HAPPY:
-		chat_bubble.show_emoji(ChatBubble.Emoji.STAR, true)
-	elif to == Mood.Stage.SAD:
-		chat_bubble.show_emoji(ChatBubble.Emoji.FACE_ANGRY, true)
+	# if to == Mood.Stage.HAPPY:
+	# 	chat_bubble.show_emoji(ChatBubble.Emoji.STAR, true)
+	# elif to == Mood.Stage.SAD:
+	# 	chat_bubble.show_emoji(ChatBubble.Emoji.FACE_ANGRY, true)
 	mood_stage_changed.emit(self, from, to)
 
 

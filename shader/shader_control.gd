@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name ShaderControl
+
 const PLAYER_POS_PARAM := "player_pos"
 const PLAYER_WORLD_POS_PARAM := "player_world_pos"
 const SCREEN_WIDTH_PARAM := "screen_width"

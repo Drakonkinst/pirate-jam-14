@@ -53,7 +53,7 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(1, 0.5)
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("player", "player_spawn_point")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("player", "player_spawn_point", "shader_control")]
 process_mode = 1
 texture_filter = 1
 texture_repeat = 1
@@ -61,6 +61,7 @@ script = ExtResource("1_mq68w")
 level_data = ExtResource("2_i1q1b")
 player = NodePath("World/Player")
 player_spawn_point = NodePath("Areas/PlayerSpawnPoint")
+shader_control = NodePath("ShaderLayer/ShaderControl")
 
 [node name="PauseMenuLayer" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -104,6 +105,7 @@ position = Vector2(938, 541)
 script = ExtResource("12_kpomg")
 player = NodePath("../../World/Player")
 camera = NodePath("../../Camera2D")
+time_of_day = 1
 day_shader = NodePath("../DayShader")
 night_shader = NodePath("../NightShader")
 canvas_modulate = NodePath("../../CanvasModulate")

@@ -25,9 +25,9 @@
 [ext_resource type="SpriteFrames" uid="uid://cuto6uvh4ti5y" path="res://data/sprite/npc_model/npc_model6.tres" id="19_hma47"]
 [ext_resource type="PackedScene" uid="uid://ctc6iva3px6p3" path="res://scenes/npc/chat_bubble.tscn" id="20_iadok"]
 [ext_resource type="Texture2D" uid="uid://sh5tdjjgehbp" path="res://assets/art/rainy.png" id="25_cve5x"]
-[ext_resource type="Texture2D" uid="uid://d2na6u4yqgrm1" path="res://assets/art/sun_behind_clouds.png" id="26_g50o3"]
 [ext_resource type="Script" path="res://scenes/npc/conversation_control.gd" id="26_pnjc2"]
-[ext_resource type="Texture2D" uid="uid://bsr3wmn4au2ot" path="res://assets/art/sunny.png" id="27_qnw36"]
+[ext_resource type="Texture2D" uid="uid://sx5dybwdjhs2" path="res://assets/art/normal.png" id="27_4p3ox"]
+[ext_resource type="Texture2D" uid="uid://d2na6u4yqgrm1" path="res://assets/art/sunny.png" id="27_qnw36"]
 [ext_resource type="Script" path="res://scenes/npc/personality.gd" id="51_6i456"]
 [ext_resource type="Script" path="res://scenes/npc/behavior.gd" id="52_1j522"]
 [ext_resource type="Script" path="res://scenes/npc/mood.gd" id="53_rfa5q"]
@@ -165,10 +165,11 @@ script = ExtResource("53_rfa5q")
 weather_mood_sprite = NodePath("../RevealWhenNearby/WeatherMood")
 rainy = ExtResource("25_cve5x")
 cloudy = ExtResource("6_aj6vf")
-normal = ExtResource("26_g50o3")
+normal = ExtResource("27_4p3ox")
 sunny = ExtResource("27_qnw36")
 
 [node name="StageChangeCooldown" type="Timer" parent="Mood"]
+wait_time = 15.0
 
 [node name="MoveControl" type="Node2D" parent="."]
 script = ExtResource("5_3yays")
@@ -207,7 +208,6 @@ negative_emojis = Array[int]([17, 24, 1, 0, 5, 11])
 harasser_emojis = Array[int]([14, 3, 22, 10])
 
 [node name="ConversationTickTimer" type="Timer" parent="ConversationControl"]
-wait_time = 1.5
 autostart = true
 
 [node name="ConversationFinishTimer" type="Timer" parent="ConversationControl"]
