@@ -14,13 +14,13 @@ signal made_noise(action: Action, direction: float, origin: Vector2)
 
 @onready var noise_cooldown: Timer = $NoiseCooldownTimer
 
-func _input(event):
+func _input(event) -> void:
     if event.is_action_pressed(MEOW_INPUT):
         _attempt_make_noise(Action.MEOW)
     elif event.is_action_pressed(HISS_INPUT):
         _attempt_make_noise(Action.HISS)
 
-func _attempt_make_noise(action: Action):
+func _attempt_make_noise(action: Action) -> void:
     if not noise_cooldown.is_stopped():
         return
     var direction: Vector2 = get_global_mouse_position() - global_position
