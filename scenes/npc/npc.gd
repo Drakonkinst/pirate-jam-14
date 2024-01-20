@@ -272,15 +272,15 @@ func _handle_surroundings_state_changes() -> bool:
 
 func _handle_surroundings_ambient() -> void:
 	if randf() < AMBIENT_CHANCE and behavior.state == Behavior.State.WALK_TO_EXIT:
-		if mood.get_mood() >= 100:
-			chat_bubble.show_emoji(ChatBubble.Emoji.STAR)
-		if mood.get_mood() >= 50:
-			chat_bubble.show_emoji(ChatBubble.Emoji.FACE_HAPPY)
-		elif mood.get_mood() <= -100:
-			chat_bubble.show_emoji(ChatBubble.Emoji.FACE_ANGRY)
-		elif mood.get_mood() <= -50:
-			chat_bubble.show_emoji(ChatBubble.Emoji.FACE_SAD)
-		elif personality.sociable_type == Personality.Sociable.RUSHED:
+		# if mood.get_mood() >= 100:
+		# 	chat_bubble.show_emoji(ChatBubble.Emoji.STAR)
+		# if mood.get_mood() >= 50:
+		# 	chat_bubble.show_emoji(ChatBubble.Emoji.FACE_HAPPY)
+		# elif mood.get_mood() <= -100:
+		# 	chat_bubble.show_emoji(ChatBubble.Emoji.FACE_ANGRY)
+		# elif mood.get_mood() <= -50:
+		# 	chat_bubble.show_emoji(ChatBubble.Emoji.FACE_SAD)
+		if personality.sociable_type == Personality.Sociable.RUSHED:
 			chat_bubble.show_emoji(ChatBubble.Emoji.CLOCK)
 		elif personality.sociable_type == Personality.Sociable.HARASSER:
 			chat_bubble.show_emoji(ChatBubble.Emoji.CASH)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dmjjey2624xf5"]
+[gd_scene load_steps=38 format=3 uid="uid://dmjjey2624xf5"]
 
 [ext_resource type="Script" path="res://scenes/npc/npc.gd" id="1_dkacp"]
 [ext_resource type="Shader" path="res://shader/reveal.gdshader" id="2_720b1"]
@@ -10,8 +10,10 @@
 [ext_resource type="Script" path="res://scenes/npc/move_control.gd" id="5_3yays"]
 [ext_resource type="Texture2D" uid="uid://c2cqjb1a3de1j" path="res://assets/art/npc/npc1_left2.png" id="5_tscsb"]
 [ext_resource type="Script" path="res://scenes/npc/animation_control.gd" id="6_6x70e"]
+[ext_resource type="Texture2D" uid="uid://cj6eumv23ueg" path="res://assets/art/cloudy.png" id="6_aj6vf"]
 [ext_resource type="Texture2D" uid="uid://c7sbjed57u7ow" path="res://assets/art/npc/npc1_right0.png" id="6_nuhfu"]
 [ext_resource type="Texture2D" uid="uid://b0uikguyg0or6" path="res://assets/art/npc/npc1_right1.png" id="7_fa8nq"]
+[ext_resource type="Script" path="res://scenes/npc/hide_if_emoting.gd" id="7_uefu2"]
 [ext_resource type="Script" path="res://scenes/npc/navigation_control.gd" id="8_2uhr0"]
 [ext_resource type="Texture2D" uid="uid://chh8gfs6ro6fg" path="res://assets/art/npc/npc1_right2.png" id="8_iauxo"]
 [ext_resource type="Script" path="res://scenes/npc/npc_model.gd" id="12_oacit"]
@@ -22,14 +24,17 @@
 [ext_resource type="SpriteFrames" uid="uid://b2oso4gwqgfx6" path="res://data/sprite/npc_model/npc_model5.tres" id="18_1wdqm"]
 [ext_resource type="SpriteFrames" uid="uid://cuto6uvh4ti5y" path="res://data/sprite/npc_model/npc_model6.tres" id="19_hma47"]
 [ext_resource type="PackedScene" uid="uid://ctc6iva3px6p3" path="res://scenes/npc/chat_bubble.tscn" id="20_iadok"]
+[ext_resource type="Texture2D" uid="uid://sh5tdjjgehbp" path="res://assets/art/rainy.png" id="25_cve5x"]
+[ext_resource type="Texture2D" uid="uid://d2na6u4yqgrm1" path="res://assets/art/sun_behind_clouds.png" id="26_g50o3"]
 [ext_resource type="Script" path="res://scenes/npc/conversation_control.gd" id="26_pnjc2"]
+[ext_resource type="Texture2D" uid="uid://bsr3wmn4au2ot" path="res://assets/art/sunny.png" id="27_qnw36"]
 [ext_resource type="Script" path="res://scenes/npc/personality.gd" id="51_6i456"]
 [ext_resource type="Script" path="res://scenes/npc/behavior.gd" id="52_1j522"]
 [ext_resource type="Script" path="res://scenes/npc/mood.gd" id="53_rfa5q"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4drds"]
 shader = ExtResource("2_720b1")
-shader_parameter/radius = 175.0
+shader_parameter/radius = 120.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8q3tg"]
 shader = ExtResource("2_bwcji")
@@ -90,6 +95,7 @@ metadata/_edit_group_ = true
 material = SubResource("ShaderMaterial_4drds")
 
 [node name="Glow" type="Sprite2D" parent="RevealWhenNearby"]
+visible = false
 modulate = Color(1, 1, 0, 1)
 material = SubResource("ShaderMaterial_8q3tg")
 position = Vector2(1, 1)
@@ -98,6 +104,14 @@ texture = ExtResource("4_t85j7")
 script = ExtResource("4_nu57j")
 noise = SubResource("FastNoiseLite_c3mmn")
 max_bonus = 0.25
+
+[node name="WeatherMood" type="Sprite2D" parent="RevealWhenNearby" node_paths=PackedStringArray("chat_bubble")]
+use_parent_material = true
+position = Vector2(0, -40)
+scale = Vector2(3, 3)
+texture = ExtResource("6_aj6vf")
+script = ExtResource("7_uefu2")
+chat_bubble = NodePath("../../ChatBubble")
 
 [node name="AnimationControl" type="Node2D" parent="."]
 script = ExtResource("6_6x70e")
@@ -146,8 +160,13 @@ autostart = true
 [node name="StartPetTimer" type="Timer" parent="Behavior"]
 wait_time = 2.0
 
-[node name="Mood" type="Node2D" parent="."]
+[node name="Mood" type="Node2D" parent="." node_paths=PackedStringArray("weather_mood_sprite")]
 script = ExtResource("53_rfa5q")
+weather_mood_sprite = NodePath("../RevealWhenNearby/WeatherMood")
+rainy = ExtResource("25_cve5x")
+cloudy = ExtResource("6_aj6vf")
+normal = ExtResource("26_g50o3")
+sunny = ExtResource("27_qnw36")
 
 [node name="StageChangeCooldown" type="Timer" parent="Mood"]
 

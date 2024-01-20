@@ -93,7 +93,10 @@ func do_allergic_cat() -> void:
         show_dialogue_from_category(dialogue.allergic_cat)
     else:
         show_emoji(ChatBubble.Emoji.CROSS)
-    
+
+func is_playing():
+    return not _can_play()    
+
 # Helpers
 
 func _can_use_dialogue() -> bool:
