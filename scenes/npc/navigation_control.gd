@@ -49,6 +49,8 @@ func update_state(state: Behavior.State) -> void:
         Behavior.State.AVOID:
             if behavior.avoid_target != null:
                 _set_goal(_select_avoid_pos(behavior.avoid_target), false)
+        Behavior.State.CONVERSE:
+            _set_goal(behavior.conversation_control.get_target_pos())
 
 # Return true if they should speed up, based on the given state
 func _is_alert_behavior(state: Behavior.State):
@@ -153,6 +155,8 @@ func _on_recalculate_target_timer_timeout() -> void:
         Behavior.State.AVOID:
             if behavior.avoid_target != null:
                 _set_goal(_select_avoid_pos(behavior.avoid_target), false)
+        Behavior.State.CONVERSE:
+            _set_goal(behavior.conversation_control.get_target_pos())
         _:
             # Recalculate path to current target
             _set_goal(goal_pos)

@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://pvfwq5nkxkvt"]
+
+[ext_resource type="Script" path="res://scenes/npc/navigation_control.gd" id="1_s15xl"]
+
+[node name="NavigationControl" type="Node2D" node_paths=PackedStringArray("move_control", "behavior", "nav_agent")]
+script = ExtResource("1_s15xl")
+move_control = NodePath("")
+behavior = NodePath("")
+nav_agent = NodePath("")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_max_distance = 10.0
+avoidance_enabled = true
+radius = 22.0
+neighbor_distance = 200.0
+max_neighbors = 5
+time_horizon_agents = 0.5
+avoidance_mask = 3
+
+[node name="RecalculateTargetTimer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
+[connection signal="timeout" from="RecalculateTargetTimer" to="." method="_on_recalculate_target_timer_timeout"]

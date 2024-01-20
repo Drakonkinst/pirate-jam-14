@@ -4,6 +4,7 @@ class_name Behavior
 
 const MIN_WANDER_DISTANCE_THRESHOLD: float = 32.0
 const MIN_INTERACT_CAT_DISTANCE_THRESHOLD: float = 45.0
+const MIN_INTERACT_CONVERSE_DISTANCE_THRESHOLD: float = 50.0
 const MAX_NUM_PETS = 3
 
 enum State {
@@ -19,6 +20,7 @@ signal has_pet_cat
 
 @export var personality: Personality
 @export var nav_control: NavigationControl
+@export var conversation_control: ConversationControl
 
 @onready var player: Player = get_tree().get_nodes_in_group(GlobalVariables.PLAYER_GROUP)[0]
 
@@ -65,13 +67,13 @@ func update(delta: float) -> void:
 				set_state(State.WALK_TO_EXIT)
 				return
 			nav_control.move(MIN_WANDER_DISTANCE_THRESHOLD)
-			pass
+		State.CONVERSE:
+			nav_control.move(MIN_INTERACT_CONVERSE_DISTANCE_THRESHOLD)
 		State.INTERACT_CAT:
 			var arrived: bool = nav_control.move(MIN_INTERACT_CAT_DISTANCE_THRESHOLD)
 			if arrived:
-				pet_cat()
 				# Interact with cat
-				pass
+				pet_cat()
 
 func pet_cat() -> void:
 	if not start_pet_timer.is_stopped():
@@ -99,7 +101,10 @@ func should_lock_face():
 	return state == State.INTERACT_CAT or state == State.CONVERSE
 
 func get_facing_target():
-	return nav_control.goal_pos
+	if state == State.CONVERSE and conversation_control.in_conversation:
+		return conversation_control.get_target_pos()
+	else:
+		return nav_control.goal_pos
 
 func is_moving_east():
 	return moving_east

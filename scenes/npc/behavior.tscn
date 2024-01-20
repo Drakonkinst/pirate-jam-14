@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://bji3wgctf7jg0"]
+
+[ext_resource type="Script" path="res://scenes/npc/behavior.gd" id="1_c6edi"]
+
+[node name="Behavior" type="Node2D" node_paths=PackedStringArray("personality", "nav_control")]
+script = ExtResource("1_c6edi")
+personality = NodePath("")
+nav_control = NodePath("")
+
+[node name="UpdateBehaviorTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="StartConversationTimer" type="Timer" parent="."]
+
+[node name="AvoidTimer" type="Timer" parent="."]
+
+[node name="StartPetTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="timeout" from="UpdateBehaviorTimer" to="." method="_on_update_behavior_timer_timeout"]
+[connection signal="timeout" from="AvoidTimer" to="." method="_on_avoid_timer_timeout"]
+[connection signal="timeout" from="StartPetTimer" to="." method="_on_start_pet_timer_timeout"]

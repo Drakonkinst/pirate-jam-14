@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://buxxsalhr14y6"]
+
+[ext_resource type="Script" path="res://scenes/npc/conversation_control.gd" id="1_c2gyy"]
+
+[node name="ConversationControl" type="Node2D" node_paths=PackedStringArray("chat_bubble")]
+script = ExtResource("1_c2gyy")
+chat_bubble = NodePath("")
+positive_emojis = Array[int]([16, 22, 21, 28, 20, 0, 23])
+negative_emojis = Array[int]([17, 15, 24, 1, 0, 5])
+harasser_emojis = Array[int]([14, 3, 22])
+
+[node name="ConversationTickTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="ConversationFinishTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="ConversationTickTimer" to="." method="_on_conversation_tick_timer_timeout"]
+[connection signal="timeout" from="ConversationFinishTimer" to="." method="_on_conversation_finish_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dmjjey2624xf5"]
+[gd_scene load_steps=33 format=3 uid="uid://dmjjey2624xf5"]
 
 [ext_resource type="Script" path="res://scenes/npc/npc.gd" id="1_dkacp"]
 [ext_resource type="Shader" path="res://shader/reveal.gdshader" id="2_720b1"]
@@ -22,6 +22,7 @@
 [ext_resource type="SpriteFrames" uid="uid://b2oso4gwqgfx6" path="res://data/sprite/npc_model/npc_model5.tres" id="18_1wdqm"]
 [ext_resource type="SpriteFrames" uid="uid://cuto6uvh4ti5y" path="res://data/sprite/npc_model/npc_model6.tres" id="19_hma47"]
 [ext_resource type="PackedScene" uid="uid://ctc6iva3px6p3" path="res://scenes/npc/chat_bubble.tscn" id="20_iadok"]
+[ext_resource type="Script" path="res://scenes/npc/conversation_control.gd" id="26_pnjc2"]
 [ext_resource type="Script" path="res://scenes/npc/personality.gd" id="51_6i456"]
 [ext_resource type="Script" path="res://scenes/npc/behavior.gd" id="52_1j522"]
 [ext_resource type="Script" path="res://scenes/npc/mood.gd" id="53_rfa5q"]
@@ -128,10 +129,11 @@ shape = SubResource("CircleShape2D_h2tf7")
 [node name="Personality" type="Node2D" parent="."]
 script = ExtResource("51_6i456")
 
-[node name="Behavior" type="Node2D" parent="." node_paths=PackedStringArray("personality", "nav_control")]
+[node name="Behavior" type="Node2D" parent="." node_paths=PackedStringArray("personality", "nav_control", "conversation_control")]
 script = ExtResource("52_1j522")
 personality = NodePath("../Personality")
 nav_control = NodePath("../NavigationControl")
+conversation_control = NodePath("../ConversationControl")
 
 [node name="UpdateBehaviorTimer" type="Timer" parent="Behavior"]
 wait_time = 2.0
@@ -178,6 +180,20 @@ wait_time = 2.0
 wait_time = 90.0
 autostart = true
 
+[node name="ConversationControl" type="Node2D" parent="." node_paths=PackedStringArray("chat_bubble")]
+script = ExtResource("26_pnjc2")
+chat_bubble = NodePath("../ChatBubble")
+positive_emojis = Array[int]([16, 22, 21, 28, 20, 0, 23, 10])
+negative_emojis = Array[int]([17, 15, 24, 1, 0, 5, 11])
+harasser_emojis = Array[int]([14, 3, 22, 10])
+
+[node name="ConversationTickTimer" type="Timer" parent="ConversationControl"]
+autostart = true
+
+[node name="ConversationFinishTimer" type="Timer" parent="ConversationControl"]
+wait_time = 3.0
+autostart = true
+
 [connection signal="behavior_tick" from="Behavior" to="." method="_on_behavior_behavior_tick"]
 [connection signal="has_pet_cat" from="Behavior" to="." method="_on_behavior_has_pet_cat"]
 [connection signal="timeout" from="Behavior/UpdateBehaviorTimer" to="Behavior" method="_on_update_behavior_timer_timeout"]
@@ -189,3 +205,6 @@ autostart = true
 [connection signal="timeout" from="NavigationControl/RecalculateTargetTimer" to="NavigationControl" method="_on_recalculate_target_timer_timeout"]
 [connection signal="timeout" from="RespondNoiseCooldownTimer" to="." method="_on_respond_noise_cooldown_timer_timeout"]
 [connection signal="timeout" from="LifetimeTimer" to="." method="_on_lifetime_timer_timeout"]
+[connection signal="on_finished_conversation" from="ConversationControl" to="." method="_on_conversation_control_on_finished_conversation"]
+[connection signal="timeout" from="ConversationControl/ConversationTickTimer" to="ConversationControl" method="_on_conversation_tick_timer_timeout"]
+[connection signal="timeout" from="ConversationControl/ConversationFinishTimer" to="ConversationControl" method="_on_conversation_finish_timer_timeout"]

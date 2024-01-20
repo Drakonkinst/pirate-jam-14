@@ -54,9 +54,9 @@ func _ready() -> void:
 
 # Main 2 methods
 
-func show_emoji(emoji: Emoji) -> bool:
+func show_emoji(emoji: Emoji, force: bool = false) -> bool:
     # Prevent if on cooldown
-    if not _can_play():
+    if not _can_play() and not force:
         return false
     emoji_sprite.show()
     emoji_sprite.texture = emojis[emoji]
