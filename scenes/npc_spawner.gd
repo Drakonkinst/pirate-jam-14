@@ -7,6 +7,8 @@ class_name NPCSpawner
 
 enum Location { SCENE, LEFT, RIGHT }
 
+signal npc_mood_changed(who: NPC, from: Mood.Stage, to: Mood.Stage)
+
 @export var npc_scene: PackedScene
 
 @export var npc_parent: Node2D
@@ -59,15 +61,23 @@ func spawn_random_npc(pos: Vector2, location: Location) -> void:
 			behavior.set_moving_east(randf() < 0.5)
 		
 	# Set other stats based on personality
+	var starting_mood = randi_range(level_data.min_starting_mood, level_data.max_starting_mood)
+	npc.mood.set_mood(starting_mood)
+	#print("INITIAL MOOD = ", npc.mood.get_mood(), " ", level_data.min_starting_mood, " ", level_data.max_starting_mood)
 	npc.initialize()
 	npc_count += 1
 	#print("NPC spawned at ", pos, " with sociable = ", Personality.Sociable.keys()[personality.get_sociable_type()], ", cat opinion = ", Personality.CatOpinion.keys()[personality.get_cat_opinion()], ", modifiers = ", personality.has_modifier(Personality.Modifier.EMPATHETIC), ", moving_east = ", behavior.is_moving_east())
-	print("NPC spawned (", npc_count, ") (", get_tree().get_nodes_in_group("mobs").size(), ")")
+	#print("NPC spawned (", npc_count, ") (", get_tree().get_nodes_in_group("mobs").size(), ")")
+	
+	# Connect signals
+	npc.lifetime_expired.connect(_on_npc_lifetime_expired)
+	npc.mood_stage_changed.connect(_on_npc_mood_stage_changed)
 	
 # Spawn NPCs at random valid positions on navmesh
 func _spawn_initial_npcs():
 	for i in level_data.npc_quota:
 		_spawn_npc_from_location(Location.SCENE)
+	# Should start tracking score after this point, since some levels may have NPCs start already with ruined mood?
 	has_spawned_initial = true
 
 # Spawn NPC from left or right edge of map
@@ -101,3 +111,9 @@ func _get_area_from_location(location: Location):
 
 func _on_despawn_handler_on_npc_despawned() -> void:
 	npc_count -= 1
+
+func _on_npc_lifetime_expired() -> void:
+	npc_count -= 1
+
+func _on_npc_mood_stage_changed(who: NPC, from: Mood.Stage, to: Mood.Stage) -> void:
+	npc_mood_changed.emit(who, from, to)

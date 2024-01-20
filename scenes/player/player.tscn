@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://o81jg6153eh1"]
+[gd_scene load_steps=19 format=3 uid="uid://o81jg6153eh1"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_5t08w"]
 [ext_resource type="Texture2D" uid="uid://dy7wrnyedd2i2" path="res://assets/art/lpccatratdog.png" id="2_eyd3b"]
@@ -13,18 +13,6 @@
 blend_mode = 1
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_f21kj"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7mtvb"]
-atlas = ExtResource("2_eyd3b")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5r47r"]
-atlas = ExtResource("2_eyd3b")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6s74m"]
-atlas = ExtResource("2_eyd3b")
-region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cb851"]
 atlas = ExtResource("2_eyd3b")
@@ -50,34 +38,8 @@ region = Rect2(128, 64, 32, 32)
 atlas = ExtResource("2_eyd3b")
 region = Rect2(160, 64, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_of0i7"]
-atlas = ExtResource("2_eyd3b")
-region = Rect2(96, 96, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dypp2"]
-atlas = ExtResource("2_eyd3b")
-region = Rect2(128, 96, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_shvrj"]
-atlas = ExtResource("2_eyd3b")
-region = Rect2(160, 96, 32, 32)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_rwwkg"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7mtvb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5r47r")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6s74m")
-}],
-"loop": true,
-"name": &"down",
-"speed": 10.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cb851")
@@ -104,20 +66,6 @@ animations = [{
 }],
 "loop": true,
 "name": &"right",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_of0i7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dypp2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_shvrj")
-}],
-"loop": true,
-"name": &"up",
 "speed": 10.0
 }]
 
@@ -156,7 +104,7 @@ texture_filter = 1
 texture_repeat = 1
 scale = Vector2(1.15, 1.15)
 sprite_frames = SubResource("SpriteFrames_rwwkg")
-animation = &"right"
+animation = &"left"
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ga0ho")
@@ -169,6 +117,7 @@ avoidance_layers = 2
 
 [node name="PlayerMoveControl" type="Node2D" parent="."]
 script = ExtResource("6_8r2ky")
+speed = 300.0
 
 [node name="PlayerActions" type="Node2D" parent="."]
 script = ExtResource("7_0ui7u")

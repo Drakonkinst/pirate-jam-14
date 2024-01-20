@@ -52,6 +52,8 @@ enum Emoji {
 func _ready() -> void:
     emoji_sprite.hide()
 
+# Main 2 methods
+
 func show_emoji(emoji: Emoji) -> bool:
     # Prevent if on cooldown
     if not _can_play():
@@ -67,6 +69,34 @@ func show_dialogue(line: String) -> bool:
         return false
     dialogue_control.play_text(line)
     hide_timer.start()
+    return true
+
+# Public helpers for certain actions
+
+func show_dialogue_from_category(category: Array[String]) -> void:
+    show_dialogue(dialogue.generate_line(category))
+
+func do_greet_cat() -> void:
+    if _can_use_dialogue() and randf() < 0.2:
+        show_dialogue_from_category(dialogue.greet_cat)
+    else:
+        show_emoji(Emoji.HEART)
+
+func do_shoo_cat() -> void:
+    if _can_use_dialogue() and randf() < 0.2:
+        show_dialogue_from_category(dialogue.shoo_cat)
+    else:
+        show_emoji(Emoji.QUESTION)
+
+func do_allergic_cat() -> void:
+    if _can_use_dialogue() and randf() < 0.2:
+        show_dialogue_from_category(dialogue.allergic_cat)
+    else:
+        show_emoji(ChatBubble.Emoji.CROSS)
+    
+# Helpers
+
+func _can_use_dialogue() -> bool:
     return true
 
 func _can_play() -> bool:

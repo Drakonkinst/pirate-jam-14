@@ -5,7 +5,8 @@ class_name NPC
 const AMBIENT_CHANCE := 0.1
 const EMPATHY_MULTIPLIER := 0.1
 
-signal mood_stage_changed(from: Mood.Stage, to: Mood.Stage)
+signal mood_stage_changed(who: NPC, from: Mood.Stage, to: Mood.Stage)
+signal lifetime_expired
 
 @onready var personality: Personality = $Personality
 @onready var mood: Mood = $Mood
@@ -62,23 +63,23 @@ func _receive_meow() -> void:
 	
 	match personality.cat_opinion:
 		Personality.CatOpinion.LOVE:
-			chat_bubble.show_emoji(ChatBubble.Emoji.HEART)
 			# Almost always will be distracted
 			if behavior.get_time_wasted_multiplier() > 0.0 and behavior.state != Behavior.State.INTERACT_CAT:
+				chat_bubble.do_greet_cat()
 				behavior.set_state(Behavior.State.INTERACT_CAT)
 				mood.increase_mood(60)
 			else:
 				mood.increase_mood(20)
 		Personality.CatOpinion.LIKE:
-			chat_bubble.show_emoji(ChatBubble.Emoji.HEART)
 			# Lower chance to be distracted
 			if randf() < 0.75 * behavior.get_time_wasted_multiplier() and behavior.state != Behavior.State.INTERACT_CAT:
+				chat_bubble.do_greet_cat()
 				behavior.set_state(Behavior.State.INTERACT_CAT)
 				mood.increase_mood(40)
 			else:
 				mood.increase_mood(10)
 		Personality.CatOpinion.DISLIKE:
-			chat_bubble.show_emoji(ChatBubble.Emoji.QUESTION)
+			chat_bubble.do_shoo_cat()
 			mood.decrease_mood(10)
 			behavior.start_avoiding(player)
 		Personality.CatOpinion.ALLERGIC:
@@ -103,7 +104,7 @@ func _receive_hiss() -> void:
 			else:
 				behavior.start_avoiding(player)
 		Personality.CatOpinion.DISLIKE:
-			chat_bubble.show_emoji(ChatBubble.Emoji.QUESTION)
+			chat_bubble.do_shoo_cat()
 			mood.decrease_mood(20)
 			behavior.start_avoiding(player)
 		Personality.CatOpinion.ALLERGIC:
@@ -130,7 +131,7 @@ func _handle_surroundings_state_changes() -> bool:
 		return false
 	# If cat lover, chance to approach cat without prompting
 	if behavior.state == Behavior.State.WALK_TO_EXIT and personality.cat_opinion == Personality.CatOpinion.LOVE and can_see_player and randf() < 0.3 * time_wasted_multiplier:
-		chat_bubble.show_emoji(ChatBubble.Emoji.HEART)
+		chat_bubble.do_greet_cat()
 		behavior.set_state(Behavior.State.INTERACT_CAT)
 		return false
 	# If allergic, try to avoid cat
@@ -155,16 +156,18 @@ func _handle_surroundings_state_changes() -> bool:
 				# Do a handshake to see if the other NPC wants to talk, with a harasser chance to force the conversation
 				# Social loses mood if the other npc doesn't want to talk
 				# If sociable, higher chance (lower if late); antisocial and rushed never respond unless forced to (and lose mood)
+				# Avoid harasser when they try to talk
 				pass
 	
 	# If empathetic, gain or lose mood from nearby NPCs
-	if personality.has_modifier(Personality.Modifier.EMPATHETIC):
+	if personality.has_modifier(Personality.Modifier.EMPATHETIC) and num_other_npcs > 0 and behavior.state == Behavior.State.WALK_TO_EXIT:
 		var average_mood: float = clamp(empathy_mood_change * 1.0 / num_other_npcs, mood.MIN_MOOD, mood.MAX_MOOD)
 		var mood_change: int = int(average_mood * EMPATHY_MULTIPLIER)
 		if mood_change > 10:
 			chat_bubble.show_emoji(ChatBubble.Emoji.STARS)
 		elif mood_change < 10:
 			chat_bubble.show_emoji(ChatBubble.Emoji.FACE_SAD)
+		print("EMPATHY ", mood_change)
 		mood.increase_mood(mood_change)
 	
 	# If antisocial, lose mood if too many people nearby
@@ -211,8 +214,14 @@ func _on_mood_mood_stage_changed(from: Mood.Stage, to: Mood.Stage) -> void:
 	elif to == Mood.Stage.SAD:
 		print("Sad :(")
 	# TODO: Change mood visuals
-	mood_stage_changed.emit(from, to)
+	mood_stage_changed.emit(self, from, to)
 
 
 func _on_behavior_behavior_tick() -> void:
 	check_surroundings()
+
+# Despawn NPCs after a while in case they get stuck somewhere
+# Band-aid fix because they do get stuck somewhere after a while
+func _on_lifetime_timer_timeout() -> void:	
+	lifetime_expired.emit()
+	despawn()

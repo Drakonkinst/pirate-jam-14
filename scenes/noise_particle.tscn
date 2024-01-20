@@ -9,9 +9,10 @@ meow_sprite = ExtResource("2_osybq")
 hiss_sprite = ExtResource("2_osybq")
 meow_color = Color(0.407843, 0.905882, 0.968627, 1)
 hiss_color = Color(1, 0.337255, 0.270588, 1)
+start_forward_distance = 45.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(1.75, 1.75)
+scale = Vector2(2, 2)
 sprite_frames = ExtResource("2_osybq")
 
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]

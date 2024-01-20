@@ -7,6 +7,8 @@ class_name LevelData
 
 @export var is_day: bool = true
 @export var npc_quota: int = 10
+@export var min_starting_mood: int
+@export var max_starting_mood: int
 
 @export_category("Personality Distribution")
 

@@ -174,6 +174,10 @@ autostart = true
 [node name="RespondNoiseCooldownTimer" type="Timer" parent="."]
 wait_time = 2.0
 
+[node name="LifetimeTimer" type="Timer" parent="."]
+wait_time = 90.0
+autostart = true
+
 [connection signal="behavior_tick" from="Behavior" to="." method="_on_behavior_behavior_tick"]
 [connection signal="has_pet_cat" from="Behavior" to="." method="_on_behavior_has_pet_cat"]
 [connection signal="timeout" from="Behavior/UpdateBehaviorTimer" to="Behavior" method="_on_update_behavior_timer_timeout"]
@@ -184,3 +188,4 @@ wait_time = 2.0
 [connection signal="velocity_computed" from="NavigationControl/NavigationAgent2D" to="NavigationControl" method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="timeout" from="NavigationControl/RecalculateTargetTimer" to="NavigationControl" method="_on_recalculate_target_timer_timeout"]
 [connection signal="timeout" from="RespondNoiseCooldownTimer" to="." method="_on_respond_noise_cooldown_timer_timeout"]
+[connection signal="timeout" from="LifetimeTimer" to="." method="_on_lifetime_timer_timeout"]

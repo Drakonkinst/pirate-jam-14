@@ -6,6 +6,8 @@
 script = ExtResource("1_hfj6a")
 is_day = true
 npc_quota = 20
+min_starting_mood = 25
+max_starting_mood = 75
 sociable_normal = 0.0
 sociable_social = 0.0
 sociable_antisocial = 0.0
