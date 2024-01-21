@@ -10,7 +10,6 @@
 [ext_resource type="Script" path="res://scenes/npc/move_control.gd" id="5_3yays"]
 [ext_resource type="Texture2D" uid="uid://c2cqjb1a3de1j" path="res://assets/art/npc/npc1_left2.png" id="5_tscsb"]
 [ext_resource type="Script" path="res://scenes/npc/animation_control.gd" id="6_6x70e"]
-[ext_resource type="Texture2D" uid="uid://cj6eumv23ueg" path="res://assets/art/cloudy.png" id="6_aj6vf"]
 [ext_resource type="Texture2D" uid="uid://c7sbjed57u7ow" path="res://assets/art/npc/npc1_right0.png" id="6_nuhfu"]
 [ext_resource type="Texture2D" uid="uid://b0uikguyg0or6" path="res://assets/art/npc/npc1_right1.png" id="7_fa8nq"]
 [ext_resource type="Script" path="res://scenes/npc/hide_if_emoting.gd" id="7_uefu2"]
@@ -25,10 +24,11 @@
 [ext_resource type="SpriteFrames" uid="uid://cuto6uvh4ti5y" path="res://data/sprite/npc_model/npc_model6.tres" id="19_hma47"]
 [ext_resource type="PackedScene" uid="uid://ctc6iva3px6p3" path="res://scenes/npc/chat_bubble.tscn" id="20_iadok"]
 [ext_resource type="Texture2D" uid="uid://c6mn74ywrk7if" path="res://assets/art/shadow.png" id="22_pkb6b"]
-[ext_resource type="Texture2D" uid="uid://sh5tdjjgehbp" path="res://assets/art/rainy.png" id="25_cve5x"]
+[ext_resource type="SpriteFrames" uid="uid://dki2kksxok5iw" path="res://data/sprite/weather_mood/rainy.tres" id="26_88gbg"]
 [ext_resource type="Script" path="res://scenes/npc/conversation_control.gd" id="26_pnjc2"]
-[ext_resource type="Texture2D" uid="uid://sx5dybwdjhs2" path="res://assets/art/normal.png" id="27_4p3ox"]
-[ext_resource type="Texture2D" uid="uid://d2na6u4yqgrm1" path="res://assets/art/sunny.png" id="27_qnw36"]
+[ext_resource type="SpriteFrames" uid="uid://bdoj8kwviv420" path="res://data/sprite/weather_mood/cloudy.tres" id="27_twtk1"]
+[ext_resource type="SpriteFrames" uid="uid://bu6fvc30ogf0h" path="res://data/sprite/weather_mood/normal.tres" id="28_2om8n"]
+[ext_resource type="SpriteFrames" uid="uid://hggtba6fgcg1" path="res://data/sprite/weather_mood/sunny.tres" id="29_lbpur"]
 [ext_resource type="Script" path="res://scenes/npc/personality.gd" id="51_6i456"]
 [ext_resource type="Script" path="res://scenes/npc/behavior.gd" id="52_1j522"]
 [ext_resource type="Script" path="res://scenes/npc/mood.gd" id="53_rfa5q"]
@@ -106,11 +106,11 @@ script = ExtResource("4_nu57j")
 noise = SubResource("FastNoiseLite_c3mmn")
 max_bonus = 0.25
 
-[node name="WeatherMood" type="Sprite2D" parent="RevealWhenNearby" node_paths=PackedStringArray("chat_bubble")]
+[node name="WeatherMood" type="AnimatedSprite2D" parent="RevealWhenNearby" node_paths=PackedStringArray("chat_bubble")]
 use_parent_material = true
 position = Vector2(0, -40)
 scale = Vector2(3, 3)
-texture = ExtResource("6_aj6vf")
+sprite_frames = ExtResource("29_lbpur")
 script = ExtResource("7_uefu2")
 chat_bubble = NodePath("../../ChatBubble")
 
@@ -171,10 +171,10 @@ wait_time = 2.0
 [node name="Mood" type="Node2D" parent="." node_paths=PackedStringArray("weather_mood_sprite")]
 script = ExtResource("53_rfa5q")
 weather_mood_sprite = NodePath("../RevealWhenNearby/WeatherMood")
-rainy = ExtResource("25_cve5x")
-cloudy = ExtResource("6_aj6vf")
-normal = ExtResource("27_4p3ox")
-sunny = ExtResource("27_qnw36")
+rainy = ExtResource("26_88gbg")
+cloudy = ExtResource("27_twtk1")
+normal = ExtResource("28_2om8n")
+sunny = ExtResource("29_lbpur")
 
 [node name="StageChangeCooldown" type="Timer" parent="Mood"]
 wait_time = 5.0

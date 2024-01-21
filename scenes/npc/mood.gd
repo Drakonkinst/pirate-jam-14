@@ -13,11 +13,11 @@ const MAX_MOOD: int = 100
 
 signal mood_stage_changed(from: Stage, to: Stage)
 
-@export var weather_mood_sprite: Sprite2D
-@export var rainy: CompressedTexture2D
-@export var cloudy: CompressedTexture2D
-@export var normal: CompressedTexture2D
-@export var sunny: CompressedTexture2D
+@export var weather_mood_sprite: AnimatedSprite2D
+@export var rainy: SpriteFrames
+@export var cloudy: SpriteFrames
+@export var normal: SpriteFrames
+@export var sunny: SpriteFrames
 
 @onready var mood_change_cooldown: Timer = $StageChangeCooldown
 var mood: int = 0
@@ -48,9 +48,9 @@ func set_mood(value: int) -> void:
 	update_sprite()
 
 func update_sprite() -> void:
-	weather_mood_sprite.texture = get_sprite()
+	weather_mood_sprite.sprite_frames = get_sprite()
 
-func get_sprite() -> CompressedTexture2D:
+func get_sprite() -> SpriteFrames:
 	if mood_stage == Stage.SAD:
 		return rainy
 	elif mood_stage == Stage.HAPPY:

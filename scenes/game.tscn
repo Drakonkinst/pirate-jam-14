@@ -74,8 +74,15 @@ layer = 99
 visible = false
 script = ExtResource("3_4dg2k")
 
+[node name="DarkenBackground" type="ColorRect" parent="PauseMenuLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.333333)
+
 [node name="BlurBackground" type="ColorRect" parent="PauseMenuLayer"]
-modulate = Color(0.564706, 0.564706, 0.564706, 1)
 material = SubResource("ShaderMaterial_g7gcb")
 anchors_preset = 15
 anchor_right = 1.0
