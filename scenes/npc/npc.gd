@@ -140,7 +140,7 @@ func _receive_meow() -> void:
 				behavior.set_state(Behavior.State.INTERACT_CAT)
 				mood.increase_mood(60)
 			else:
-				mood.increase_mood(20)
+				mood.increase_mood(40)
 		Personality.CatOpinion.LIKE:
 			# Lower chance to be distracted
 			if randf() < 0.75 * behavior.get_time_wasted_multiplier() and behavior.state != Behavior.State.INTERACT_CAT:
@@ -148,14 +148,14 @@ func _receive_meow() -> void:
 				behavior.set_state(Behavior.State.INTERACT_CAT)
 				mood.increase_mood(40)
 			else:
-				mood.increase_mood(10)
+				mood.increase_mood(20)
 		Personality.CatOpinion.DISLIKE:
 			chat_bubble.do_shoo_cat()
 			mood.decrease_mood(10)
 			behavior.start_avoiding(player)
 		Personality.CatOpinion.ALLERGIC:
 			chat_bubble.show_emoji(ChatBubble.Emoji.CROSS)
-			mood.decrease_mood(20)
+			mood.decrease_mood(40)
 			behavior.start_avoiding(player)
 
 

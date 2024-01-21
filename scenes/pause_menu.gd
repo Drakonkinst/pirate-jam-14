@@ -3,8 +3,8 @@ extends CanvasLayer
 func _ready() -> void:
     hide()
 
-func _on_pause_control_unpause() -> void:
+func _on_pause_control_unpaused() -> void:
     hide()
 
-func _on_pause_control_pause() -> void:
+func _on_pause_control_paused() -> void:
     show()
