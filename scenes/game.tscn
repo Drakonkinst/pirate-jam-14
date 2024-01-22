@@ -69,7 +69,7 @@ shader_control = NodePath("ShaderLayer/ShaderControl")
 text_particle_spawner = NodePath("WorldSpaceUILayer/TextParticleSpawner")
 
 [node name="PauseMenuLayer" type="CanvasLayer" parent="."]
-process_mode = 3
+process_mode = 2
 layer = 99
 visible = false
 script = ExtResource("3_4dg2k")

@@ -34,9 +34,9 @@ func _on_npc_spawner_npc_mood_changed(who: NPC, from: Mood.Stage, to: Mood.Stage
 	elif to == Mood.Stage.SAD:
 		text_particle_spawner.spawn_decrease_mood_text(who.global_position)
 		if from == Mood.Stage.HAPPY:
-			score_handler.decrease_score(15)
+			score_handler.decrease_score(30)
 		else:
-			score_handler.decrease_score(10)
+			score_handler.decrease_score(15)
 
 func _on_game_over_timer_timeout() -> void:
 	pause_control.pause()

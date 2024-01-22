@@ -3,7 +3,7 @@ extends CharacterBody2D
 class_name NPC
 
 const AMBIENT_CHANCE := 0.1
-const EMPATHY_MULTIPLIER := 0.2
+const EMPATHY_MULTIPLIER := 0.5
 const CONVERSATION_MOOD_MULTIPLIER := 1.0
 
 signal mood_stage_changed(who: NPC, from: Mood.Stage, to: Mood.Stage)
@@ -55,6 +55,10 @@ func respond_conversation(from: NPC) -> bool:
 	var from_type := from.personality.sociable_type
 	var time_wasted_multiplier := behavior.get_time_wasted_multiplier()
 	
+	# To simplify things, always respond no to harassers
+	if from_type == Personality.Sociable.HARASSER:
+		return false
+	
 	match personality.sociable_type:
 		Personality.Sociable.SOCIAL:
 			return time_wasted_multiplier > 0.0 if from_type != Personality.Sociable.HARASSER else randf() < 0.5 * time_wasted_multiplier
@@ -76,7 +80,7 @@ func have_conversation(with: NPC, was_voluntary: bool) -> void:
 	var other_mood = with.mood.get_mood()
 	if not was_voluntary:
 		self_mood_change = 20
-		other_mood_change = -50
+		other_mood_change = -100
 	elif self_mood * other_mood >= 0:
 		# They are both the same sign, so affect both
 		self_mood_change = int(other_mood * CONVERSATION_MOOD_MULTIPLIER)
@@ -88,7 +92,7 @@ func have_conversation(with: NPC, was_voluntary: bool) -> void:
 		self_mood_change = int(other_mood * CONVERSATION_MOOD_MULTIPLIER)
 		other_mood_change = 1 if other_mood >= 0 else -1
 	
-	var conversation_time: float = randf_range(7.0, 15.0)
+	var conversation_time: float = randf_range(5.0, 10.0)
 	
 	conversation_control.start(with, self_mood_change, conversation_time, true, not was_voluntary)
 	with.conversation_control.start(self, other_mood_change, conversation_time, was_voluntary, false)
@@ -157,7 +161,6 @@ func _receive_meow() -> void:
 			chat_bubble.show_emoji(ChatBubble.Emoji.CROSS)
 			mood.decrease_mood(40)
 			behavior.start_avoiding(player)
-
 
 func _receive_hiss() -> void:
 	if conversation_control.in_conversation:
@@ -257,8 +260,8 @@ func _handle_surroundings_state_changes() -> bool:
 			if behavior.state == Behavior.State.WALK_TO_EXIT and behavior.start_conversation_timer.is_stopped() and not npc.conversation_control.in_conversation and npc.behavior.state == Behavior.State.WALK_TO_EXIT:
 				if personality.sociable_type == Personality.Sociable.ANTISOCIAL or personality.sociable_type == Personality.Sociable.RUSHED:
 					continue
-				# Max 10% chance to attempt a conversation
-				if randf() > (0.1 if personality.sociable_type != Personality.Sociable.SOCIAL else 0.2) * time_wasted_multiplier:
+				# Default 10% chance to attempt a conversation, lower if wasted time
+				if randf() > _get_base_conversation_change() * time_wasted_multiplier:
 					continue
 				# If harasser, high chance to try to force conversation on non-harassers
 				var forced := personality.sociable_type == Personality.Sociable.HARASSER and npc.personality.sociable_type != Personality.Sociable.HARASSER
@@ -281,15 +284,26 @@ func _handle_surroundings_state_changes() -> bool:
 			chat_bubble.show_emoji(ChatBubble.Emoji.STARS)
 		# elif mood_change < 10:
 		# 	chat_bubble.show_emoji(ChatBubble.Emoji.FACE_SAD)
-		print("EMPATHY ", mood_change)
+		# print("EMPATHY ", mood_change)
 		mood.increase_mood(mood_change)
 	
 	# If antisocial, lose mood if too many people nearby
-	if personality.sociable_type == Personality.Sociable.ANTISOCIAL and num_other_npcs > 3:
+	if personality.sociable_type == Personality.Sociable.ANTISOCIAL and num_other_npcs >= 5:
 		chat_bubble.show_emoji(ChatBubble.Emoji.ALERT)
 		mood.decrease_mood(10)
 	
 	return true
+
+# Social personalities are more likely to try to make conversation
+# Harassers should be obvious and go out of their way to talk to people
+func _get_base_conversation_change() -> float:
+	match personality.sociable_type:
+		Personality.Sociable.SOCIAL:
+			return 0.2
+		Personality.Sociable.HARASSER:
+			return 0.5
+		_:
+			return 0.1
 
 func _handle_surroundings_ambient() -> void:
 	if randf() < AMBIENT_CHANCE and behavior.state == Behavior.State.WALK_TO_EXIT:
