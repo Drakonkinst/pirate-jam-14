@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dmjjey2624xf5" path="res://scenes/npc/npc.tscn" id="4_kxhr6"]
 [ext_resource type="Script" path="res://scenes/despawn_handler.gd" id="4_ww6lp"]
 [ext_resource type="Material" uid="uid://bvluuc1qjhaox" path="res://shader/night_shader.tres" id="5_2k0h2"]
-[ext_resource type="Script" path="res://scenes/score_ui.gd" id="5_dwdwp"]
+[ext_resource type="PackedScene" uid="uid://bioqoosmvi2tl" path="res://scenes/hud/hud.tscn" id="5_mp2p0"]
 [ext_resource type="Script" path="res://scenes/camera_follow.gd" id="8_jjgcx"]
 [ext_resource type="Script" path="res://scenes/set_mouse.gd" id="10_hh47s"]
 [ext_resource type="Material" uid="uid://6f3ir8yvdn4g" path="res://shader/day_shader.tres" id="10_holxx"]
@@ -105,23 +105,8 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 64
 text = "Paused"
 
-[node name="HUDLayer" type="CanvasLayer" parent="."]
-process_mode = 3
+[node name="HUD" parent="." instance=ExtResource("5_mp2p0")]
 layer = 20
-
-[node name="ScoreUI" type="Label" parent="HUDLayer"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_top = 17.0
-offset_right = 20.0
-offset_bottom = 47.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 40
-text = "Score: 0"
-horizontal_alignment = 1
-script = ExtResource("5_dwdwp")
 
 [node name="WorldSpaceUILayer" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
@@ -326,7 +311,7 @@ editor_draw_drag_margin = true
 [connection signal="paused" from="PauseControl" to="PauseMenuLayer" method="_on_pause_control_paused"]
 [connection signal="unpaused" from="PauseControl" to="PauseMenuLayer" method="_on_pause_control_unpaused"]
 [connection signal="timeout" from="GameOverTimer" to="." method="_on_game_over_timer_timeout"]
-[connection signal="score_changed" from="ScoreHandler" to="HUDLayer/ScoreUI" method="_on_score_handler_score_changed"]
+[connection signal="score_changed" from="ScoreHandler" to="HUD" method="_on_score_handler_score_changed"]
 [connection signal="on_npc_despawned" from="DespawnHandler" to="NPCSpawner" method="_on_despawn_handler_on_npc_despawned"]
 [connection signal="body_entered" from="DespawnHandler/Left" to="DespawnHandler" method="_on_left_body_entered"]
 [connection signal="body_entered" from="DespawnHandler/Right" to="DespawnHandler" method="_on_right_body_entered"]

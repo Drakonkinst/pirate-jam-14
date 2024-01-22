@@ -1,5 +1,7 @@
 extends Label
 
+class_name ScoreUI
+
 @export var prefix: String = "Score: "
 
 func set_score(score: int):
