@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dy7wrnyedd2i2" path="res://assets/art/lpccatratdog.png" id="2_eyd3b"]
 [ext_resource type="Texture2D" uid="uid://d3fkpw72jhw4d" path="res://assets/art/particle/glow.png" id="3_dl2k3"]
 [ext_resource type="Script" path="res://scenes/player/player_animation_control.gd" id="4_1vm7j"]
-[ext_resource type="Script" path="res://scenes/glow_size_change.gd" id="4_yymbj"]
+[ext_resource type="Script" path="res://scenes/util/glow_size_change.gd" id="4_yymbj"]
 [ext_resource type="Texture2D" uid="uid://c6mn74ywrk7if" path="res://assets/art/shadow.png" id="6_7w41a"]
 [ext_resource type="Script" path="res://scenes/player/player_move_control.gd" id="6_8r2ky"]
 [ext_resource type="PackedScene" uid="uid://ctc6iva3px6p3" path="res://scenes/npc/chat_bubble.tscn" id="6_bpcj0"]
