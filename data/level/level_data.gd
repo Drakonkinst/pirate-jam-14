@@ -29,6 +29,7 @@ class_name LevelData
 @export_group("Modifier Chances")
 @export var modifier_empathetic = 0.1
 
+var processed := false
 var personality_sociables = Personality.Sociable.values()
 var personality_cat_opinion = Personality.CatOpinion.values()
 var sociable_weights: Array[float]
@@ -36,8 +37,12 @@ var sociable_weights_sum: float
 var cat_opinion_weights: Array[float]
 var cat_opinion_weights_sum: float
 
-# Called when the node enters the scene tree for the first time.
-func _init() -> void:
+func initialize() -> void:
+	if not processed:
+		_generate_weights()
+		processed = true
+		
+func _generate_weights() -> void:
 	var sociables := {
 		Personality.Sociable.NORMAL: sociable_normal,
 		Personality.Sociable.SOCIAL: sociable_social,
@@ -51,6 +56,7 @@ func _init() -> void:
 		Personality.CatOpinion.DISLIKE: opinion_dislike,
 		Personality.CatOpinion.ALLERGIC: opinion_allergic,
 	}
+	print(sociables)
 	sociable_weights = _create_weight_accumulator(Personality.Sociable.values(), sociables)
 	cat_opinion_weights = _create_weight_accumulator(Personality.CatOpinion.values(), cat_opinions)
 

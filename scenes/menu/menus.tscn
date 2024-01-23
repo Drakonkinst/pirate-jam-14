@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://cveien67cv77c"]
+
+[ext_resource type="PackedScene" uid="uid://c5r326asu6s5b" path="res://scenes/menu/main_menu.tscn" id="1_8up21"]
+[ext_resource type="Script" path="res://scenes/menu/menus.gd" id="1_n4v1e"]
+[ext_resource type="PackedScene" uid="uid://dby7dch41cs42" path="res://scenes/menu/options_menu.tscn" id="3_lrquo"]
+[ext_resource type="PackedScene" uid="uid://boppjocuk7aqf" path="res://scenes/menu/credits_menu.tscn" id="4_coa1g"]
+[ext_resource type="PackedScene" uid="uid://cs8k48yiea4x4" path="res://scenes/menu/level_select_menu.tscn" id="5_e8wt2"]
+
+[node name="Menus" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_n4v1e")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 2
+
+[node name="MainMenu" parent="." instance=ExtResource("1_8up21")]
+layout_mode = 2
+
+[node name="OptionsMenu" parent="." instance=ExtResource("3_lrquo")]
+layout_mode = 2
+
+[node name="CreditsMenu" parent="." instance=ExtResource("4_coa1g")]
+visible = false
+layout_mode = 2
+
+[node name="LevelSelectMenu" parent="." instance=ExtResource("5_e8wt2")]
+layout_mode = 2
+
+[connection signal="pressed_credits" from="MainMenu" to="." method="_on_main_menu_pressed_credits"]
+[connection signal="pressed_game_start" from="MainMenu" to="." method="_on_main_menu_pressed_game_start"]
+[connection signal="pressed_options" from="MainMenu" to="." method="_on_main_menu_pressed_options"]
+[connection signal="pressed_back" from="OptionsMenu" to="." method="_on_options_menu_pressed_back"]
+[connection signal="pressed_back" from="CreditsMenu" to="." method="_on_credits_menu_pressed_back"]
+[connection signal="level_selected" from="LevelSelectMenu" to="." method="_on_level_select_menu_level_selected"]
+[connection signal="pressed_back" from="LevelSelectMenu" to="." method="_on_level_select_menu_pressed_back"]

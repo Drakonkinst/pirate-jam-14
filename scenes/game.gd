@@ -1,5 +1,9 @@
 extends Node2D
 
+class_name Game
+
+signal on_quit_to_menu
+
 const MINUTE_TO_SECOND: float = 60.0
 
 @export var level_data: LevelData
@@ -13,10 +17,6 @@ const MINUTE_TO_SECOND: float = 60.0
 @onready var game_over_timer: Timer = $GameOverTimer
 @onready var pause_control: PauseControl = $PauseControl
 
-func _ready() -> void:
-	# Can possibly load something else first, then call initialize()
-	initialize()
-	
 func initialize():
 	npc_spawner.initialize(level_data)
 	player.initialize(player_spawn_point.position)

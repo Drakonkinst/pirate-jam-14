@@ -69,7 +69,7 @@ func spawn_random_npc(pos: Vector2, location: Location) -> void:
 	npc_count += 1
 	
 	
-	#print("NPC spawned at ", pos, " with sociable = ", Personality.Sociable.keys()[personality.get_sociable_type()], ", cat opinion = ", Personality.CatOpinion.keys()[personality.get_cat_opinion()], ", modifiers = ", personality.has_modifier(Personality.Modifier.EMPATHETIC), ", moving_east = ", behavior.is_moving_east())
+	print("NPC spawned at ", pos, " with sociable = ", Personality.Sociable.keys()[personality.get_sociable_type()], ", cat opinion = ", Personality.CatOpinion.keys()[personality.get_cat_opinion()], ", modifiers = ", personality.has_modifier(Personality.Modifier.EMPATHETIC), ", moving_east = ", behavior.is_moving_east())
 	#print("NPC spawned (", npc_count, ") (", get_tree().get_nodes_in_group("mobs").size(), ")")
 	
 	# Connect signals

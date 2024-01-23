@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=2 format=3 uid="uid://blkeplr178jbt"]
+
+[ext_resource type="Script" path="res://data/level/level_data.gd" id="1_wumw2"]
+
+[resource]
+script = ExtResource("1_wumw2")
+is_day = true
+npc_quota = 20
+min_starting_mood = -50
+max_starting_mood = 75
+max_minutes = 2.0
+sociable_normal = 1.0
+sociable_social = 1.0
+sociable_antisocial = 1.0
+sociable_rushed = 1.0
+sociable_harasser = 1.0
+opinion_love = 1.0
+opinion_like = 1.0
+opinion_dislike = 1.0
+opinion_allergic = 1.0
+modifier_empathetic = 0.1

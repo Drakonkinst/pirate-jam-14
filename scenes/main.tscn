@@ -1,7 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://dh0x7ll22nbdf"]
+[gd_scene load_steps=14 format=3 uid="uid://dh0x7ll22nbdf"]
 
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_20ics"]
 [ext_resource type="PackedScene" uid="uid://qxsv8wqrj306" path="res://scenes/game.tscn" id="1_notbr"]
+[ext_resource type="PackedScene" uid="uid://cveien67cv77c" path="res://scenes/menu/menus.tscn" id="3_mkd18"]
+[ext_resource type="Resource" uid="uid://blkeplr178jbt" path="res://data/level/day_1.tres" id="4_x5x1s"]
+[ext_resource type="Resource" uid="uid://bpc3qd3xhttf8" path="res://data/level/day_2.tres" id="5_bkeda"]
+[ext_resource type="Script" path="res://scenes/util/set_mouse.gd" id="5_xexi3"]
+[ext_resource type="Texture2D" uid="uid://hd5icmyjjvga" path="res://assets/art/crosshair.png" id="6_23sgj"]
+[ext_resource type="Resource" uid="uid://botdb85usxej3" path="res://data/level/day_3.tres" id="6_y8gyv"]
+[ext_resource type="Resource" uid="uid://8p0swfc2wfyt" path="res://data/level/day_infinite.tres" id="7_1sbgu"]
+[ext_resource type="Resource" uid="uid://dnjhptbidnnsc" path="res://data/level/night_1.tres" id="8_1xa7o"]
+[ext_resource type="Resource" uid="uid://c1xjavhjuna3m" path="res://data/level/night_2.tres" id="9_w75cx"]
+[ext_resource type="Resource" uid="uid://c1gtw2ls4qfik" path="res://data/level/night_3.tres" id="10_7itgt"]
+[ext_resource type="Resource" uid="uid://cd62wmskeqycf" path="res://data/level/night_infinite.tres" id="11_ldt30"]
 
 [node name="Main" type="Node"]
+script = ExtResource("1_20ics")
+game_scene = ExtResource("1_notbr")
+menus_scene = ExtResource("3_mkd18")
+level_data = Array[Resource("res://data/level/level_data.gd")]([ExtResource("4_x5x1s"), ExtResource("5_bkeda"), ExtResource("6_y8gyv"), ExtResource("7_1sbgu"), ExtResource("8_1xa7o"), ExtResource("9_w75cx"), ExtResource("10_7itgt"), ExtResource("11_ldt30")])
 
-[node name="Game" parent="." instance=ExtResource("1_notbr")]
+[node name="SetMouse" type="Node2D" parent="."]
+script = ExtResource("5_xexi3")
+default_image = ExtResource("6_23sgj")

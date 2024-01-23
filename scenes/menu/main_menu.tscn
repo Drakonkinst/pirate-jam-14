@@ -1,0 +1,86 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5r326asu6s5b"]
+
+[ext_resource type="Script" path="res://scenes/menu/main_menu.gd" id="1_5dykt"]
+[ext_resource type="Texture2D" uid="uid://cutr4cjr442mx" path="res://assets/art/jam_logo.png" id="1_8p4bw"]
+
+[node name="MainMenu" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 60
+theme_override_constants/margin_bottom = 40
+script = ExtResource("1_5dykt")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="LeftSide" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="TextureRect" parent="HBoxContainer/LeftSide"]
+layout_mode = 2
+
+[node name="MenuOptions" type="VBoxContainer" parent="HBoxContainer/LeftSide"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="PlayButton" type="Button" parent="HBoxContainer/LeftSide/MenuOptions"]
+custom_minimum_size = Vector2(200, 75)
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Play"
+
+[node name="OptionsButton" type="Button" parent="HBoxContainer/LeftSide/MenuOptions"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="HBoxContainer/LeftSide/MenuOptions"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Quit"
+
+[node name="JamLogo" type="TextureRect" parent="HBoxContainer/LeftSide"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 10
+texture = ExtResource("1_8p4bw")
+stretch_mode = 2
+
+[node name="JamLabel" type="Label" parent="HBoxContainer/LeftSide"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 16
+text = "Created for Pirate Jam 14"
+
+[node name="RightSide" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Spacing" type="Control" parent="HBoxContainer/RightSide"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CreditsButton" type="Button" parent="HBoxContainer/RightSide"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 32
+text = "Credits
+"
+
+[node name="BlockOut" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0, 0, 0, 0)
+
+[connection signal="pressed" from="HBoxContainer/LeftSide/MenuOptions/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/LeftSide/MenuOptions/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/LeftSide/MenuOptions/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/RightSide/CreditsButton" to="." method="_on_credits_button_pressed"]

@@ -1,0 +1,190 @@
+[gd_scene load_steps=4 format=3 uid="uid://cs8k48yiea4x4"]
+
+[ext_resource type="Script" path="res://scenes/menu/level_select_menu.gd" id="1_rv2ba"]
+[ext_resource type="Texture2D" uid="uid://ceqfniup1r3tm" path="res://assets/art/sun.png" id="2_x4dc0"]
+[ext_resource type="Texture2D" uid="uid://c5pkhj12rume0" path="res://assets/art/moon.png" id="3_s3los"]
+
+[node name="LevelSelectMenu" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+script = ExtResource("1_rv2ba")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Level Select"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 25
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+
+[node name="Sun" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("2_x4dc0")
+
+[node name="Moon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("3_s3los")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 10
+
+[node name="Labels" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Easy" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Labels"]
+custom_minimum_size = Vector2(75, 25)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.784314, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Easy"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Medium" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Labels"]
+custom_minimum_size = Vector2(75, 25)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.815686, 0.776471, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Medium"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Hard" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Labels"]
+custom_minimum_size = Vector2(75, 25)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.803922, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Hard"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Infinite" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Labels"]
+custom_minimum_size = Vector2(75, 25)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.764706, 0.776471, 1)
+theme_override_font_sizes/font_size = 32
+text = "Infinite"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="LevelRow1" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LevelButton1" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/LevelRow1"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "DAY
+1"
+
+[node name="LevelButton2" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/LevelRow1"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "DAY
+2"
+
+[node name="LevelButton3" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/LevelRow1"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "DAY
+3"
+
+[node name="LevelButton4" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/LevelRow1"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "∞"
+
+[node name="LevelRow2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LevelButton5" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/LevelRow2"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "NIGHT
+1"
+
+[node name="LevelButton6" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/LevelRow2"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "NIGHT
+2"
+
+[node name="LevelButton7" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/LevelRow2"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "NIGHT
+3"
+
+[node name="LevelButton8" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/LevelRow2"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "∞"
+
+[node name="Spacing" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Back"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/LevelRow1/LevelButton1" to="." method="_on_level_button_1_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/LevelRow1/LevelButton2" to="." method="_on_level_button_2_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/LevelRow1/LevelButton3" to="." method="_on_level_button_3_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/LevelRow1/LevelButton4" to="." method="_on_level_button_4_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/LevelRow2/LevelButton5" to="." method="_on_level_button_5_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/LevelRow2/LevelButton6" to="." method="_on_level_button_6_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/LevelRow2/LevelButton7" to="." method="_on_level_button_7_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/LevelRow2/LevelButton8" to="." method="_on_level_button_8_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
