@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://c5r326asu6s5b"]
+[gd_scene load_steps=4 format=3 uid="uid://c5r326asu6s5b"]
 
 [ext_resource type="Script" path="res://scenes/menu/main_menu.gd" id="1_5dykt"]
 [ext_resource type="Texture2D" uid="uid://cutr4cjr442mx" path="res://assets/art/jam_logo.png" id="1_8p4bw"]
+[ext_resource type="PackedScene" uid="uid://di03kretluhk6" path="res://scenes/menu/ui_click_audio.tscn" id="3_7tbba"]
 
 [node name="MainMenu" type="MarginContainer"]
 anchors_preset = 15
@@ -79,6 +80,9 @@ text = "Credits
 [node name="BlockOut" type="ColorRect" parent="."]
 layout_mode = 2
 color = Color(0, 0, 0, 0)
+
+[node name="UIClickAudio" parent="." instance=ExtResource("3_7tbba")]
+volume_db = -10.0
 
 [connection signal="pressed" from="HBoxContainer/LeftSide/MenuOptions/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/LeftSide/MenuOptions/OptionsButton" to="." method="_on_options_button_pressed"]

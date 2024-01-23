@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://boppjocuk7aqf"]
+[gd_scene load_steps=4 format=3 uid="uid://boppjocuk7aqf"]
 
 [ext_resource type="Script" path="res://scenes/menu/credits_menu.gd" id="1_mqsn7"]
 [ext_resource type="StyleBox" uid="uid://c8p5vqqblr1v5" path="res://assets/theme/credits_menu.tres" id="2_yyqug"]
+[ext_resource type="PackedScene" uid="uid://di03kretluhk6" path="res://scenes/menu/ui_click_audio.tscn" id="3_o5qp0"]
 
 [node name="CreditsMenu" type="MarginContainer"]
 anchors_preset = 15
@@ -45,5 +46,8 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 32
 text = "Back"
+
+[node name="UIClickAudio" parent="." instance=ExtResource("3_o5qp0")]
+volume_db = -10.0
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

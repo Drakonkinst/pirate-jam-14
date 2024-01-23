@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cs8k48yiea4x4"]
+[gd_scene load_steps=5 format=3 uid="uid://cs8k48yiea4x4"]
 
 [ext_resource type="Script" path="res://scenes/menu/level_select_menu.gd" id="1_rv2ba"]
 [ext_resource type="Texture2D" uid="uid://ceqfniup1r3tm" path="res://assets/art/sun.png" id="2_x4dc0"]
 [ext_resource type="Texture2D" uid="uid://c5pkhj12rume0" path="res://assets/art/moon.png" id="3_s3los"]
+[ext_resource type="PackedScene" uid="uid://di03kretluhk6" path="res://scenes/menu/ui_click_audio.tscn" id="4_djq4h"]
 
 [node name="LevelSelectMenu" type="MarginContainer"]
 anchors_preset = 15
@@ -178,6 +179,9 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 32
 text = "Back"
+
+[node name="UIClickAudio" parent="." instance=ExtResource("4_djq4h")]
+volume_db = -10.0
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/LevelRow1/LevelButton1" to="." method="_on_level_button_1_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/LevelRow1/LevelButton2" to="." method="_on_level_button_2_pressed"]

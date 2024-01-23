@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://cveien67cv77c"]
+[gd_scene load_steps=8 format=3 uid="uid://cveien67cv77c"]
 
 [ext_resource type="PackedScene" uid="uid://c5r326asu6s5b" path="res://scenes/menu/main_menu.tscn" id="1_8up21"]
 [ext_resource type="Script" path="res://scenes/menu/menus.gd" id="1_n4v1e"]
 [ext_resource type="PackedScene" uid="uid://dby7dch41cs42" path="res://scenes/menu/options_menu.tscn" id="3_lrquo"]
 [ext_resource type="PackedScene" uid="uid://boppjocuk7aqf" path="res://scenes/menu/credits_menu.tscn" id="4_coa1g"]
 [ext_resource type="PackedScene" uid="uid://cs8k48yiea4x4" path="res://scenes/menu/level_select_menu.tscn" id="5_e8wt2"]
+[ext_resource type="AudioStream" uid="uid://dr21jlemnst4u" path="res://assets/audio/MUSIC_title.ogg" id="6_3myls"]
+[ext_resource type="AudioStream" uid="uid://dspp4v04wb0o2" path="res://assets/audio/SOUND_titleambience.wav" id="7_ljpda"]
 
 [node name="Menus" type="MarginContainer"]
 anchors_preset = 15
@@ -29,6 +31,15 @@ layout_mode = 2
 
 [node name="LevelSelectMenu" parent="." instance=ExtResource("5_e8wt2")]
 layout_mode = 2
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_3myls")
+autoplay = true
+
+[node name="BackgroundAmbience" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_ljpda")
+volume_db = -15.0
+autoplay = true
 
 [connection signal="pressed_credits" from="MainMenu" to="." method="_on_main_menu_pressed_credits"]
 [connection signal="pressed_game_start" from="MainMenu" to="." method="_on_main_menu_pressed_game_start"]

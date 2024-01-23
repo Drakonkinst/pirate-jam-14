@@ -5,10 +5,13 @@ class_name LevelSelectMenu
 signal level_selected
 signal pressed_back
 
+@onready var ui_click_audio: AudioStreamPlayer = $UIClickAudio
+
 var selected := false # Ensure this can only be pressed once per instance
 
 func _on_back_button_pressed() -> void:
     pressed_back.emit()
+    ui_click_audio.play()
     hide()
 
 func _set_level(level: int) -> void:
@@ -16,6 +19,7 @@ func _set_level(level: int) -> void:
         return
     GlobalVariables.next_level_index = level - 1
     level_selected.emit()
+    ui_click_audio.play()
     selected = true
 
 func _on_level_button_1_pressed() -> void:
