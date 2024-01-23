@@ -35,11 +35,13 @@ layout_mode = 2
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_3myls")
 autoplay = true
+bus = &"Music"
 
 [node name="BackgroundAmbience" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_ljpda")
 volume_db = -15.0
 autoplay = true
+bus = &"Effects"
 
 [connection signal="pressed_credits" from="MainMenu" to="." method="_on_main_menu_pressed_credits"]
 [connection signal="pressed_game_start" from="MainMenu" to="." method="_on_main_menu_pressed_game_start"]

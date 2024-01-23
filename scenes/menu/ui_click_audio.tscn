@@ -4,4 +4,4 @@
 
 [node name="UIClickAudio" type="AudioStreamPlayer"]
 stream = ExtResource("1_1cvt6")
-volume_db = -20.0
+volume_db = -15.0

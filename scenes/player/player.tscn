@@ -305,5 +305,11 @@ script = ExtResource("7_0ui7u")
 [node name="NoiseCooldownTimer" type="Timer" parent="PlayerActions"]
 wait_time = 0.5
 
+[node name="HissAudio" type="AudioStreamPlayer2D" parent="."]
+
+[node name="MeowAudio" type="AudioStreamPlayer2D" parent="."]
+
+[node name="PurrAudio" type="AudioStreamPlayer2D" parent="."]
+
 [connection signal="made_noise" from="PlayerActions" to="." method="_on_player_actions_made_noise"]
 [connection signal="timeout" from="PlayerActions/NoiseCooldownTimer" to="PlayerActions" method="_on_noise_cooldown_timer_timeout"]
