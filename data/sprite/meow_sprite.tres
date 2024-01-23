@@ -1,28 +1,28 @@
-[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://bo3hpgk33h0ch"]
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://wheno47evggl"]
 
-[ext_resource type="Texture2D" uid="uid://b0bugenipsibp" path="res://assets/art/particle/meow_0.png" id="1_6e7of"]
-[ext_resource type="Texture2D" uid="uid://cm5jgnvvi1xrp" path="res://assets/art/particle/meow_1.png" id="2_5nb2g"]
-[ext_resource type="Texture2D" uid="uid://dy7svavn8lhnj" path="res://assets/art/particle/meow_2.png" id="3_dfocd"]
-[ext_resource type="Texture2D" uid="uid://ci3lhuftot5h4" path="res://assets/art/particle/meow_3.png" id="4_2egau"]
-[ext_resource type="Texture2D" uid="uid://x3ilw2il2qr4" path="res://assets/art/particle/meow_4.png" id="5_figw1"]
+[ext_resource type="Texture2D" uid="uid://b0bugenipsibp" path="res://assets/art/particle/meow_0.png" id="1_kmxxx"]
+[ext_resource type="Texture2D" uid="uid://cm5jgnvvi1xrp" path="res://assets/art/particle/meow_1.png" id="2_n7onx"]
+[ext_resource type="Texture2D" uid="uid://dy7svavn8lhnj" path="res://assets/art/particle/meow_2.png" id="3_1hyh4"]
+[ext_resource type="Texture2D" uid="uid://ci3lhuftot5h4" path="res://assets/art/particle/meow_3.png" id="4_ob58w"]
+[ext_resource type="Texture2D" uid="uid://x3ilw2il2qr4" path="res://assets/art/particle/meow_4.png" id="5_64vv6"]
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_6e7of")
+"texture": ExtResource("1_kmxxx")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_5nb2g")
+"texture": ExtResource("2_n7onx")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_dfocd")
+"texture": ExtResource("3_1hyh4")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_2egau")
+"texture": ExtResource("4_ob58w")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_figw1")
+"texture": ExtResource("5_64vv6")
 }],
 "loop": true,
 "name": &"default",

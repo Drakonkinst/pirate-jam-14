@@ -1,18 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://csv60xwlxwo2l"]
+[gd_scene load_steps=4 format=3 uid="uid://csv60xwlxwo2l"]
 
 [ext_resource type="Script" path="res://scenes/noise_particle.gd" id="1_qf7kh"]
-[ext_resource type="SpriteFrames" uid="uid://bo3hpgk33h0ch" path="res://data/sprite/meow_sprite.tres" id="2_osybq"]
+[ext_resource type="SpriteFrames" uid="uid://bo3hpgk33h0ch" path="res://data/sprite/hiss_sprite.tres" id="2_omg3m"]
+[ext_resource type="SpriteFrames" uid="uid://wheno47evggl" path="res://data/sprite/meow_sprite.tres" id="2_osybq"]
 
 [node name="NoiseParticle" type="Node2D"]
 script = ExtResource("1_qf7kh")
 meow_sprite = ExtResource("2_osybq")
-hiss_sprite = ExtResource("2_osybq")
+hiss_sprite = ExtResource("2_omg3m")
 meow_color = Color(0.407843, 0.905882, 0.968627, 1)
 hiss_color = Color(1, 0.337255, 0.270588, 1)
-start_forward_distance = 45.0
+start_forward_distance = 55.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)
-sprite_frames = ExtResource("2_osybq")
+sprite_frames = ExtResource("2_omg3m")
 
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]

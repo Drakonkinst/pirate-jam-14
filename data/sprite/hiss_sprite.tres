@@ -1,0 +1,30 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://bo3hpgk33h0ch"]
+
+[ext_resource type="Texture2D" uid="uid://b60v6uh3wloqu" path="res://assets/art/particle/hiss1.png" id="1_8xhwr"]
+[ext_resource type="Texture2D" uid="uid://dk3cogobaqocu" path="res://assets/art/particle/hiss2.png" id="2_lp27w"]
+[ext_resource type="Texture2D" uid="uid://c72j0npwjpq2t" path="res://assets/art/particle/hiss3.png" id="3_226or"]
+[ext_resource type="Texture2D" uid="uid://bxgkmutp6rjb" path="res://assets/art/particle/hiss4.png" id="4_6a0jf"]
+[ext_resource type="Texture2D" uid="uid://0wpdcakm72lh" path="res://assets/art/particle/hiss5.png" id="5_5spqj"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_8xhwr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_lp27w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_226or")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6a0jf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_5spqj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 16.0
+}]
