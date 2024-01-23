@@ -22,7 +22,8 @@ func initialize():
 	player.initialize(player_spawn_point.position)
 	player.animation_control.set_shadow(level_data.is_day)
 	shader_control.set_time_of_day(ShaderControl.TimeOfDay.DAY if level_data.is_day else ShaderControl.TimeOfDay.NIGHT)
-	game_over_timer.start(level_data.max_minutes * MINUTE_TO_SECOND)
+	if level_data.max_minutes > 0:
+		game_over_timer.start(level_data.max_minutes * MINUTE_TO_SECOND)
 
 func _on_npc_spawner_npc_mood_changed(who: NPC, from: Mood.Stage, to: Mood.Stage) -> void:
 	if to == Mood.Stage.HAPPY:
@@ -39,4 +40,5 @@ func _on_npc_spawner_npc_mood_changed(who: NPC, from: Mood.Stage, to: Mood.Stage
 			score_handler.decrease_score(15)
 
 func _on_game_over_timer_timeout() -> void:
+	# TODO: Actual game over screen
 	pause_control.pause()

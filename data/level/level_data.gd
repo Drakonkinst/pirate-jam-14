@@ -56,7 +56,6 @@ func _generate_weights() -> void:
 		Personality.CatOpinion.DISLIKE: opinion_dislike,
 		Personality.CatOpinion.ALLERGIC: opinion_allergic,
 	}
-	print(sociables)
 	sociable_weights = _create_weight_accumulator(Personality.Sociable.values(), sociables)
 	cat_opinion_weights = _create_weight_accumulator(Personality.CatOpinion.values(), cat_opinions)
 
