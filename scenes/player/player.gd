@@ -9,6 +9,9 @@ signal made_noise(action: PlayerActions.Action, direction: float, origin: Vector
 @onready var animation_control: PlayerAnimationControl = $PlayerAnimationControl
 @onready var move_control: PlayerMoveControl = $PlayerMoveControl
 @onready var chat_bubble: ChatBubble = $ChatBubble
+@onready var hiss_audio: AudioStreamPlayer2D = $HissAudio
+@onready var meow_audio: AudioStreamPlayer2D = $MeowAudio
+@onready var purr_audio: AudioStreamPlayer2D = $PurrAudio
 
 func _ready() -> void:
 	hide()
@@ -25,7 +28,15 @@ func initialize(start_pos: Vector2) -> void:
 	show()
 
 func pet() -> bool:
+	if not purr_audio.playing:
+		purr_audio.play()
 	return chat_bubble.show_emoji(ChatBubble.Emoji.HEART)
 
 func _on_player_actions_made_noise(action: PlayerActions.Action, direction: float, origin: Vector2) -> void:
+	if action == PlayerActions.Action.HISS:
+		hiss_audio.play()
+		purr_audio.stop()
+	elif action == PlayerActions.Action.MEOW:
+		meow_audio.play()
+		purr_audio.stop()
 	made_noise.emit(action, direction, origin)

@@ -1,0 +1,5 @@
+SOUND_purr.wav = https://freesound.org/people/itinerantmonk108/sounds/719410/
+SOUND_purr2.wav = https://freesound.org/people/TRP/sounds/717866/
+SOUND_hiss.wav = https://freesound.org/people/Kinoton/sounds/656619/
+MUSIC_title.wav = https://opengameart.org/content/where-was-i
+SOUND_titleambience.wav = https://freesound.org/people/TRP/sounds/715684/
