@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://o81jg6153eh1"]
+[gd_scene load_steps=69 format=3 uid="uid://o81jg6153eh1"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_5t08w"]
 [ext_resource type="Texture2D" uid="uid://d3fkpw72jhw4d" path="res://assets/art/particle/glow.png" id="3_dl2k3"]
@@ -56,7 +56,11 @@
 [ext_resource type="Texture2D" uid="uid://brwmudxfif5cx" path="res://assets/art/player/gray_run_up5.png" id="50_1ibf6"]
 [ext_resource type="AudioStream" uid="uid://d33io8y2s6ij0" path="res://assets/audio/SOUND_hiss.wav" id="55_sbb6c"]
 [ext_resource type="AudioStream" uid="uid://yah5b0vee6ap" path="res://assets/audio/SOUND_purr.wav" id="56_jpsqg"]
+[ext_resource type="AudioStream" uid="uid://k4bkk6lety6x" path="res://assets/audio/SOUND_meow.wav" id="56_la3r5"]
+[ext_resource type="AudioStream" uid="uid://cv3ev5wc7500v" path="res://assets/audio/SOUND_meow2.wav" id="57_41ccg"]
 [ext_resource type="AudioStream" uid="uid://cl5kg4731ch76" path="res://assets/audio/SOUND_purr2.wav" id="57_t4731"]
+[ext_resource type="AudioStream" uid="uid://d0egb0tyup85y" path="res://assets/audio/SOUND_meow3.wav" id="58_wn7ne"]
+[ext_resource type="AudioStream" uid="uid://b3dn0ghby04fq" path="res://assets/audio/SOUND_meow4.wav" id="59_xenle"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yhp5r"]
 blend_mode = 1
@@ -253,6 +257,18 @@ streams_count = 1
 stream_0/stream = ExtResource("55_sbb6c")
 stream_0/weight = 1.0
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bs3m2"]
+random_pitch = 1.1
+streams_count = 4
+stream_0/stream = ExtResource("56_la3r5")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("57_41ccg")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("58_wn7ne")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("59_xenle")
+stream_3/weight = 1.0
+
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_6xsbj"]
 playback_mode = 1
 random_pitch = 1.1
@@ -329,6 +345,8 @@ stream = SubResource("AudioStreamRandomizer_2jvsh")
 bus = &"Effects"
 
 [node name="MeowAudio" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_bs3m2")
+volume_db = -10.0
 bus = &"Effects"
 
 [node name="PurrAudio" type="AudioStreamPlayer2D" parent="."]

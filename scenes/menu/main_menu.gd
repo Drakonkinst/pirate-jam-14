@@ -11,6 +11,7 @@ signal pressed_credits
 
 func _ready() -> void:
     block_out.hide()
+    GlobalVariables.unmuffle_music()
 
 func _on_play_button_pressed() -> void:
     ui_click_audio.play()

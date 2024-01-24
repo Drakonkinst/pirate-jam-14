@@ -1,11 +1,10 @@
-[gd_scene load_steps=30 format=3 uid="uid://qxsv8wqrj306"]
+[gd_scene load_steps=37 format=3 uid="uid://qxsv8wqrj306"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_mq68w"]
 [ext_resource type="TileSet" uid="uid://bk0ycboeo7qyy" path="res://data/city.tres" id="2_a56mi"]
 [ext_resource type="Resource" uid="uid://blkeplr178jbt" path="res://data/level/day_1.tres" id="2_i1q1b"]
-[ext_resource type="Script" path="res://scenes/menu/pause_menu.gd" id="3_4dg2k"]
-[ext_resource type="Shader" path="res://shader/paused.gdshader" id="3_b20q6"]
 [ext_resource type="PackedScene" uid="uid://o81jg6153eh1" path="res://scenes/player/player.tscn" id="3_ml610"]
+[ext_resource type="PackedScene" uid="uid://c0k630esitjju" path="res://scenes/menu/pause_menu.tscn" id="3_ymx0h"]
 [ext_resource type="Script" path="res://scenes/npc_spawner.gd" id="4_f3c1u"]
 [ext_resource type="PackedScene" uid="uid://dmjjey2624xf5" path="res://scenes/npc/npc.tscn" id="4_kxhr6"]
 [ext_resource type="Script" path="res://scenes/despawn_handler.gd" id="4_ww6lp"]
@@ -21,10 +20,15 @@
 [ext_resource type="Script" path="res://scenes/pause_control.gd" id="17_am3tw"]
 [ext_resource type="Script" path="res://scenes/text_particle_spawner.gd" id="17_p7qn5"]
 [ext_resource type="PackedScene" uid="uid://c02xopmqkdo8j" path="res://scenes/text_particle.tscn" id="18_72uwt"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g7gcb"]
-shader = ExtResource("3_b20q6")
-shader_parameter/blur_amount = 1.0
+[ext_resource type="Script" path="res://scenes/game_music.gd" id="22_bionk"]
+[ext_resource type="AudioStream" uid="uid://dywkrb84lwv6c" path="res://assets/audio/MUSIC_day1.wav" id="23_dcfog"]
+[ext_resource type="AudioStream" uid="uid://bc7tgg6wyjig" path="res://assets/audio/MUSIC_day2.wav" id="24_p7maw"]
+[ext_resource type="AudioStream" uid="uid://bn8fhjcpb2ff" path="res://assets/audio/MUSIC_day3.wav" id="25_5cwi0"]
+[ext_resource type="AudioStream" uid="uid://b8wg728s5xnte" path="res://assets/audio/MUSIC_dayinfinite.ogg" id="26_pinqj"]
+[ext_resource type="AudioStream" uid="uid://bynr0ouyrfyam" path="res://assets/audio/MUSIC_night1.mp3" id="27_t6n1s"]
+[ext_resource type="AudioStream" uid="uid://dsw7ruhywm533" path="res://assets/audio/MUSIC_night2.mp3" id="28_me3cd"]
+[ext_resource type="AudioStream" uid="uid://bmotqmvafpmwn" path="res://assets/audio/MUSIC_night3.mp3" id="29_ujxm8"]
+[ext_resource type="AudioStream" uid="uid://dekli5dgoheu1" path="res://assets/audio/MUSIC_nightinfinite.mp3" id="30_3ilqa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bc27j"]
 size = Vector2(112.5, 670)
@@ -66,42 +70,7 @@ player_spawn_point = NodePath("Areas/PlayerSpawnPoint")
 shader_control = NodePath("ShaderLayer/ShaderControl")
 text_particle_spawner = NodePath("WorldSpaceUILayer/TextParticleSpawner")
 
-[node name="PauseMenuLayer" type="CanvasLayer" parent="."]
-process_mode = 2
-layer = 99
-visible = false
-script = ExtResource("3_4dg2k")
-
-[node name="DarkenBackground" type="ColorRect" parent="PauseMenuLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.333333)
-
-[node name="BlurBackground" type="ColorRect" parent="PauseMenuLayer"]
-material = SubResource("ShaderMaterial_g7gcb")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="PauseText" type="Label" parent="PauseMenuLayer"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -72.0
-offset_top = -56.0
-offset_right = 72.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 64
-text = "Paused"
+[node name="PauseMenu" parent="." instance=ExtResource("3_ymx0h")]
 
 [node name="HUD" parent="." node_paths=PackedStringArray("time_remaining") instance=ExtResource("5_mp2p0")]
 layer = 20
@@ -303,8 +272,17 @@ drag_right_margin = 0.1
 drag_bottom_margin = 0.1
 editor_draw_drag_margin = true
 
-[connection signal="paused" from="PauseControl" to="PauseMenuLayer" method="_on_pause_control_paused"]
-[connection signal="unpaused" from="PauseControl" to="PauseMenuLayer" method="_on_pause_control_unpaused"]
+[node name="GameMusic" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+volume_db = -10.0
+bus = &"Music"
+script = ExtResource("22_bionk")
+tracks_by_level = Array[AudioStream]([ExtResource("23_dcfog"), ExtResource("24_p7maw"), ExtResource("25_5cwi0"), ExtResource("26_pinqj"), ExtResource("27_t6n1s"), ExtResource("28_me3cd"), ExtResource("29_ujxm8"), ExtResource("30_3ilqa")])
+
+[connection signal="paused" from="PauseControl" to="." method="_on_pause_control_paused"]
+[connection signal="paused" from="PauseControl" to="PauseMenu" method="_on_pause_control_paused"]
+[connection signal="unpaused" from="PauseControl" to="." method="_on_pause_control_unpaused"]
+[connection signal="unpaused" from="PauseControl" to="PauseMenu" method="_on_pause_control_unpaused"]
 [connection signal="timeout" from="GameOverTimer" to="." method="_on_game_over_timer_timeout"]
 [connection signal="score_changed" from="ScoreHandler" to="HUD" method="_on_score_handler_score_changed"]
 [connection signal="on_npc_despawned" from="DespawnHandler" to="NPCSpawner" method="_on_despawn_handler_on_npc_despawned"]

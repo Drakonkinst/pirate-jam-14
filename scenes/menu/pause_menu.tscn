@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0k630esitjju"]
+
+[ext_resource type="Script" path="res://scenes/menu/pause_menu.gd" id="1_2nap2"]
+[ext_resource type="Shader" path="res://shader/paused.gdshader" id="2_sjp67"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g7gcb"]
+shader = ExtResource("2_sjp67")
+shader_parameter/blur_amount = 1.0
+
+[node name="PauseMenuLayer" type="CanvasLayer"]
+process_mode = 2
+layer = 99
+visible = false
+script = ExtResource("1_2nap2")
+
+[node name="DarkenBackground" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.333333)
+
+[node name="BlurBackground" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_g7gcb")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseText" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -56.0
+offset_right = 72.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "Paused"

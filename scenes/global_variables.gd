@@ -25,6 +25,12 @@ func _load_config() -> void:
             set_effects_volume(1.0, false)
         config.save(CONFIG_PATH)
 
+func muffle_music() -> void:
+    AudioServer.get_bus_effect(music, 0).resonance = 0.1
+
+func unmuffle_music() -> void:
+    AudioServer.get_bus_effect(music, 0).resonance = 0.5
+
 func set_music_volume(value: float, save: bool = true) -> void:
     AudioServer.set_bus_volume_db(music, linear_to_db(value))
     if save:

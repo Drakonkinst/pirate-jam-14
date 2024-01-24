@@ -16,8 +16,10 @@ const MINUTE_TO_SECOND: float = 60.0
 @onready var score_handler: ScoreHandler = $ScoreHandler
 @onready var game_over_timer: Timer = $GameOverTimer
 @onready var pause_control: PauseControl = $PauseControl
+@onready var game_music: GameMusic = $GameMusic
 
 func initialize():
+	game_music.initialize()
 	npc_spawner.initialize(level_data)
 	player.initialize(player_spawn_point.position)
 	player.animation_control.set_shadow(level_data.is_day)
@@ -42,3 +44,9 @@ func _on_npc_spawner_npc_mood_changed(who: NPC, from: Mood.Stage, to: Mood.Stage
 func _on_game_over_timer_timeout() -> void:
 	# TODO: Actual game over screen
 	pause_control.pause()
+
+func _on_pause_control_paused() -> void:
+	GlobalVariables.muffle_music()
+
+func _on_pause_control_unpaused() -> void:
+	GlobalVariables.unmuffle_music()
