@@ -50,3 +50,6 @@ func _on_pause_control_paused() -> void:
 
 func _on_pause_control_unpaused() -> void:
 	GlobalVariables.unmuffle_music()
+
+func _on_pause_menu_pressed_quit_to_menu() -> void:
+	on_quit_to_menu.emit()

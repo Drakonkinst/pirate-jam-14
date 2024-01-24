@@ -70,7 +70,8 @@ player_spawn_point = NodePath("Areas/PlayerSpawnPoint")
 shader_control = NodePath("ShaderLayer/ShaderControl")
 text_particle_spawner = NodePath("WorldSpaceUILayer/TextParticleSpawner")
 
-[node name="PauseMenu" parent="." instance=ExtResource("3_ymx0h")]
+[node name="PauseMenu" parent="." node_paths=PackedStringArray("pause_control") instance=ExtResource("3_ymx0h")]
+pause_control = NodePath("../PauseControl")
 
 [node name="HUD" parent="." node_paths=PackedStringArray("time_remaining") instance=ExtResource("5_mp2p0")]
 layer = 20
@@ -279,6 +280,7 @@ bus = &"Music"
 script = ExtResource("22_bionk")
 tracks_by_level = Array[AudioStream]([ExtResource("23_dcfog"), ExtResource("24_p7maw"), ExtResource("25_5cwi0"), ExtResource("26_pinqj"), ExtResource("27_t6n1s"), ExtResource("28_me3cd"), ExtResource("29_ujxm8"), ExtResource("30_3ilqa")])
 
+[connection signal="pressed_quit_to_menu" from="PauseMenu" to="." method="_on_pause_menu_pressed_quit_to_menu"]
 [connection signal="paused" from="PauseControl" to="." method="_on_pause_control_paused"]
 [connection signal="paused" from="PauseControl" to="PauseMenu" method="_on_pause_control_paused"]
 [connection signal="unpaused" from="PauseControl" to="." method="_on_pause_control_unpaused"]

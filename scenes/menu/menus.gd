@@ -10,6 +10,8 @@ class_name Menus
 signal on_game_started
 
 func _ready() -> void:
+    GlobalVariables.unmuffle_music()
+    get_tree().paused = false
     options_menu.hide()
     credits_menu.hide()
     level_select_menu.hide()

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://di03kretluhk6"]
 
-[ext_resource type="AudioStream" uid="uid://bovyo72djrdeq" path="res://assets/audio/ui_click.wav" id="1_1cvt6"]
+[ext_resource type="AudioStream" uid="uid://bovyo72djrdeq" path="res://assets/audio/SOUND_ui_click.wav" id="1_1cvt6"]
 
 [node name="UIClickAudio" type="AudioStreamPlayer"]
 stream = ExtResource("1_1cvt6")

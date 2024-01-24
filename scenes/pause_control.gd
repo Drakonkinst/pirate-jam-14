@@ -23,3 +23,8 @@ func pause() -> void:
     if get_tree().paused:
         return
     _toggle_pause()
+
+func unpause() -> void:
+    if not get_tree().paused:
+        return
+    _toggle_pause()
