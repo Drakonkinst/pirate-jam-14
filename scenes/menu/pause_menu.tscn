@@ -1,9 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://c0k630esitjju"]
+[gd_scene load_steps=16 format=3 uid="uid://c0k630esitjju"]
 
 [ext_resource type="Script" path="res://scenes/menu/pause_menu.gd" id="1_2nap2"]
 [ext_resource type="Shader" path="res://shader/paused.gdshader" id="2_sjp67"]
+[ext_resource type="Texture2D" uid="uid://bsemyq0j6t4n8" path="res://assets/art/input/tile_0077.png" id="3_c4rx8"]
 [ext_resource type="PackedScene" uid="uid://dby7dch41cs42" path="res://scenes/menu/options_menu.tscn" id="3_i1q8h"]
 [ext_resource type="PackedScene" uid="uid://di03kretluhk6" path="res://scenes/menu/ui_click_audio.tscn" id="4_jyexc"]
+[ext_resource type="Texture2D" uid="uid://bo25blh2i8t5d" path="res://assets/art/input/tile_0078.png" id="4_o3n15"]
+[ext_resource type="Texture2D" uid="uid://g5uxwd4o7mae" path="res://assets/art/input/tile_0166.png" id="5_d8nn3"]
+[ext_resource type="Texture2D" uid="uid://baceeof3dh72n" path="res://assets/art/input/tile_0358.png" id="5_fjkxu"]
+[ext_resource type="Texture2D" uid="uid://ihct1dkxy5ha" path="res://assets/art/input/tile_0169.png" id="6_4im5f"]
+[ext_resource type="Texture2D" uid="uid://bjkaajkfxjpuh" path="res://assets/art/input/tile_0392.png" id="6_whrys"]
+[ext_resource type="Texture2D" uid="uid://b63eahxm1uujb" path="res://assets/art/input/tile_0168.png" id="7_23ur1"]
+[ext_resource type="Texture2D" uid="uid://d3lvcq8qwiocb" path="res://assets/art/input/tile_0393.png" id="7_q37m5"]
+[ext_resource type="Texture2D" uid="uid://nw85grs7fpjj" path="res://assets/art/input/tile_0394.png" id="8_gc5qf"]
+[ext_resource type="Texture2D" uid="uid://c2s0eq6lx5nwa" path="res://assets/art/input/tile_0167.png" id="8_nglqd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g7gcb"]
 shader = ExtResource("2_sjp67")
@@ -36,45 +46,74 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 50
+theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 50
+theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 50
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="PauseText" type="Label" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 100)
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LeftSide" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 15
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/LeftSide"]
+custom_minimum_size = Vector2(0, 90)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Tips:"
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/LeftSide"]
+clip_contents = true
+custom_minimum_size = Vector2(215, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/line_spacing = 4
+theme_override_font_sizes/font_size = 16
+text = "* Some people like cats, some don't
+* Meow to boost some people's mood
+* Leave others alone to avoid runing their mood
+* Conversations spread mood to others, happy or sad!
+* Hiss to interrupt negative conversations"
+autowrap_mode = 2
+
+[node name="Buttons" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/separation = 20
+
+[node name="PauseText" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Buttons"]
+custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "Paused"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="ResumeButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="ResumeButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/Buttons"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 32
 text = "Resume"
 
-[node name="OptionsButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="OptionsButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/Buttons"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 32
 text = "Options"
 
-[node name="QuitToMenuButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="QuitToMenuButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/Buttons"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -84,12 +123,152 @@ theme_override_colors/font_hover_color = Color(1, 0.443137, 0.376471, 1)
 theme_override_font_sizes/font_size = 32
 text = "Quit to Menu"
 
+[node name="RightSide" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 0
+theme_override_constants/separation = 5
+
+[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/RightSide"]
+custom_minimum_size = Vector2(0, 90)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Controls:"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightSide"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_constants/separation = 25
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/RightSide/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("3_c4rx8")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/RightSide/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "Meow"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightSide"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_constants/separation = 25
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/RightSide/HBoxContainer2"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("4_o3n15")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/RightSide/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "Hiss"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightSide"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 2
+theme_override_constants/separation = 5
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightSide/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/RightSide/HBoxContainer3/VBoxContainer2"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_fjkxu")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightSide/HBoxContainer3/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/RightSide/HBoxContainer3/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("6_whrys")
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/RightSide/HBoxContainer3/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("7_q37m5")
+
+[node name="TextureRect3" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/RightSide/HBoxContainer3/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("8_gc5qf")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/RightSide/HBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "or"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightSide/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/RightSide/HBoxContainer3/VBoxContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_d8nn3")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/RightSide/HBoxContainer3/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/RightSide/HBoxContainer3/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("6_4im5f")
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/RightSide/HBoxContainer3/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("7_23ur1")
+
+[node name="TextureRect3" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/RightSide/HBoxContainer3/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("8_nglqd")
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/RightSide"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Move"
+
 [node name="OptionsMenu" parent="." instance=ExtResource("3_i1q8h")]
 visible = false
 
 [node name="UIClickAudio" parent="." instance=ExtResource("4_jyexc")]
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/QuitToMenuButton" to="." method="_on_quit_to_menu_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Buttons/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Buttons/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Buttons/QuitToMenuButton" to="." method="_on_quit_to_menu_button_pressed"]
 [connection signal="pressed_back" from="OptionsMenu" to="." method="_on_options_menu_pressed_back"]

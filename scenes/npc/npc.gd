@@ -176,18 +176,18 @@ func _receive_hiss() -> void:
 			else:
 				behavior.start_avoiding(player)
 		Personality.CatOpinion.LIKE:
-			mood.decrease_mood(40)
+			mood.decrease_mood(60)
 			if behavior.state == Behavior.State.INTERACT_CAT:
 				behavior.set_state(Behavior.State.WALK_TO_EXIT)
 			else:
 				behavior.start_avoiding(player)
 		Personality.CatOpinion.DISLIKE:
 			chat_bubble.do_shoo_cat()
-			mood.decrease_mood(40)
+			mood.decrease_mood(60)
 			behavior.start_avoiding(player)
 		Personality.CatOpinion.ALLERGIC:
 			chat_bubble.show_emoji(ChatBubble.Emoji.CROSS)
-			mood.decrease_mood(40)
+			mood.decrease_mood(60)
 			behavior.start_avoiding(player)
 
 func interrupt_conversation():
