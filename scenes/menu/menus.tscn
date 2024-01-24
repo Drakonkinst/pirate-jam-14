@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://boppjocuk7aqf" path="res://scenes/menu/credits_menu.tscn" id="4_coa1g"]
 [ext_resource type="PackedScene" uid="uid://cs8k48yiea4x4" path="res://scenes/menu/level_select_menu.tscn" id="5_e8wt2"]
 [ext_resource type="AudioStream" uid="uid://dr21jlemnst4u" path="res://assets/audio/MUSIC_title.ogg" id="6_3myls"]
-[ext_resource type="AudioStream" uid="uid://dspp4v04wb0o2" path="res://assets/audio/SOUND_titleambience.wav" id="7_ljpda"]
+[ext_resource type="AudioStream" uid="uid://b8hk63p2030br" path="res://assets/audio/SOUND_titleambience.ogg" id="7_44mio"]
 
 [node name="Menus" type="MarginContainer"]
 anchors_preset = 15
@@ -38,7 +38,7 @@ autoplay = true
 bus = &"Music"
 
 [node name="BackgroundAmbience" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_ljpda")
+stream = ExtResource("7_44mio")
 volume_db = -15.0
 autoplay = true
 bus = &"Effects"

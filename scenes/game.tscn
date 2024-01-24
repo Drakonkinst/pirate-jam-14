@@ -20,10 +20,10 @@
 [ext_resource type="Script" path="res://scenes/pause_control.gd" id="17_am3tw"]
 [ext_resource type="Script" path="res://scenes/text_particle_spawner.gd" id="17_p7qn5"]
 [ext_resource type="PackedScene" uid="uid://c02xopmqkdo8j" path="res://scenes/text_particle.tscn" id="18_72uwt"]
+[ext_resource type="AudioStream" uid="uid://chphuq13x0fmq" path="res://assets/audio/MUSIC_day.ogg" id="22_7pibp"]
 [ext_resource type="Script" path="res://scenes/game_music.gd" id="22_bionk"]
-[ext_resource type="AudioStream" uid="uid://dywkrb84lwv6c" path="res://assets/audio/MUSIC_day1.wav" id="23_dcfog"]
-[ext_resource type="AudioStream" uid="uid://bc7tgg6wyjig" path="res://assets/audio/MUSIC_day2.wav" id="24_p7maw"]
-[ext_resource type="AudioStream" uid="uid://bn8fhjcpb2ff" path="res://assets/audio/MUSIC_day3.wav" id="25_5cwi0"]
+[ext_resource type="AudioStream" uid="uid://b46lc5kla0apn" path="res://assets/audio/MUSIC_day2.ogg" id="23_cwlgd"]
+[ext_resource type="AudioStream" uid="uid://cjh80ajnmo38h" path="res://assets/audio/MUSIC_day3.ogg" id="24_1j7vi"]
 [ext_resource type="AudioStream" uid="uid://b8wg728s5xnte" path="res://assets/audio/MUSIC_dayinfinite.ogg" id="26_pinqj"]
 [ext_resource type="AudioStream" uid="uid://bynr0ouyrfyam" path="res://assets/audio/MUSIC_night1.mp3" id="27_t6n1s"]
 [ext_resource type="AudioStream" uid="uid://dsw7ruhywm533" path="res://assets/audio/MUSIC_night2.mp3" id="28_me3cd"]
@@ -278,7 +278,7 @@ process_mode = 3
 volume_db = -10.0
 bus = &"Music"
 script = ExtResource("22_bionk")
-tracks_by_level = Array[AudioStream]([ExtResource("23_dcfog"), ExtResource("24_p7maw"), ExtResource("25_5cwi0"), ExtResource("26_pinqj"), ExtResource("27_t6n1s"), ExtResource("28_me3cd"), ExtResource("29_ujxm8"), ExtResource("30_3ilqa")])
+tracks_by_level = Array[AudioStream]([ExtResource("22_7pibp"), ExtResource("23_cwlgd"), ExtResource("24_1j7vi"), ExtResource("26_pinqj"), ExtResource("27_t6n1s"), ExtResource("28_me3cd"), ExtResource("29_ujxm8"), ExtResource("30_3ilqa")])
 
 [connection signal="pressed_quit_to_menu" from="PauseMenu" to="." method="_on_pause_menu_pressed_quit_to_menu"]
 [connection signal="paused" from="PauseControl" to="." method="_on_pause_control_paused"]

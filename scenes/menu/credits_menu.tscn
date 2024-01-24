@@ -68,7 +68,8 @@ size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
 layout_mode = 2
-text = "Kenney Vleugels - Tileset, NPC Sprites, Emotes"
+text = "Kenney Vleugels - Tileset, NPC Sprites,
+Emotes, Input Sprites"
 horizontal_alignment = 1
 
 [node name="Label3" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
