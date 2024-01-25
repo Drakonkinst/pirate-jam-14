@@ -15,6 +15,7 @@
 [ext_resource type="Resource" uid="uid://cd62wmskeqycf" path="res://data/level/night_infinite.tres" id="11_ldt30"]
 
 [node name="Main" type="Node"]
+process_mode = 3
 script = ExtResource("1_20ics")
 game_scene = ExtResource("1_notbr")
 menus_scene = ExtResource("3_mkd18")

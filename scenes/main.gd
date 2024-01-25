@@ -9,12 +9,15 @@ var game: Game
 func _ready() -> void:
     init_main_menu()
 
+
 func start_new_game() -> void:
     if menu != null:
-        menu.queue_free()
+        remove_child(menu)
+        menu = null
     game = game_scene.instantiate()
     game.level_data = _fetch_level_data()
     game.on_quit_to_menu.connect(_on_game_on_quit_to_menu)
+    game.restart_game.connect(_on_game_on_restart_level)
     add_child(game)
     game.initialize()
 
@@ -30,5 +33,13 @@ func _fetch_level_data() -> LevelData:
 
 func _on_game_on_quit_to_menu() -> void:
     if game != null:
-        game.queue_free()
+        remove_child(game)
+        game = null
     init_main_menu()
+
+# https://forum.godotengine.org/t/discussion-of-best-practices-regarding-queue-free/5159
+func _on_game_on_restart_level() -> void:
+    if game != null:
+        remove_child(game)
+        game = null
+    start_new_game()

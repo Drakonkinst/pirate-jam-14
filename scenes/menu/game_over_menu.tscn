@@ -1,0 +1,134 @@
+[gd_scene load_steps=6 format=3 uid="uid://bb6qglgiixh4f"]
+
+[ext_resource type="Script" path="res://scenes/menu/game_over_menu.gd" id="1_k2jca"]
+[ext_resource type="Shader" path="res://shader/paused.gdshader" id="2_va8ok"]
+[ext_resource type="Texture2D" uid="uid://b4f2xqxj4updm" path="res://assets/art/filled_star.png" id="3_lfh26"]
+[ext_resource type="Texture2D" uid="uid://sdayinnidrnx" path="res://assets/art/blank_star.png" id="4_2wmdb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_33hfk"]
+shader = ExtResource("2_va8ok")
+shader_parameter/blur_amount = 1.0
+
+[node name="GameOverMenu" type="CanvasLayer" node_paths=PackedStringArray("score_text", "star_1", "star_2", "star_3")]
+process_mode = 2
+layer = 98
+script = ExtResource("1_k2jca")
+filled_star_texture = ExtResource("3_lfh26")
+empty_star_texture = ExtResource("4_2wmdb")
+score_text = NodePath("MarginContainer/VBoxContainer/Buttons/GameOverText2")
+star_1 = NodePath("MarginContainer/VBoxContainer/Buttons/HBoxContainer/Star1")
+star_2 = NodePath("MarginContainer/VBoxContainer/Buttons/HBoxContainer/Star2")
+star_3 = NodePath("MarginContainer/VBoxContainer/Buttons/HBoxContainer/Star3")
+
+[node name="DarkenBackground" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.333333)
+
+[node name="BlurBackground" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_33hfk")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Buttons" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/separation = 20
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="GameOverText" type="Label" parent="MarginContainer/VBoxContainer/Buttons/HBoxContainer3"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Time's Up!"
+horizontal_alignment = 1
+
+[node name="GameOverText2" type="Label" parent="MarginContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Score: 200"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 25
+
+[node name="Star1" type="TextureRect" parent="MarginContainer/VBoxContainer/Buttons/HBoxContainer"]
+texture_filter = 2
+clip_contents = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("3_lfh26")
+expand_mode = 2
+
+[node name="Star2" type="TextureRect" parent="MarginContainer/VBoxContainer/Buttons/HBoxContainer"]
+texture_filter = 2
+clip_contents = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("3_lfh26")
+expand_mode = 2
+
+[node name="Star3" type="TextureRect" parent="MarginContainer/VBoxContainer/Buttons/HBoxContainer"]
+texture_filter = 2
+clip_contents = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("4_2wmdb")
+expand_mode = 2
+
+[node name="GameOverText3" type="Label" parent="MarginContainer/VBoxContainer/Buttons"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Try to get an even better score
+or check out the other levels!"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 50
+
+[node name="RestartLevel" type="Button" parent="MarginContainer/VBoxContainer/Buttons/HBoxContainer2"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Restart Level"
+
+[node name="ReturnToMenu" type="Button" parent="MarginContainer/VBoxContainer/Buttons/HBoxContainer2"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Return to Menu"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/HBoxContainer2/RestartLevel" to="." method="_on_restart_level_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/HBoxContainer2/ReturnToMenu" to="." method="_on_return_to_menu_pressed"]
