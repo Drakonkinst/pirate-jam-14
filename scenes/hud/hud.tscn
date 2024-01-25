@@ -1,14 +1,41 @@
-[gd_scene load_steps=4 format=3 uid="uid://bioqoosmvi2tl"]
+[gd_scene load_steps=7 format=3 uid="uid://bioqoosmvi2tl"]
 
 [ext_resource type="Script" path="res://scenes/hud/hud.gd" id="1_johtr"]
-[ext_resource type="Script" path="res://scenes/hud/score_ui.gd" id="2_b7akm"]
+[ext_resource type="Texture2D" uid="uid://b4f2xqxj4updm" path="res://assets/art/filled_star.png" id="2_8syx0"]
 [ext_resource type="Texture2D" uid="uid://ww64w1v3a1ee" path="res://assets/art/circle_512.png" id="3_ecvov"]
+[ext_resource type="Texture2D" uid="uid://sdayinnidrnx" path="res://assets/art/blank_star.png" id="3_oavue"]
 
-[node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("time_remaining_bar")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_savq2"]
+bg_color = Color(0.301961, 0.25098, 0.0313726, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+corner_detail = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e76j4"]
+bg_color = Color(1, 0.952941, 0.498039, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+corner_detail = 16
+
+[node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("score_meter", "star_1", "star_2", "star_3", "time_remaining_bar", "center_sprite")]
 script = ExtResource("1_johtr")
+score_meter = NodePath("ScoreUI/ProgressBar")
+filled_star_texture = ExtResource("2_8syx0")
+empty_star_texture = ExtResource("3_oavue")
+star_1 = NodePath("ScoreUI/ProgressBar/Node2D/Sprite2D")
+star_2 = NodePath("ScoreUI/ProgressBar/Node2D/Sprite2D2")
+star_3 = NodePath("ScoreUI/ProgressBar/Node2D/Sprite2D3")
 time_remaining_bar = NodePath("TimeRemainingUIContainer/Node2D/TimeRemainingUI")
+day_color = Color(0.968627, 0.882353, 0.352941, 1)
+night_color = Color(0.341176, 0.341176, 0.572549, 1)
+center_sprite = NodePath("TimeRemainingUIContainer/Node2D/TimeRemainingUI/Center")
 
-[node name="ScoreUI" type="Label" parent="."]
+[node name="ScoreUI" type="Control" parent="."]
+layout_mode = 3
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -17,12 +44,65 @@ offset_top = 21.0
 offset_right = 50.0
 offset_bottom = 51.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 40
-text = "Score: 0"
+
+[node name="ProgressBar" type="ProgressBar" parent="ScoreUI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -198.0
+offset_top = 12.0
+offset_right = 199.0
+offset_bottom = 18.0
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_savq2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_e76j4")
+value = 43.9
+show_percentage = false
+
+[node name="Node2D" type="Node2D" parent="ScoreUI/ProgressBar"]
+
+[node name="Label" type="Label" parent="ScoreUI/ProgressBar/Node2D"]
+offset_left = 79.0
+offset_top = 16.0
+offset_right = 119.0
+offset_bottom = 28.0
+text = "+50"
 horizontal_alignment = 1
-script = ExtResource("2_b7akm")
+
+[node name="Sprite2D" type="Sprite2D" parent="ScoreUI/ProgressBar/Node2D"]
+position = Vector2(100, 1)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_8syx0")
+
+[node name="Label2" type="Label" parent="ScoreUI/ProgressBar/Node2D"]
+offset_left = 178.0
+offset_top = 16.0
+offset_right = 218.0
+offset_bottom = 28.0
+text = "+100"
+horizontal_alignment = 1
+
+[node name="Sprite2D2" type="Sprite2D" parent="ScoreUI/ProgressBar/Node2D"]
+position = Vector2(200, 1)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_8syx0")
+
+[node name="Label3" type="Label" parent="ScoreUI/ProgressBar/Node2D"]
+offset_left = 378.0
+offset_top = 16.0
+offset_right = 418.0
+offset_bottom = 28.0
+text = "+200"
+horizontal_alignment = 1
+
+[node name="Sprite2D3" type="Sprite2D" parent="ScoreUI/ProgressBar/Node2D"]
+position = Vector2(400, 1)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_8syx0")
 
 [node name="TimeRemainingUIContainer" type="Control" parent="."]
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
@@ -54,12 +134,12 @@ fill_mode = 5
 texture_under = ExtResource("3_ecvov")
 texture_over = ExtResource("3_ecvov")
 texture_progress = ExtResource("3_ecvov")
-tint_under = Color(0.266667, 0.266667, 0.266667, 1)
-tint_over = Color(0, 1, 1, 0)
-tint_progress = Color(0.898039, 0.972549, 1, 1)
+tint_under = Color(0.341176, 0.341176, 0.572549, 1)
+tint_over = Color(1, 1, 1, 0)
+tint_progress = Color(0.968627, 0.882353, 0.352941, 1)
 
 [node name="Center" type="Sprite2D" parent="TimeRemainingUIContainer/Node2D/TimeRemainingUI"]
-modulate = Color(0.266667, 0.266667, 0.266667, 1)
+modulate = Color(0.341176, 0.341176, 0.572549, 1)
 position = Vector2(256, 256)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_ecvov")

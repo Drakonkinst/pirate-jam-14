@@ -89,7 +89,7 @@ z_as_relative = false
 script = ExtResource("17_p7qn5")
 text_particle_scene = ExtResource("18_72uwt")
 offset = Vector2(20, -20)
-increase_mood_color = Color(0.941176, 0.866667, 0.498039, 1)
+increase_mood_color = Color(1, 0.952941, 0.498039, 1)
 decrease_mood_color = Color(0.85098, 0.278431, 0.262745, 1)
 
 [node name="ShaderLayer" type="CanvasLayer" parent="."]

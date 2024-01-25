@@ -21,7 +21,7 @@ const MINUTE_TO_SECOND: float = 60.0
 
 @onready var game_over_menu: CanvasLayer = $GameOverMenu
 @onready var pause_menu: CanvasLayer = $PauseMenu
-@onready var hud: CanvasLayer = $HUD
+@onready var hud: HUD = $HUD
 
 func initialize():
 	pause_control.unpause()
@@ -29,6 +29,7 @@ func initialize():
 	npc_spawner.initialize(level_data)
 	player.initialize(player_spawn_point.position)
 	player.animation_control.set_shadow(level_data.is_day)
+	hud.initialize(level_data.is_day)
 	shader_control.set_time_of_day(ShaderControl.TimeOfDay.DAY if level_data.is_day else ShaderControl.TimeOfDay.NIGHT)
 	if level_data.max_minutes > 0:
 		#game_over_timer.start(3)
