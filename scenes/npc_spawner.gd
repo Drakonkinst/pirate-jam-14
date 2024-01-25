@@ -32,7 +32,7 @@ func initialize(data: LevelData) -> void:
 	set_level_data(data)
 	# For some reason, the map isn't initialized on the first frame
 	# So wait exactly one frame before spawning or else everyone spawns at (0, 0)
-	await get_tree().create_timer(0).timeout
+	# await get_tree().create_timer(0.001).timeout
 	_spawn_initial_npcs()
 
 # Set level data in case we need to change it later
@@ -79,7 +79,7 @@ func spawn_random_npc(pos: Vector2, location: Location) -> void:
 # Spawn NPCs at random valid positions on navmesh
 func _spawn_initial_npcs():
 	for i in level_data.npc_quota:
-		_spawn_npc_from_location(Location.SCENE)
+		_spawn_npc_from_location(Location.SCENE, false)
 	# Should start tracking score after this point, since some levels may have NPCs start already with ruined mood?
 	has_spawned_initial = true
 
