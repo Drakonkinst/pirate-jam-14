@@ -4,6 +4,7 @@ class_name ChatBubble
 
 const POP_IN_ANIMATION = "pop_in"
 const POP_OUT_ANIMATION = "pop_out"
+const DIALOGUE_CHANCE = 0.2
 
 enum Emoji {
     ALERT,
@@ -77,22 +78,38 @@ func show_dialogue_from_category(category: Array[String]) -> void:
     show_dialogue(dialogue.generate_line(category))
 
 func do_greet_cat() -> void:
-    if _can_use_dialogue() and randf() < 0.2:
+    if _can_use_dialogue() and randf() < DIALOGUE_CHANCE:
         show_dialogue_from_category(dialogue.greet_cat)
     else:
         show_emoji(Emoji.HEART)
 
 func do_shoo_cat() -> void:
-    if _can_use_dialogue() and randf() < 0.2:
+    if _can_use_dialogue() and randf() < DIALOGUE_CHANCE:
         show_dialogue_from_category(dialogue.shoo_cat)
     else:
         show_emoji(Emoji.QUESTION)
 
 func do_allergic_cat() -> void:
-    if _can_use_dialogue() and randf() < 0.2:
+    if _can_use_dialogue() and randf() < DIALOGUE_CHANCE:
         show_dialogue_from_category(dialogue.allergic_cat)
     else:
         show_emoji(ChatBubble.Emoji.CROSS)
+
+func do_start_convo() -> void:
+    if _can_use_dialogue() and randf() < DIALOGUE_CHANCE:
+        show_dialogue_from_category(dialogue.start_convo)
+        
+func do_convo_line() -> bool:
+    if _can_use_dialogue() and randf() < DIALOGUE_CHANCE:
+        show_dialogue_from_category(dialogue.accept_convo)
+        return true
+    return false
+    
+func do_running_late() -> void:
+    if _can_use_dialogue() and randf() < DIALOGUE_CHANCE:
+        show_dialogue_from_category(dialogue.decline_convo)
+    else:
+        show_emoji(ChatBubble.Emoji.CLOCK)
 
 func is_playing():
     return not _can_play()    

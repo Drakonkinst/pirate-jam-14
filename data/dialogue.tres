@@ -4,6 +4,9 @@
 
 [resource]
 script = ExtResource("1_0h2kf")
-greet_cat = Array[String](["Aw, hello there!", "OMG a cat", "Hello!", "Hi there!", "Aww, a cat!", "Nice to meet you!"])
-shoo_cat = Array[String](["Go away!", "What do you want?", "Shoo!", "Leave me alone"])
-allergic_cat = Array[String](["Achoo!", "Oh no, a cat!", "Stay away!"])
+greet_cat = Array[String](["Pspspsps, here kitty!", "OMG a cat!", "Aww, a cute cat!", "Nice to meet you!", "Hello, little one!", "I would die for this animal.", "Little meowmeow!"])
+shoo_cat = Array[String](["Yuck. Get away.", "Out of here, cat!", "Shoo! Go on, ‘git!", "Nasty creature.", "Disgusting…", "Filthy, filthy cat."])
+allergic_cat = Array[String](["Oh no, a cat’s nearby!", "Uh oh, my allergies!", "Achoo!", "*sniffle sniffle*", "My doctor said to stay away!", "Sorry kitty-cat; I’m allergic!"])
+start_convo = Array[String](["Hey! How’s it going?", "What’s up?", "Don’t I know you?", "What’s new?"])
+accept_convo = Array[String](["Nice weather we’re having.", "Terrible weather we’re having.", "Did you see the cat?", "This place needs more greenery.", "I’ve been playing that new game recently.", "Want to get something to eat?"])
+decline_convo = Array[String](["I'm late!", "I gotta go.", "I'm in a hurry!", "Gotta run!", "I'm gonna be late, sorry!", "Oh dear, I'm running late!"])

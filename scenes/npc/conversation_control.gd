@@ -26,6 +26,7 @@ func start(target: NPC, mood_change: int, conversation_time: float, voluntary: b
     was_voluntary = voluntary
     was_forced = forced
     in_conversation = true
+    chat_bubble.do_start_convo()
     conversation_finish_timer.start(conversation_time)
 
 func interrupt() -> void:
@@ -57,8 +58,9 @@ func _on_conversation_tick_timer_timeout() -> void:
         _play_random(negative_emojis)
     else:
         _play_random(positive_emojis)
-    
 
 func _play_random(arr: Array[ChatBubble.Emoji]) -> void:
+    if next_mood_change > 0 and not was_forced and chat_bubble.do_convo_line():
+        return
     var emoji := arr[randi() % arr.size()]
     chat_bubble.show_emoji(emoji)

@@ -228,7 +228,7 @@ func _handle_surroundings_state_changes() -> bool:
 	
 	# If following cat, chance to stop and go back to walking
 	if behavior.state == Behavior.State.INTERACT_CAT and randf() < 1.0 - time_wasted_multiplier:
-		chat_bubble.show_emoji(ChatBubble.Emoji.CLOCK)
+		chat_bubble.do_running_late()
 		behavior.set_state(Behavior.State.WALK_TO_EXIT)
 		return false
 	if behavior.state == Behavior.State.WALK_TO_EXIT and can_see_player and randf() < 0.3:
@@ -308,7 +308,7 @@ func _get_base_conversation_change() -> float:
 func _handle_surroundings_ambient() -> void:
 	if randf() < AMBIENT_CHANCE and behavior.state == Behavior.State.WALK_TO_EXIT:
 		if personality.sociable_type == Personality.Sociable.RUSHED:
-			chat_bubble.show_emoji(ChatBubble.Emoji.CLOCK)
+			chat_bubble.do_running_late()
 		elif personality.sociable_type == Personality.Sociable.HARASSER:
 			chat_bubble.show_emoji(ChatBubble.Emoji.CASH)
 
