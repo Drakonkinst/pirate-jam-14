@@ -7,8 +7,10 @@ const PAUSE_INPUT := "pause"
 signal paused
 signal unpaused
 
+var disabled := false
+
 func _input(event) -> void:
-    if event.is_action_pressed(PAUSE_INPUT):
+    if event.is_action_pressed(PAUSE_INPUT) and not disabled:
         _toggle_pause()
 
 func _toggle_pause() -> void:
@@ -18,6 +20,9 @@ func _toggle_pause() -> void:
         unpaused.emit()
     else:
         paused.emit()
+
+func disable() -> void:
+    disabled = true
 
 func pause() -> void:
     if get_tree().paused:

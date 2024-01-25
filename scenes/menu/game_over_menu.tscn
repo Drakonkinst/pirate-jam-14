@@ -10,7 +10,7 @@ shader = ExtResource("2_va8ok")
 shader_parameter/blur_amount = 1.0
 
 [node name="GameOverMenu" type="CanvasLayer" node_paths=PackedStringArray("score_text", "star_1", "star_2", "star_3")]
-process_mode = 2
+process_mode = 3
 layer = 98
 script = ExtResource("1_k2jca")
 filled_star_texture = ExtResource("3_lfh26")

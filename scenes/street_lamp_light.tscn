@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://gmpymwru4anw"]
+
+[ext_resource type="Texture2D" uid="uid://d3fkpw72jhw4d" path="res://assets/art/particle/glow.png" id="1_8dh6b"]
+[ext_resource type="Script" path="res://scenes/util/glow_size_change.gd" id="2_2m2uo"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xdhik"]
+
+[node name="PointLight2D" type="PointLight2D"]
+position = Vector2(-993, 397)
+scale = Vector2(0.5, 0.5)
+color = Color(0.843137, 0.580392, 0, 1)
+energy = 2.0
+shadow_enabled = true
+texture = ExtResource("1_8dh6b")
+script = ExtResource("2_2m2uo")
+noise = SubResource("FastNoiseLite_xdhik")
+speed = 10.0
+max_bonus = 0.2

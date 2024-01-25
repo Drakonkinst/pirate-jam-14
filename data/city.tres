@@ -2215,7 +2215,7 @@ texture = ExtResource("1_v7mlw")
 2:7/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_it2br")
 
 [resource]
-occlusion_layer_0/light_mask = 1
+occlusion_layer_0/light_mask = 0
 physics_layer_0/collision_layer = 1
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_s28u3")

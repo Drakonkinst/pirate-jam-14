@@ -12,6 +12,7 @@ const MINUTE_TO_SECOND: float = 60.0
 @export var player_spawn_point: Marker2D
 @export var shader_control: ShaderControl
 @export var text_particle_spawner: TextParticleSpawner
+@export var street_lights: Node2D
 
 @onready var npc_spawner: NPCSpawner = $NPCSpawner
 @onready var score_handler: ScoreHandler = $ScoreHandler
@@ -31,6 +32,10 @@ func initialize():
 	player.animation_control.set_shadow(level_data.is_day)
 	hud.initialize(level_data.is_day)
 	shader_control.set_time_of_day(ShaderControl.TimeOfDay.DAY if level_data.is_day else ShaderControl.TimeOfDay.NIGHT)
+	if level_data.is_day:
+		street_lights.hide()
+	else:
+		street_lights.show()
 	if level_data.max_minutes > 0:
 		#game_over_timer.start(3)
 		game_over_timer.start(level_data.max_minutes * MINUTE_TO_SECOND)
@@ -51,6 +56,7 @@ func _on_npc_spawner_npc_mood_changed(who: NPC, from: Mood.Stage, to: Mood.Stage
 
 func _on_game_over_timer_timeout() -> void:
 	pause_control.pause()
+	pause_control.disable()
 	pause_menu.hide()
 	game_over_menu.show_game_over()
 	hud.hide()

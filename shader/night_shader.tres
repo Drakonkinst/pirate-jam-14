@@ -8,4 +8,4 @@ shader_parameter/tint = Vector3(0, 0, 0.25)
 shader_parameter/scale = 0.35
 shader_parameter/min_radius = 0.25
 shader_parameter/max_radius = 0.5
-shader_parameter/desaturation = 0.95
+shader_parameter/desaturation = 1.0
