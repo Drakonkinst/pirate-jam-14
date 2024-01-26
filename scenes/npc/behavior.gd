@@ -69,6 +69,9 @@ func update(delta: float) -> void:
 			nav_control.move(MIN_WANDER_DISTANCE_THRESHOLD)
 		State.CONVERSE:
 			nav_control.move(MIN_INTERACT_CONVERSE_DISTANCE_THRESHOLD)
+			if not is_instance_valid(conversation_control.conversation_target):
+				conversation_control.interrupt()
+				set_state(State.WALK_TO_EXIT)
 		State.INTERACT_CAT:
 			var arrived: bool = nav_control.move(MIN_INTERACT_CAT_DISTANCE_THRESHOLD)
 			if arrived:

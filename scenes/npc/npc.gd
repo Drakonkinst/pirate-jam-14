@@ -3,7 +3,7 @@ extends CharacterBody2D
 class_name NPC
 
 const AMBIENT_CHANCE := 0.1
-const EMPATHY_MULTIPLIER := 0.5
+const EMPATHY_MULTIPLIER := 0.25
 const CONVERSATION_MOOD_MULTIPLIER := 1.0
 
 signal mood_stage_changed(who: NPC, from: Mood.Stage, to: Mood.Stage)
@@ -30,6 +30,7 @@ var was_hissed: bool = false
 var despawned: bool = false
 
 var speech: Dialogue
+var immune_to_hiss := false
 
 func initialize():
 	# Set walking speed
@@ -92,7 +93,7 @@ func have_conversation(with: NPC, was_voluntary: bool) -> void:
 		self_mood_change = int(other_mood * CONVERSATION_MOOD_MULTIPLIER)
 		other_mood_change = 1 if other_mood >= 0 else -1
 	
-	var conversation_time: float = randf_range(5.0, 10.0)
+	var conversation_time: float = randf_range(7.0, 12.0)
 	
 	conversation_control.start(with, self_mood_change, conversation_time, true, not was_voluntary)
 	with.conversation_control.start(self, other_mood_change, conversation_time, was_voluntary, false)
@@ -139,7 +140,7 @@ func _receive_meow() -> void:
 	match personality.cat_opinion:
 		Personality.CatOpinion.LOVE:
 			# Almost always will be distracted
-			if behavior.get_time_wasted_multiplier() > 0.0 and behavior.state != Behavior.State.INTERACT_CAT:
+			if behavior.get_time_wasted_multiplier() > 0.0 and behavior.state == Behavior.State.WALK_TO_EXIT:
 				chat_bubble.do_greet_cat()
 				behavior.set_state(Behavior.State.INTERACT_CAT)
 				mood.increase_mood(60)
@@ -147,7 +148,7 @@ func _receive_meow() -> void:
 				mood.increase_mood(40)
 		Personality.CatOpinion.LIKE:
 			# Lower chance to be distracted
-			if randf() < 0.75 * behavior.get_time_wasted_multiplier() and behavior.state != Behavior.State.INTERACT_CAT:
+			if randf() < 0.75 * behavior.get_time_wasted_multiplier() and behavior.state == Behavior.State.WALK_TO_EXIT:
 				chat_bubble.do_greet_cat()
 				behavior.set_state(Behavior.State.INTERACT_CAT)
 				mood.increase_mood(40)
@@ -156,13 +157,18 @@ func _receive_meow() -> void:
 		Personality.CatOpinion.DISLIKE:
 			chat_bubble.do_shoo_cat()
 			mood.decrease_mood(10)
-			behavior.start_avoiding(player)
+			if behavior.state == Behavior.State.WALK_TO_EXIT:
+				behavior.start_avoiding(player)
 		Personality.CatOpinion.ALLERGIC:
 			chat_bubble.show_emoji(ChatBubble.Emoji.CROSS)
 			mood.decrease_mood(40)
-			behavior.start_avoiding(player)
+			if behavior.state == Behavior.State.WALK_TO_EXIT:
+				behavior.start_avoiding(player)
 
 func _receive_hiss() -> void:
+	if immune_to_hiss:
+		immune_to_hiss = false
+		return
 	if conversation_control.in_conversation:
 		if conversation_control.next_mood_change < 0 or randf() < 0.5:
 			interrupt_conversation()
@@ -194,26 +200,30 @@ func interrupt_conversation():
 	var other: NPC = conversation_control.conversation_target
 	if conversation_control.in_conversation:
 		# If they were having a good time, have a bad time
-		if conversation_control.next_mood_change > 0:
-			mood.decrease_mood(20)
-		else:
-			mood.increase_mood(10)
-		if other.conversation_control.next_mood_change > 0:
-			other.mood.decrease_mood(20)
-		else:
-			other.mood.increase_mood(10)
+		if conversation_control.next_mood_change > 1:
+			mood.decrease_mood(40)
+		elif conversation_control.next_mood_change < -1:
+			mood.increase_mood(40)
 		
 		chat_bubble.show_emoji(ChatBubble.Emoji.EXCLAMATION, true)
-		other.chat_bubble.show_emoji(ChatBubble.Emoji.EXCLAMATION, true)
 		behavior.set_state(Behavior.State.WALK_TO_EXIT)
-		# print("CONVERSATION INTERRUPTED")
 		
 		# Interrupt
-		other.conversation_control.interrupt()
 		conversation_control.interrupt()
 		behavior.start_conversation_timer.start()
-		other.behavior.start_conversation_timer.start()
-
+		
+		if is_instance_valid(other):
+			if other.conversation_control.next_mood_change > 1:
+				other.mood.decrease_mood(40)
+			elif other.conversation_control.next_mood_change < -1:
+				other.mood.increase_mood(40)
+		
+			# Patch to avoid doubling up on mood change
+			other.immune_to_hiss = true
+			other.chat_bubble.show_emoji(ChatBubble.Emoji.EXCLAMATION, true)
+			other.conversation_control.interrupt()
+			other.behavior.start_conversation_timer.start()
+		
 # Prioritize state changes first, then ambient
 # Runs every ~2 seconds
 func check_surroundings() -> void:
@@ -290,7 +300,7 @@ func _handle_surroundings_state_changes() -> bool:
 	# If antisocial, lose mood if too many people nearby
 	if personality.sociable_type == Personality.Sociable.ANTISOCIAL and num_other_npcs >= 5:
 		chat_bubble.show_emoji(ChatBubble.Emoji.ALERT)
-		mood.decrease_mood(10)
+		mood.decrease_mood(30)
 	
 	return true
 

@@ -6,6 +6,7 @@ signal on_quit_to_menu
 signal restart_game
 
 const MINUTE_TO_SECOND: float = 60.0
+const TOO_FAR_THRESHOLD: float = 128.0
 
 @export var level_data: LevelData
 @export var player: Player
@@ -41,6 +42,7 @@ func initialize():
 		game_over_timer.start(level_data.max_minutes * MINUTE_TO_SECOND)
 
 func _on_npc_spawner_npc_mood_changed(who: NPC, from: Mood.Stage, to: Mood.Stage) -> void:
+	var score_multiplier: float = 1.0 if who.global_position.distance_squared_to(player.global_position) <= TOO_FAR_THRESHOLD * TOO_FAR_THRESHOLD else 0.1
 	if to == Mood.Stage.HAPPY:
 		text_particle_spawner.spawn_increase_mood_text(who.global_position)
 		if from == Mood.Stage.SAD:
@@ -50,9 +52,9 @@ func _on_npc_spawner_npc_mood_changed(who: NPC, from: Mood.Stage, to: Mood.Stage
 	elif to == Mood.Stage.SAD:
 		text_particle_spawner.spawn_decrease_mood_text(who.global_position)
 		if from == Mood.Stage.HAPPY:
-			score_handler.decrease_score(30)
+			score_handler.decrease_score(int(20 * score_multiplier))
 		else:
-			score_handler.decrease_score(15)
+			score_handler.decrease_score(int(15 * score_multiplier))
 
 func _on_game_over_timer_timeout() -> void:
 	pause_control.pause()
