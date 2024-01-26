@@ -82,9 +82,10 @@ theme_override_constants/line_spacing = 4
 theme_override_font_sizes/font_size = 16
 text = "* Some people like cats, some don't
 * Meow to boost some people's mood
-* Leave others alone to avoid runing their mood
+* Leave others alone to avoid ruining their mood
 * Conversations spread mood to others, happy or sad!
-* Hiss to interrupt negative conversations"
+* Hiss to interrupt negative conversations
+* Stay on the move to keep spreading happiness!"
 autowrap_mode = 2
 
 [node name="Buttons" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]

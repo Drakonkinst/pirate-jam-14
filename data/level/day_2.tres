@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_ogaru")
 is_day = true
-npc_quota = 25
+npc_quota = 20
 min_starting_mood = -50
 max_starting_mood = 50
 max_minutes = 2.5

@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_ai2kl")
 is_day = false
-npc_quota = 20
+npc_quota = 15
 min_starting_mood = -25
 max_starting_mood = 75
 max_minutes = 2.0

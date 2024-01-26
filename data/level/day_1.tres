@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_wumw2")
 is_day = true
-npc_quota = 25
+npc_quota = 20
 min_starting_mood = -25
 max_starting_mood = 75
 max_minutes = 2.0

@@ -143,17 +143,17 @@ func _receive_meow() -> void:
 			if behavior.get_time_wasted_multiplier() > 0.0 and behavior.state == Behavior.State.WALK_TO_EXIT:
 				chat_bubble.do_greet_cat()
 				behavior.set_state(Behavior.State.INTERACT_CAT)
-				mood.increase_mood(60)
+				mood.increase_mood(80)
 			else:
-				mood.increase_mood(40)
+				mood.increase_mood(60)
 		Personality.CatOpinion.LIKE:
 			# Lower chance to be distracted
 			if randf() < 0.75 * behavior.get_time_wasted_multiplier() and behavior.state == Behavior.State.WALK_TO_EXIT:
 				chat_bubble.do_greet_cat()
 				behavior.set_state(Behavior.State.INTERACT_CAT)
-				mood.increase_mood(40)
+				mood.increase_mood(60)
 			else:
-				mood.increase_mood(20)
+				mood.increase_mood(40)
 		Personality.CatOpinion.DISLIKE:
 			chat_bubble.do_shoo_cat()
 			mood.decrease_mood(10)
